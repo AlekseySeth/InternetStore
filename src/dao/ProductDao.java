@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -96,9 +97,9 @@ public class ProductDao {
     }
 
     public Set<Product> getAll() {
-        Set<Product> products = new HashSet<>();
+        Set<Product> products = new LinkedHashSet<>();
         try (Connection connection = ConnectionManager.newConnection()) {
-            String sql = "SELECT * FROM products p JOIN categories c ON p.category_id=c.id";
+            String sql = "SELECT * FROM products p JOIN categories c ON p.category_id=c.id ORDER BY p.id";
             PreparedStatement statement = connection.prepareStatement(sql);
 
             ResultSet resultSet = statement.executeQuery();
