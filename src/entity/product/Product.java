@@ -23,4 +23,9 @@ public class Product {
     private int qtyInSock;
     private Category category;
     private String imageURL;
+
+    @Override
+    public String toString() {
+        return id + ". " + name + " " + description + " " + price + " " + qtyInSock + " " + category;
+    }
 }

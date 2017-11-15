@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author a.shestovsky
@@ -87,6 +89,40 @@ public class ProductDao {
             resultSet.close();
             statement.close();
             return product;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Set<Product> getAll() {
+        Set<Product> products = new HashSet<>();
+        try (Connection connection = ConnectionManager.newConnection()) {
+            String sql = "SELECT p.name, p.description, p.price, p.qty, p.image_url, c.id, c.category " +
+                    "FROM products p JOIN categories c ON p.category_id=c.id";
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            ResultSet resultSet = statement.executeQuery();
+            Product product = null;
+
+            while (resultSet.next()) {
+                Category category = new Category(
+                        resultSet.getLong("c.id"),
+                        resultSet.getString("c.name"));
+
+                products.add(new Product(
+                        resultSet.getLong("id"),
+                        resultSet.getString("p.name"),
+                        resultSet.getString("p.description"),
+                        resultSet.getBigDecimal("p.price"),
+                        resultSet.getInt("p.qty"),
+                        category,
+                        resultSet.getString("p.image_url")));
+            }
+
+            resultSet.close();
+            statement.close();
+            return products;
         } catch (SQLException e) {
             e.printStackTrace();
         }
