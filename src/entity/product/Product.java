@@ -26,6 +26,6 @@ public class Product {
 
     @Override
     public String toString() {
-        return id + ". " + name + " " + description + " " + price + " " + qtyInSock + " " + category;
+        return id + ". " + name + " - " + description + " | " + price + " | " + qtyInSock + " | " + category.getName();
     }
 }

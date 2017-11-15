@@ -96,8 +96,8 @@ CREATE TABLE users_orders (
 
 #DROP DATABASE nutrition_store;
 
-#CREATE TABLE referrals (
-  #parent_id LONG,
-  #child_id LONG,
-  #PRIMARY KEY(parent_id, child_id),
-  #FOREIGN KEY(parent_id) REFERENCES user(id));
+INSERT INTO categories(name) VALUES ('Protein');
+INSERT INTO categories(id, name, parent_id) VALUES (10, 'Biotech', 1);
+
+
+INSERT INTO products(name, description, price, qty, category_id) VALUES ('Protein Power Biotech USA 1000', 'Some description for Protein Power Biotech', 25.35, 10, 10);

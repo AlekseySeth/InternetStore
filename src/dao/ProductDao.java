@@ -63,7 +63,7 @@ public class ProductDao {
 
     public Product get(Long id) {
         try (Connection connection = ConnectionManager.newConnection()) {
-            String sql = "SELECT p.name, p.description, p.price, p.qty, p.image_url, c.id, c.category " +
+            String sql = "SELECT p.name, p.description, p.price, p.qty, p.image_url, c.id, c.name " +
                     "FROM products p JOIN categories c ON p.category_id=c.id WHERE p.id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, id);
@@ -98,8 +98,7 @@ public class ProductDao {
     public Set<Product> getAll() {
         Set<Product> products = new HashSet<>();
         try (Connection connection = ConnectionManager.newConnection()) {
-            String sql = "SELECT p.name, p.description, p.price, p.qty, p.image_url, c.id, c.category " +
-                    "FROM products p JOIN categories c ON p.category_id=c.id";
+            String sql = "SELECT * FROM products p JOIN categories c ON p.category_id=c.id";
             PreparedStatement statement = connection.prepareStatement(sql);
 
             ResultSet resultSet = statement.executeQuery();
@@ -111,7 +110,7 @@ public class ProductDao {
                         resultSet.getString("c.name"));
 
                 products.add(new Product(
-                        resultSet.getLong("id"),
+                        resultSet.getLong("p.id"),
                         resultSet.getString("p.name"),
                         resultSet.getString("p.description"),
                         resultSet.getBigDecimal("p.price"),
