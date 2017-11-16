@@ -34,9 +34,8 @@ public class Order {
         this.delivery = delivery;
     }
 
-    public Order(Long id, String status, BigDecimal totalPrice, Date openDate, Date closeDate) {
+    public Order(Long id, BigDecimal totalPrice, Date openDate, Date closeDate) {
         this.id = id;
-        this.status = Status.valueOf(status);
         this.totalPrice = totalPrice;
         this.openDate = openDate;
         this.closeDate = closeDate;
