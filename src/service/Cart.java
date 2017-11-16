@@ -18,12 +18,21 @@ public class Cart {
     private Map<Product, Integer> products = new HashMap<>();
 
     public void addProduct(Product product, int qtyToAdd) {
-
+        products.put(product, qtyToAdd);
     }
 
-    private BigDecimal calculateTotalPrice(Map<Product, Integer> products, Delivery delivery) {
+    private BigDecimal calculateSubtotalPrice(Map<Product, Integer> products) {
+        BigDecimal subtotalPrice = new BigDecimal(0.0);
+        for (Map.Entry<Product, Integer> entry : products.entrySet()) {
+            subtotalPrice.add(entry.getKey().getPrice());
+        }
+        return subtotalPrice;
+    }
 
-        return null;
+    private BigDecimal calculateTotalPrice(BigDecimal subtotalPrice, Delivery delivery) {
+        BigDecimal totalPrice = new BigDecimal(subtotalPrice.doubleValue());
+        totalPrice.add(delivery.getCost());
+        return totalPrice;
     }
 
     public Order createOrder(Map<Product, Integer> products, User user, Delivery delivery) {
