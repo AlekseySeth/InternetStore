@@ -3,6 +3,7 @@ package dao;
 import connection.ConnectionManager;
 import entity.order.Delivery;
 import entity.order.Order;
+import entity.order.Status;
 import entity.product.Category;
 import entity.product.Product;
 import entity.user.Role;
@@ -91,6 +92,7 @@ public class OrderDao {
                     "JOIN products p ON op.product_id=p.id " +
                     "JOIN deliveries d ON o.delivery_id=d.id " +
                     "JOIN categories c ON p.category_id=c.id " +
+                    "JOIN categories pc ON c.parent_id=pc.id" +
                     "WHERE o.id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, id);
@@ -101,10 +103,11 @@ public class OrderDao {
             if (resultSet.next()) {
                 order = new Order(
                         id,
-                        resultSet.getString("o.status"),
                         resultSet.getBigDecimal("o.total_price"),
                         resultSet.getDate("o.open_date"),
                         resultSet.getDate("o.close_date"));
+
+                order.setStatus(Status.values()[resultSet.getInt("o.status_id")]);
 
                 order.setUser(new User(
                         resultSet.getLong("u.id"),
@@ -128,9 +131,10 @@ public class OrderDao {
                         resultSet.getString("p.description"),
                         resultSet.getBigDecimal("p.price"),
                         resultSet.getInt("p.qty"),
-                        new Category(resultSet.getLong("c.id"), resultSet.getString("c.name")),
+                        new Category(resultSet.getLong("c.id"), resultSet.getString("c.name"),
+                            new Category(resultSet.getLong("c.parent_id"), resultSet.getString("pc.name"), null)),
                         resultSet.getString("p.image_url")),
-                                resultSet.getInt("op.product_qty"));
+                        resultSet.getInt("op.product_qty"));
 
                 while (resultSet.next()) {
                     order.addProduct(new Product(
@@ -138,8 +142,9 @@ public class OrderDao {
                                     resultSet.getString("p.name"),
                                     resultSet.getString("p.description"),
                                     resultSet.getBigDecimal("p.price"),
-                                    resultSet.getInt("p.qty"),
-                                    new Category(resultSet.getLong("c.id"), resultSet.getString("c.name")),
+                                    resultSet.getInt("op.product_qty"),
+                                    new Category(resultSet.getLong("c.id"), resultSet.getString("c.name"),
+                                        new Category(resultSet.getLong("c.parent_id"), resultSet.getString("pc.name"), null)),
                                     resultSet.getString("p.image_url")),
                             resultSet.getInt("op.product_qty"));
                 }

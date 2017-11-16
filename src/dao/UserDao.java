@@ -62,7 +62,7 @@ public class UserDao {
 
     public User get(Long id) {
         try (Connection connection = ConnectionManager.newConnection()) {
-            String sql = "SELECT * FROM users WHERE u.id=?";
+            String sql = "SELECT * FROM users WHERE id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, id);
 
@@ -72,14 +72,45 @@ public class UserDao {
             if (resultSet.next()) {
                 user = new User(
                         id,
-                        resultSet.getString("u.first_name"),
-                        resultSet.getString("u.last_name"),
-                        resultSet.getString("u.email"),
-                        resultSet.getString("u.password"),
-                        resultSet.getString("u.phone"),
-                        resultSet.getString("u.address"),
-                        resultSet.getDate("u.registration_date"),
-                        Role.values()[resultSet.getInt("u.role_id")]);
+                        resultSet.getString("first_name"),
+                        resultSet.getString("last_name"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password"),
+                        resultSet.getString("phone"),
+                        resultSet.getString("address"),
+                        resultSet.getDate("registration_date"),
+                        Role.values()[resultSet.getInt("role_id")]);
+                return user;
+            }
+
+            resultSet.close();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public User getByEmail(String email) {
+        try (Connection connection = ConnectionManager.newConnection()) {
+            String sql = "SELECT * FROM users WHERE email=?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, email);
+
+            ResultSet resultSet = statement.executeQuery();
+            User user = null;
+
+            if (resultSet.next()) {
+                user = new User(
+                        resultSet.getLong("id"),
+                        resultSet.getString("first_name"),
+                        resultSet.getString("last_name"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password"),
+                        resultSet.getString("phone"),
+                        resultSet.getString("address"),
+                        resultSet.getDate("registration_date"),
+                        Role.values()[resultSet.getInt("role_id")]);
                 return user;
             }
 
