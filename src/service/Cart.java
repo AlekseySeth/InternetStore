@@ -4,15 +4,19 @@ import entity.order.Delivery;
 import entity.order.Order;
 import entity.product.Product;
 import entity.user.User;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * @author a.shestovsky
  */
+@Getter
+@NoArgsConstructor
 public class Cart {
 
     private Map<Product, Integer> products = new HashMap<>();
@@ -24,19 +28,22 @@ public class Cart {
     private BigDecimal calculateSubtotalPrice(Map<Product, Integer> products) {
         BigDecimal subtotalPrice = new BigDecimal(0.0);
         for (Map.Entry<Product, Integer> entry : products.entrySet()) {
-            subtotalPrice.add(entry.getKey().getPrice());
+            subtotalPrice = subtotalPrice.add(entry.getKey().getPrice());
         }
         return subtotalPrice;
     }
 
     private BigDecimal calculateTotalPrice(BigDecimal subtotalPrice, Delivery delivery) {
         BigDecimal totalPrice = new BigDecimal(subtotalPrice.doubleValue());
-        totalPrice.add(delivery.getCost());
+        totalPrice = totalPrice.add(delivery.getCost());
         return totalPrice;
     }
 
     public Order createOrder(Map<Product, Integer> products, User user, Delivery delivery) {
-        return null;
-    }
+        BigDecimal subtotalPrice = calculateSubtotalPrice(products);
+        BigDecimal totalPrice = calculateTotalPrice(subtotalPrice, delivery);
+        Date openDate = null;
 
+        return new Order(totalPrice, openDate, products, user, delivery);
+    }
 }
