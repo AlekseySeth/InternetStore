@@ -65,7 +65,9 @@ public class ProductDao {
     public Product get(Long id) {
         try (Connection connection = ConnectionManager.newConnection()) {
             String sql = "SELECT p.name, p.description, p.price, p.qty, p.image_url, c.id, c.name " +
-                    "FROM products p JOIN categories c ON p.category_id=c.id WHERE p.id=?";
+                    "FROM products p JOIN categories c ON p.category_id=c.id " +
+                    "JOIN categories pc ON c.parent_id=pc.id" +
+                    "WHERE p.id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, id);
 
@@ -75,7 +77,8 @@ public class ProductDao {
             if (resultSet.next()) {
                 Category category = new Category(
                         resultSet.getLong("c.id"),
-                        resultSet.getString("c.name"));
+                        resultSet.getString("c.name"),
+                        new Category(resultSet.getLong("c.parent_id"), resultSet.getString("pc.name"), null));
 
                 product = new Product(
                         id,
@@ -99,7 +102,8 @@ public class ProductDao {
     public Set<Product> getAll() {
         Set<Product> products = new LinkedHashSet<>();
         try (Connection connection = ConnectionManager.newConnection()) {
-            String sql = "SELECT * FROM products p JOIN categories c ON p.category_id=c.id ORDER BY p.id";
+            String sql = "SELECT * FROM products p JOIN categories c ON p.category_id=c.id " +
+                    "JOIN categories pc ON c.parent_id=pc.id ORDER BY p.id";
             PreparedStatement statement = connection.prepareStatement(sql);
 
             ResultSet resultSet = statement.executeQuery();
@@ -108,7 +112,8 @@ public class ProductDao {
             while (resultSet.next()) {
                 Category category = new Category(
                         resultSet.getLong("c.id"),
-                        resultSet.getString("c.name"));
+                        resultSet.getString("c.name"),
+                        new Category(resultSet.getLong("c.parent_id"), resultSet.getString("pc.name"), null));
 
                 products.add(new Product(
                         resultSet.getLong("p.id"),

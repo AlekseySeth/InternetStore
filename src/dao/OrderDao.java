@@ -158,4 +158,21 @@ public class OrderDao {
         }
         return null;
     }
+
+    public boolean update(Order order) {
+        try (Connection connection = ConnectionManager.newConnection()) {
+            String sql = "UPDATE orders SET status_id=?, close_date=? WHERE id=?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setLong(1, order.getStatus().ordinal());
+            statement.setDate(2, order.getCloseDate());
+            statement.setLong(3, order.getId());
+
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }

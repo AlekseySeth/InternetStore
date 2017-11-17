@@ -3,6 +3,7 @@ package entity.order;
 import entity.product.Product;
 import entity.user.User;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
@@ -16,6 +17,7 @@ import java.util.Map;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class Order {
     private Long id;
     private Status status;
