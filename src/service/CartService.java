@@ -19,10 +19,10 @@ import java.util.Map;
 @NoArgsConstructor
 public class CartService {
 
-    private Map<Product, Integer> products = new HashMap<>();
-
-    public void addProduct(Product product, int qtyToAdd) {
-        products.put(product, qtyToAdd);
+    public void addProductToCart(Product product, int qtyToAdd) {
+        // использовать куки, чтобы определенный пользователь добавлял товары в свою корзину
+        Order order = new Order();
+        order.addProduct(product, qtyToAdd);
     }
 
     private BigDecimal calculateSubtotalPrice(Map<Product, Integer> products) {
@@ -39,11 +39,12 @@ public class CartService {
         return totalPrice;
     }
 
-    public Order createOrder(Map<Product, Integer> products, User user, Delivery delivery) {
+    //переделать
+    public Order placeOrder(Order order, Map<Product, Integer> products, User user, Delivery delivery) {
         BigDecimal subtotalPrice = calculateSubtotalPrice(products);
         BigDecimal totalPrice = calculateTotalPrice(subtotalPrice, delivery);
         Date openDate = null;
-
+        order.setTotalPrice(totalPrice);
         return new Order(totalPrice, openDate, products, user, delivery);
     }
 }
