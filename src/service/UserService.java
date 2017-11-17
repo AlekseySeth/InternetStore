@@ -1,7 +1,10 @@
 package service;
 
+import dao.UserDao;
+import entity.user.Role;
 import entity.user.User;
 
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -9,9 +12,11 @@ import java.util.List;
  */
 public class UserService {
 
-    public User createNewUser() {
-
-        return null;
+    public User createNewUser(String firstName, String lastName, String email, String password,
+                              String phone, String address, Date registrationDate, Role role) {
+        User user = new User(firstName, lastName, email, password, phone, address, registrationDate, role);
+        UserDao userDao = UserDao.newInstance();
+        return userDao.save(user);
     }
 
     public User updateUser() {
@@ -24,15 +29,13 @@ public class UserService {
         return null;
     }
 
-    public User getUserById() {
+    public User getUserById(Long id) {
 
         return null;
     }
 
-    public User getUserByEmail() {
-
-        return null;
+    public User getUserByEmail(String email) {
+        UserDao userDao = UserDao.newInstance();
+        return userDao.getByEmail(email);
     }
-
-
 }
