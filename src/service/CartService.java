@@ -17,7 +17,7 @@ import java.util.Map;
  */
 @Getter
 @NoArgsConstructor
-public class Cart {
+public class CartService {
 
     private Map<Product, Integer> products = new HashMap<>();
 
