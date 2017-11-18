@@ -19,15 +19,6 @@ import java.io.PrintWriter;
 public class AdminServlet extends HttpServlet {
 
     @Override
-    public void init() throws ServletException {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         PrintWriter writer = resp.getWriter();

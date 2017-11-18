@@ -33,7 +33,7 @@ public class UserDao {
     }
 
     public User save(User user) {
-        try (Connection connection = ConnectionManager.newConnection()) {
+        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
             String sql = "INSERT INTO users (first_name, last_name, email, password, phone, address, registration_date, role_id)" +
                     " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -63,7 +63,7 @@ public class UserDao {
     }
 
     public User get(Long id) {
-        try (Connection connection = ConnectionManager.newConnection()) {
+        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
             String sql = "SELECT * FROM users WHERE id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, id);
@@ -94,7 +94,7 @@ public class UserDao {
     }
 
     public User getByEmail(String email) {
-        try (Connection connection = ConnectionManager.newConnection()) {
+        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
             String sql = "SELECT * FROM users WHERE email=?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, email);
@@ -125,7 +125,7 @@ public class UserDao {
     }
 
     public boolean update(User user) {
-        try (Connection connection = ConnectionManager.newConnection()) {
+        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
             String sql = "UPDATE users SET first_name=?, last_name=?, password=?, phone=?, address=?, role_id=? " +
                     "WHERE id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -147,7 +147,7 @@ public class UserDao {
     }
 
     public boolean delete(Long id) {
-        try (Connection connection = ConnectionManager.newConnection()) {
+        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
             String sql = "DELETE FROM users WHERE id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, id);
