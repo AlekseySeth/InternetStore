@@ -1,0 +1,135 @@
+html, body {
+    background-color: #f2f5f6;
+    /*height: 100%;*/
+}
+
+header {
+	display: block;
+	background: #dce2ed;
+	height: 100px;
+}
+
+aside {
+    float: left;
+    width: 240px;
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+nav {
+    background: #e8e8e8;
+    height: 50px;
+}
+
+nav ul {
+    width: 100%;
+    float: left;
+    padding: 0;
+    list-style: none;
+}
+
+nav ul li {
+    float: left;
+    padding: 17px 35px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #069;
+    border-right: 1px solid #ccc;
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+li.my-account {
+    float: right;
+    padding: 17px 35px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #069;
+    border-left: 1px solid #ccc;
+    border-right: none;
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+
+article {
+    background: #dbe1ff;
+    margin-right: 280px;
+    margin-top: 20px;
+    padding: 10px;
+    /*height: 100%;*/
+}
+
+article.article-main {
+    padding: 10px;
+}
+
+p{
+    text-align: justify;
+}
+
+footer {
+    background: #dbdbdb;
+    height: 40px;
+    padding: 20px;
+    flex: 0 0 auto;
+}
+
+p#footer{
+    text-align: center;
+    font-size: 15px;
+    padding-top: 13px;
+    padding-bottom: 12px;
+}
+
+.main {
+    background: #FFFFFF;
+    flex: 1 0 auto;
+    padding: 20px;
+}
+
+.logo-container {
+    height: 150px;
+    padding: 0 20px 10px 20px;
+}
+
+.logo {
+    float: left;
+}
+
+.search {
+    float: right;
+    border-right: hidden;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+div.title {
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+p.store-title {
+    text-align: center;
+    font-size: 50px;
+    font-weight: 500;
+    /*line-height: 45px;*/
+}
+
+.categories-main{
+    background: #dbe1ff;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.wrapper {
+	max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 0 10px;
+}
