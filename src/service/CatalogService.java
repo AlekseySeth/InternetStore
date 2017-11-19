@@ -1,5 +1,6 @@
 package service;
 
+import dao.CategoryDao;
 import entity.product.Category;
 import entity.product.Product;
 
@@ -35,12 +36,12 @@ public class CatalogService {
         return null;
     }
 
-    public Category getCategoryById() {
-
-        return null;
+    public Category getCategoryById(Long id) {
+        CategoryDao categoryDao = CategoryDao.newInstance();
+        return categoryDao.get(id);
     }
 
-    public List<Product> getProductsByCategory() {
+    public List<Product> getProductsByCategory(Category category) {
 
         return null;
     }

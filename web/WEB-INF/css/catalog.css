@@ -3,15 +3,28 @@ html, body {
     /*height: 100%;*/
 }
 
-article {
-    background: #dbe1ff;
-    margin-right: 280px;
-    margin-top: 20px;
+aside {
+    float: left;
+    width: 200px;
+    margin: 20px;
     padding: 10px;
 }
 
-article.article-main {
-    padding: 10px;
+.catalog-tree {
+
+}
+
+
+
+div h2 {
+    font-size: 25px;
+    padding-bottom: 15px;
+    text-align: center;
+}
+
+ul li {
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 p{
@@ -24,15 +37,8 @@ p{
     padding: 20px;
 }
 
-.categories-main{
-    background: #dbe1ff;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 10px;
-}
-
 .wrapper {
-	max-width: 1200px;
+    max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
     display: flex;

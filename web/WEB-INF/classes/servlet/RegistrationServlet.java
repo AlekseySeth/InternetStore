@@ -35,11 +35,14 @@ public class RegistrationServlet extends HttpServlet {
         Date registrationDate = new Date(System.currentTimeMillis());
         Role role = Role.CUSTOMER;
 
-        User newUser = new UserService()
-                .createNewUser(firstName, lastName, email, password, phone, address, registrationDate, role);
+        User newUser = new UserService().createNewUser(
+                new User(firstName, lastName, email, password, phone, address, registrationDate, role));
 
-        writer.write(newUser.getId() == null ? "<p>Unsuccessful user registration</p>"
-                                             : "<p>User successfully registered</p>");
+
+        if (newUser.getId() == null) {
+
+        }
+
 
     }
 }

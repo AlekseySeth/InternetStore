@@ -5,15 +5,16 @@
     <title>Sports nutrition store</title>
       <style>
       <%@include file="../css/main.css"%>
+      <%@include file="../css/header.css"%>
+      <%@include file="../css/footer.css"%>
       <%@include file="../css/reset.css"%>
       </style>
 
   </head>
   <body>
   <div class="wrapper">
-      <!-- Header -->
-      <%@include file="header.jsp"%>
 
+      <%@include file="header.jsp"%>
       <div class="main">
 
           <article class="article-main">
@@ -29,8 +30,6 @@
           </div>
 
       </div>
-
       <%@include file="footer.jsp"%>
-
   </body>
 </html>

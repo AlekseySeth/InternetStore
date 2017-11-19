@@ -8,6 +8,8 @@
     <style>
         <%@include file="../css/main.css"%>
         <%@include file="../css/reset.css"%>
+        <%@include file="../css/header.css"%>
+        <%@include file="../css/footer.css"%>
     </style>
 </head>
     <body>

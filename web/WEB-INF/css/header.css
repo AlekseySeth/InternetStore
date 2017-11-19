@@ -1,0 +1,52 @@
+header {
+    display: block;
+    background: #dce2ed;
+    height: 100px;
+}
+
+nav {
+    background: #e8e8e8;
+    height: 50px;
+}
+
+nav ul {
+    width: 100%;
+    float: left;
+    padding: 0;
+    list-style: none;
+}
+
+nav ul li {
+    float: left;
+    padding: 17px 35px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #069;
+    border-right: 1px solid #ccc;
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+li.my-account {
+    float: right;
+    padding: 17px 35px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #069;
+    border-left: 1px solid #ccc;
+    border-right: none;
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+div.title {
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+p.store-title {
+    text-align: center;
+    font-size: 50px;
+    font-weight: 500;
+    /*line-height: 45px;*/
+}

@@ -12,9 +12,7 @@ import java.util.List;
  */
 public class UserService {
 
-    public User createNewUser(String firstName, String lastName, String email, String password,
-                              String phone, String address, Date registrationDate, Role role) {
-        User user = new User(firstName, lastName, email, password, phone, address, registrationDate, role);
+    public User createNewUser(User user) {
         UserDao userDao = UserDao.newInstance();
         return userDao.save(user);
     }

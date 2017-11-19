@@ -1,0 +1,12 @@
+footer {
+    background: #dbdbdb;
+    height: 40px;
+    flex: 0 0 auto;
+}
+
+p#footer{
+    text-align: center;
+    font-size: 15px;
+    padding-top: 13px;
+    padding-bottom: 12px;
+}
