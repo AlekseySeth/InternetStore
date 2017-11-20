@@ -132,8 +132,13 @@ public class OrderDao {
                         resultSet.getString("p.description"),
                         resultSet.getBigDecimal("p.price"),
                         resultSet.getInt("p.qty"),
-                        new Category(resultSet.getLong("c.id"), resultSet.getString("c.name"),
-                            new Category(resultSet.getLong("c.parent_id"), resultSet.getString("pc.name"), null)),
+                        new Category(resultSet.getLong("c.id"),
+                                resultSet.getString("c.name"),
+                                null,
+                                new Category(resultSet.getLong("c.parent_id"),
+                                        resultSet.getString("pc.name"),
+                                        resultSet.getString("pc.description"),
+                                        null)),
                         resultSet.getString("p.image_url")),
                         resultSet.getInt("op.product_qty"));
 
@@ -144,8 +149,13 @@ public class OrderDao {
                                     resultSet.getString("p.description"),
                                     resultSet.getBigDecimal("p.price"),
                                     resultSet.getInt("op.product_qty"),
-                                    new Category(resultSet.getLong("c.id"), resultSet.getString("c.name"),
-                                        new Category(resultSet.getLong("c.parent_id"), resultSet.getString("pc.name"), null)),
+                                    new Category(resultSet.getLong("c.id"),
+                                            resultSet.getString("c.name"),
+                                            null,
+                                            new Category(resultSet.getLong("c.parent_id"),
+                                                    resultSet.getString("pc.name"),
+                                                    resultSet.getString("c.description"),
+                                                    null)),
                                     resultSet.getString("p.image_url")),
                             resultSet.getInt("op.product_qty"));
                 }

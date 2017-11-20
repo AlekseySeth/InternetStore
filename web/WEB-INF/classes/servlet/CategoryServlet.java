@@ -16,8 +16,8 @@ import java.util.List;
 /**
  * @author a.shestovsky
  */
-@WebServlet("/catalog")
-public class CatalogServlet extends HttpServlet {
+@WebServlet("/category")
+public class CategoryServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,7 +26,7 @@ public class CatalogServlet extends HttpServlet {
 
 
         RequestDispatcher requestDispatcher = req.getServletContext()
-                .getRequestDispatcher(PathContainer.getPath() + "catalog.jsp");
+                .getRequestDispatcher(PathContainer.getPath() + "category.jsp");
         requestDispatcher.forward(req, resp);
     }
 }
