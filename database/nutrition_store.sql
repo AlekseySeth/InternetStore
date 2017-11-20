@@ -33,9 +33,13 @@ INSERT INTO users (id, first_name, email, password, phone, address, registration
 CREATE TABLE categories (
   id INT AUTO_INCREMENT,
   name VARCHAR(30) UNIQUE NOT NULL,
+  description TEXT,
   parent_id INT,
   PRIMARY KEY(id),
   FOREIGN KEY(parent_id) REFERENCES categories(id));
+
+INSERT INTO categories(name, description) VALUES ('Protein', 'Protein description');
+INSERT INTO categories(id, name, parent_id) VALUES (10, 'Biotech', 1);
 
 CREATE TABLE products (
   id INT AUTO_INCREMENT,
@@ -47,6 +51,10 @@ CREATE TABLE products (
   image_url VARCHAR(100),
   PRIMARY KEY(id),
   FOREIGN KEY(category_id) REFERENCES categories(id)) AUTO_INCREMENT=1000;
+
+INSERT INTO products(name, description, price, qty, category_id) VALUES ('Protein Power Biotech USA 1000', 'Some description for Protein Power Biotech', 25.99, 10, 10);
+INSERT INTO products(name, description, price, qty, category_id) VALUES ('Iso Whey Zero Biotech USA 908', 'Some description for Iso Whey Zero Biotech', 45.99, 10, 10);
+INSERT INTO products(name, description, price, qty, category_id) VALUES ('Biotech Iso Whey Zero lact free 500g', 'Some description for Iso Whey Zero lact free', 24.99, 10, 10);
  
  CREATE TABLE deliveries (
   id INT AUTO_INCREMENT,
@@ -95,11 +103,3 @@ CREATE TABLE users_orders (
   FOREIGN KEY(order_id) REFERENCES orders(id));
 
 #DROP DATABASE nutrition_store;
-
-INSERT INTO categories(name) VALUES ('Protein');
-INSERT INTO categories(id, name, parent_id) VALUES (10, 'Biotech', 1);
-
-
-INSERT INTO products(name, description, price, qty, category_id) VALUES ('Protein Power Biotech USA 1000', 'Some description for Protein Power Biotech', 25.99, 10, 10);
-INSERT INTO products(name, description, price, qty, category_id) VALUES ('Iso Whey Zero Biotech USA 908', 'Some description for Iso Whey Zero Biotech', 45.99, 10, 10);
-INSERT INTO products(name, description, price, qty, category_id) VALUES ('Biotech Iso Whey Zero lact free 500g', 'Some description for Iso Whey Zero lact free', 24.99, 10, 10);

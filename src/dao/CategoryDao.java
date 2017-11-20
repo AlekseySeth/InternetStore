@@ -33,10 +33,11 @@ public class CategoryDao {
 
     public Category save(Category category) {
         try (Connection connection = ConnectionManager.dataSource.getConnection()) {
-            String sql = "INSERT INTO categories (name, parent_id) VALUES (?, ?)";
+            String sql = "INSERT INTO categories (name, description, parent_id) VALUES (?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, category.getName());
-            statement.setLong(2, category.getCategory().getId());
+            statement.setString(2, category.getDescription());
+            statement.setLong(3, category.getCategory().getId());
 
             statement.executeUpdate();
 
@@ -65,8 +66,10 @@ public class CategoryDao {
 
             if (resultSet.next()) {
                 Category parentCategory = new Category(resultSet.getLong("c.parent_id"),
-                        resultSet.getString("p.name"), null);
-                category = new Category(id, resultSet.getString("c.name"), parentCategory);
+                        resultSet.getString("p.name"),
+                        resultSet.getString("p.description"),
+                        null);
+                category = new Category(id, resultSet.getString("c.name"), null, parentCategory);
             }
 
             resultSet.close();
@@ -80,11 +83,12 @@ public class CategoryDao {
 
     public boolean update(Category category) {
         try (Connection connection = ConnectionManager.dataSource.getConnection()) {
-            String sql = "UPDATE categories SET name=?, parent_id=? WHERE id=?";
+            String sql = "UPDATE categories SET name=?, description=?, parent_id=? WHERE id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, category.getName());
-            statement.setLong(2, category.getCategory().getId());
-            statement.setLong(3, category.getId());
+            statement.setString(2, category.getDescription());
+            statement.setLong(3, category.getCategory().getId());
+            statement.setLong(4, category.getId());
 
             statement.executeUpdate();
 

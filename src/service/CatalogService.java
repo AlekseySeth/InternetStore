@@ -4,6 +4,7 @@ import dao.CategoryDao;
 import entity.product.Category;
 import entity.product.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,13 +13,29 @@ import java.util.List;
 public class CatalogService {
 
     public List<Category> getParentCategories() {
+        List<Category> parentCategories = new ArrayList<>();
+        List<Category> allCategories = getAllCategories();
 
-        return null;
+        for (Category current : allCategories) {
+            if (current.getCategory() == null) {
+                parentCategories.add(current);
+            }
+        }
+
+        return parentCategories;
     }
 
-    public List<Category> getCategoriesByParent() {
+    public List<Category> getCategoriesByParent(Category category) {
+        List<Category> childCategories = new ArrayList<>();
+        List<Category> allCategories = getAllCategories();
 
-        return null;
+        for (Category current : allCategories) {
+            if (current.getCategory().equals(category)) {
+                childCategories.add(current);
+            }
+        }
+
+        return childCategories;
     }
 
     public List<Category> getAllCategories() {
@@ -26,9 +43,9 @@ public class CatalogService {
         return null;
     }
 
-    public Category addNewCategory() {
-
-        return null;
+    public Category addNewCategory(Category category) {
+        CategoryDao categoryDao = CategoryDao.newInstance();
+        return categoryDao.save(category);
     }
 
     public Category getCategoryByName() {
