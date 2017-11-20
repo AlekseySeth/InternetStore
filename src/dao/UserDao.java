@@ -15,6 +15,7 @@ import java.sql.Statement;
  */
 public class UserDao {
 
+    private static final int CORRECTION_FACTOR = 1;
     private static UserDao INSTANCE;
 
     private UserDao() {
@@ -32,9 +33,9 @@ public class UserDao {
     }
 
     public User save(User user) {
-        try (Connection connection = ConnectionManager.newConnection()) {
-            String sql = "INSERT INTO users (first_name, last_name, email, password, phone, address, registation_date)" +
-                    " VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
+            String sql = "INSERT INTO users (first_name, last_name, email, password, phone, address, registration_date, role_id)" +
+                    " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, user.getFirstName());
             statement.setString(2, user.getLastName());
@@ -43,6 +44,7 @@ public class UserDao {
             statement.setString(5, user.getPhone());
             statement.setString(6, user.getAddress());
             statement.setDate(7, user.getRegistrationDate());
+            statement.setInt(8, user.getRole().ordinal() + 1);
 
             statement.executeUpdate();
 
@@ -61,7 +63,7 @@ public class UserDao {
     }
 
     public User get(Long id) {
-        try (Connection connection = ConnectionManager.newConnection()) {
+        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
             String sql = "SELECT * FROM users WHERE id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, id);
@@ -79,7 +81,7 @@ public class UserDao {
                         resultSet.getString("phone"),
                         resultSet.getString("address"),
                         resultSet.getDate("registration_date"),
-                        Role.values()[resultSet.getInt("role_id")]);
+                        Role.values()[resultSet.getInt("role_id") - CORRECTION_FACTOR]);
                 return user;
             }
 
@@ -92,7 +94,7 @@ public class UserDao {
     }
 
     public User getByEmail(String email) {
-        try (Connection connection = ConnectionManager.newConnection()) {
+        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
             String sql = "SELECT * FROM users WHERE email=?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, email);
@@ -110,7 +112,7 @@ public class UserDao {
                         resultSet.getString("phone"),
                         resultSet.getString("address"),
                         resultSet.getDate("registration_date"),
-                        Role.values()[resultSet.getInt("role_id")]);
+                        Role.values()[resultSet.getInt("role_id") - CORRECTION_FACTOR]);
                 return user;
             }
 
@@ -123,7 +125,7 @@ public class UserDao {
     }
 
     public boolean update(User user) {
-        try (Connection connection = ConnectionManager.newConnection()) {
+        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
             String sql = "UPDATE users SET first_name=?, last_name=?, password=?, phone=?, address=?, role_id=? " +
                     "WHERE id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -132,7 +134,7 @@ public class UserDao {
             statement.setString(3, user.getPassword());
             statement.setString(4, user.getPhone());
             statement.setString(5, user.getAddress());
-            statement.setInt(6, user.getRole().ordinal());
+            statement.setInt(6, user.getRole().ordinal() + CORRECTION_FACTOR);
             statement.setLong(7, user.getId());
 
             statement.executeUpdate();
@@ -145,7 +147,7 @@ public class UserDao {
     }
 
     public boolean delete(Long id) {
-        try (Connection connection = ConnectionManager.newConnection()) {
+        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
             String sql = "DELETE FROM users WHERE id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, id);

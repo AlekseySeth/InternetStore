@@ -35,7 +35,7 @@ public class ProductDao {
     }
 
     public Product save(Product product) {
-        try (Connection connection = ConnectionManager.newConnection()) {
+        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
             String sql = "INSERT INTO products (name, description, price, qty, category_id, image_url) " +
                     "VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -63,7 +63,7 @@ public class ProductDao {
     }
 
     public Product get(Long id) {
-        try (Connection connection = ConnectionManager.newConnection()) {
+        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
             String sql = "SELECT p.name, p.description, p.price, p.qty, p.image_url, c.id, c.name " +
                     "FROM products p JOIN categories c ON p.category_id=c.id " +
                     "JOIN categories pc ON c.parent_id=pc.id" +
@@ -101,7 +101,7 @@ public class ProductDao {
 
     public Set<Product> getAll() {
         Set<Product> products = new LinkedHashSet<>();
-        try (Connection connection = ConnectionManager.newConnection()) {
+        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
             String sql = "SELECT * FROM products p JOIN categories c ON p.category_id=c.id " +
                     "JOIN categories pc ON c.parent_id=pc.id ORDER BY p.id";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -135,7 +135,7 @@ public class ProductDao {
     }
 
     public boolean update(Product product) {
-        try (Connection connection = ConnectionManager.newConnection()) {
+        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
             String sql = "UPDATE products SET name=?, description=?, price=?, qty=?, category_id=?, image_url=? " +
                     "WHERE id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -156,7 +156,7 @@ public class ProductDao {
     }
 
     public boolean delete(Long id) {
-        try (Connection connection = ConnectionManager.newConnection()) {
+        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
             String sql = "DELETE FROM products WHERE id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, id);

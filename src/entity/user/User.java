@@ -26,7 +26,7 @@ public class User {
     private Role role;
 
     public User(String firstName, String lastName, String email, String password,
-                String phone, String address, Date registrationDate) {
+                String phone, String address, Date registrationDate, Role role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -34,5 +34,6 @@ public class User {
         this.phone = phone;
         this.address = address;
         this.registrationDate = registrationDate;
+        this.role = role;
     }
 }

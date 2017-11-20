@@ -21,6 +21,7 @@ import java.util.Map;
  */
 public class OrderDao {
 
+    private static final int CORRECTION_FACTOR = 1;
     private static OrderDao INSTANCE;
 
     private OrderDao() {
@@ -38,7 +39,7 @@ public class OrderDao {
     }
 
     public Order save(Order order) {
-        try (Connection connection = ConnectionManager.newConnection()) {
+        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
             connection.setAutoCommit(false);
             String orderSql = "INSERT INTO orders (total_price, delivery_id, open_date) VALUES (?, ?, ?)";
             PreparedStatement orderStatement = connection.prepareStatement(orderSql, Statement.RETURN_GENERATED_KEYS);
@@ -84,7 +85,7 @@ public class OrderDao {
     }
 
     public Order get(Long id) {
-        try (Connection connection = ConnectionManager.newConnection()) {
+        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
             String sql = "SELECT * FROM orders o " +
                     "JOIN users_orders uo ON o.id=uo.order_id " +
                     "JOIN users u ON uo.user_id=u.id " +
@@ -107,7 +108,7 @@ public class OrderDao {
                         resultSet.getDate("o.open_date"),
                         resultSet.getDate("o.close_date"));
 
-                order.setStatus(Status.values()[resultSet.getInt("o.status_id")]);
+                order.setStatus(Status.values()[resultSet.getInt("o.status_id") - CORRECTION_FACTOR]);
 
                 order.setUser(new User(
                         resultSet.getLong("u.id"),
@@ -160,15 +161,45 @@ public class OrderDao {
     }
 
     public boolean update(Order order) {
-        try (Connection connection = ConnectionManager.newConnection()) {
+        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
             String sql = "UPDATE orders SET status_id=?, close_date=? WHERE id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setLong(1, order.getStatus().ordinal());
+            statement.setLong(1, order.getStatus().ordinal() + CORRECTION_FACTOR);
             statement.setDate(2, order.getCloseDate());
             statement.setLong(3, order.getId());
 
             statement.executeUpdate();
             statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean delete(Long id) {
+        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
+            connection.setAutoCommit(false);
+            String ordersProducts = "DELETE FROM orders_products WHERE order_id=?";
+            String usersOrders = "DELETE FROM users_orders WHERE order_id=?";
+            String orders = "DELETE FROM orders WHERE id=?";
+
+            PreparedStatement ordersProductsStatement = connection.prepareStatement(ordersProducts);
+            PreparedStatement usersOrdersStatement = connection.prepareStatement(usersOrders);
+            PreparedStatement ordersStatement = connection.prepareStatement(orders);
+
+            ordersProductsStatement.setLong(1, id);
+            usersOrdersStatement.setLong(1, id);
+            ordersStatement.setLong(1, id);
+
+            ordersProductsStatement.executeUpdate();
+            usersOrdersStatement.executeUpdate();
+            ordersStatement.executeUpdate();
+
+            connection.commit();
+            ordersProductsStatement.close();
+            usersOrdersStatement.close();
+            ordersStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
             return false;

@@ -1,0 +1,42 @@
+html, body {
+    background-color: #f2f5f6;
+    /*height: 100%;*/
+}
+
+article {
+    background: #dbe1ff;
+    margin-right: 280px;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+article.article-main {
+    padding: 10px;
+}
+
+p{
+    text-align: justify;
+}
+
+.main {
+    background: #FFFFFF;
+    flex: 1 0 auto;
+    padding: 20px;
+}
+
+.categories-main{
+    background: #dbe1ff;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.wrapper {
+	max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 0 10px;
+}

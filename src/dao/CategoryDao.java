@@ -2,6 +2,7 @@ package dao;
 
 import connection.ConnectionManager;
 import entity.product.Category;
+import org.apache.tomcat.jdbc.pool.DataSource;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -31,7 +32,7 @@ public class CategoryDao {
     }
 
     public Category save(Category category) {
-        try (Connection connection = ConnectionManager.newConnection()) {
+        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
             String sql = "INSERT INTO categories (name, parent_id) VALUES (?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, category.getName());
@@ -54,7 +55,7 @@ public class CategoryDao {
     }
 
     public Category get(Long id) {
-        try (Connection connection = ConnectionManager.newConnection()) {
+        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
             String sql = "SELECT * FROM categories c JOIN categories p ON c.parent_id=p.id WHERE id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, id);
@@ -78,7 +79,7 @@ public class CategoryDao {
     }
 
     public boolean update(Category category) {
-        try (Connection connection = ConnectionManager.newConnection()) {
+        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
             String sql = "UPDATE categories SET name=?, parent_id=? WHERE id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, category.getName());
@@ -96,7 +97,7 @@ public class CategoryDao {
     }
 
     public boolean delete(Long id) {
-        try (Connection connection = ConnectionManager.newConnection()) {
+        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
             String sql = "DELETE FROM categories WHERE id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, id);

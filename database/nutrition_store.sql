@@ -20,7 +20,7 @@ CREATE TABLE users (
   phone VARCHAR(20) NOT NULL,
   address VARCHAR(100) NOT NULL,
   registration_date TIMESTAMP,
-  role_id INT DEFAULT 3,
+  role_id INT,
   #ref_code VARCHAR(8) UNIQUE,
   PRIMARY KEY(id),
   FOREIGN KEY (role_id) REFERENCES roles(id)) AUTO_INCREMENT=1000;
