@@ -6,7 +6,7 @@
 <head>
     <title>Catalog</title>
     <style>
-        <%@include file="../css/catalog.css"%>
+        <%@include file="../css/category.css"%>
         <%@include file="../css/header.css"%>
         <%@include file="../css/footer.css"%>
         <%@include file="../css/reset.css"%>
@@ -18,7 +18,7 @@
             <%@include file="header.jsp"%>
 
             <div class="main">
-                <%@include file="catalog-tree.jsp"%>
+                <%@include file="category-tree.jsp"%>
 
                 <div class="parent-categories">
 

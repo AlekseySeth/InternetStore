@@ -78,7 +78,11 @@ public class ProductDao {
                 Category category = new Category(
                         resultSet.getLong("c.id"),
                         resultSet.getString("c.name"),
-                        new Category(resultSet.getLong("c.parent_id"), resultSet.getString("pc.name"), null));
+                        null,
+                        new Category(resultSet.getLong("c.parent_id"),
+                                resultSet.getString("pc.name"),
+                                resultSet.getString("pc.description"),
+                                null));
 
                 product = new Product(
                         id,
@@ -113,7 +117,11 @@ public class ProductDao {
                 Category category = new Category(
                         resultSet.getLong("c.id"),
                         resultSet.getString("c.name"),
-                        new Category(resultSet.getLong("c.parent_id"), resultSet.getString("pc.name"), null));
+                        null,
+                        new Category(resultSet.getLong("c.parent_id"),
+                                resultSet.getString("pc.name"),
+                                resultSet.getString("pc.descriprion"),
+                                null));
 
                 products.add(new Product(
                         resultSet.getLong("p.id"),
