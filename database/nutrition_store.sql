@@ -71,10 +71,10 @@ CREATE TABLE statuses (
   name VARCHAR(15) UNIQUE NOT NULL,
   PRIMARY KEY(id));
   
-INSERT INTO deliveries (name) VALUES ('Open');
-INSERT INTO deliveries (name) VALUES ('In Progress');
-INSERT INTO deliveries (name) VALUES ('Completed');
-INSERT INTO deliveries (name) VALUES ('Closed');
+INSERT INTO statuses (name) VALUES ('Open');
+INSERT INTO statuses (name) VALUES ('In Progress');
+INSERT INTO statuses (name) VALUES ('Completed');
+INSERT INTO statuses (name) VALUES ('Closed');
   
 CREATE TABLE orders (
   id INT AUTO_INCREMENT,

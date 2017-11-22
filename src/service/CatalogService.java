@@ -29,36 +29,13 @@ public class CatalogService {
     }
 
     public List<Category> getParentCategories() {
-        List<Category> parentCategories = new ArrayList<>();
-        List<Category> allCategories = getAllCategories();
-
-        for (Category current : allCategories) {
-            if (current.getCategory() == null) {
-                parentCategories.add(current);
-            }
-        }
-
-        return parentCategories;
+        return CategoryDao.newInstance().getParentCategories();
     }
 
-    public List<Category> getCategoriesByParent(Long parentId) {
-        // добавить дао для этого метода
-        List<Category> childCategories = new ArrayList<>();
-        List<Category> allCategories = getAllCategories();
-        Category category = CategoryDao.newInstance().get(parentId);
-
-        for (Category current : allCategories) {
-            if (current.getCategory().equals(category)) {
-                childCategories.add(current);
-            }
-        }
-
-        return childCategories;
-    }
-
-    public List<Category> getAllCategories() {
-
-        return null;
+    public List<Category> getCategoriesByParentId(Long parentId) {
+        CategoryDao categoryDao = CategoryDao.newInstance();
+        Category parent = categoryDao.get(parentId);
+        return categoryDao.getCategoriesByParent(parent);
     }
 
     public Category addNewCategory(Category category) {

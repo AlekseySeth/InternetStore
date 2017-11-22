@@ -39,7 +39,7 @@ public class OrderDao {
     }
 
     public Order save(Order order) {
-        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
+        try (Connection connection = ConnectionManager.getConnection()) {
             connection.setAutoCommit(false);
             String orderSql = "INSERT INTO orders (total_price, delivery_id, open_date) VALUES (?, ?, ?)";
             PreparedStatement orderStatement = connection.prepareStatement(orderSql, Statement.RETURN_GENERATED_KEYS);
@@ -85,7 +85,7 @@ public class OrderDao {
     }
 
     public Order get(Long id) {
-        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
+        try (Connection connection = ConnectionManager.getConnection()) {
             String sql = "SELECT * FROM orders o " +
                     "JOIN users_orders uo ON o.id=uo.order_id " +
                     "JOIN users u ON uo.user_id=u.id " +
@@ -171,7 +171,7 @@ public class OrderDao {
     }
 
     public boolean update(Order order) {
-        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
+        try (Connection connection = ConnectionManager.getConnection()) {
             String sql = "UPDATE orders SET status_id=?, close_date=? WHERE id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, order.getStatus().ordinal() + CORRECTION_FACTOR);
@@ -188,7 +188,7 @@ public class OrderDao {
     }
 
     public boolean delete(Long id) {
-        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
+        try (Connection connection = ConnectionManager.getConnection()) {
             connection.setAutoCommit(false);
             String ordersProducts = "DELETE FROM orders_products WHERE order_id=?";
             String usersOrders = "DELETE FROM users_orders WHERE order_id=?";
