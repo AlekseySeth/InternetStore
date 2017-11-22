@@ -1,4 +1,4 @@
-package servlet;
+package servlet.account;
 
 import entity.user.Role;
 import entity.user.User;

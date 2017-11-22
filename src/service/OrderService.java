@@ -9,6 +9,22 @@ import java.util.List;
  */
 public class OrderService {
 
+    private static OrderService INSTANCE;
+
+    private OrderService() {
+    }
+
+    public static OrderService newInstance() {
+        if (INSTANCE == null) {
+            synchronized (OrderService.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = new OrderService();
+                }
+            }
+        }
+        return INSTANCE;
+    }
+
     public List<Order> getOrdersByUser() {
 
         return null;

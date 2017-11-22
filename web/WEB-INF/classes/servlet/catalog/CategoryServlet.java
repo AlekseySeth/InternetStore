@@ -1,6 +1,5 @@
-package servlet;
+package servlet.catalog;
 
-import com.sun.org.apache.xml.internal.resolver.Catalog;
 import entity.product.Category;
 import service.CatalogService;
 
@@ -11,22 +10,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
+
+import static util.ServletUtil.getPath;
 
 /**
  * @author a.shestovsky
  */
 @WebServlet("/category")
 public class CategoryServlet extends HttpServlet {
-
+// переписать: вынести логику создания categoryById в сервис. getProductsByCategory принимает сразу id
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Long id = Long.valueOf(getInitParameter("id"));
+        CatalogService catalogService = CatalogService.newInstance();
+        Category categoryById = catalogService.getCategoryById(id);
 
-        List<Category> allCategories = new CatalogService().getAllCategories();
-
+        req.setAttribute("products", catalogService.getProductsByCategory(categoryById));
 
         RequestDispatcher requestDispatcher = req.getServletContext()
-                .getRequestDispatcher(PathContainer.getPath() + "category.jsp");
+                .getRequestDispatcher(getPath("category"));
         requestDispatcher.forward(req, resp);
+
     }
 }

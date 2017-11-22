@@ -12,6 +12,22 @@ import java.util.List;
  */
 public class CatalogService {
 
+    private static CatalogService INSTANCE;
+
+    private CatalogService() {
+    }
+
+    public static CatalogService newInstance() {
+        if (INSTANCE == null) {
+            synchronized (CatalogService.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = new CatalogService();
+                }
+            }
+        }
+        return INSTANCE;
+    }
+
     public List<Category> getParentCategories() {
         List<Category> parentCategories = new ArrayList<>();
         List<Category> allCategories = getAllCategories();
@@ -25,9 +41,11 @@ public class CatalogService {
         return parentCategories;
     }
 
-    public List<Category> getCategoriesByParent(Category category) {
+    public List<Category> getCategoriesByParent(Long parentId) {
+        // добавить дао для этого метода
         List<Category> childCategories = new ArrayList<>();
         List<Category> allCategories = getAllCategories();
+        Category category = CategoryDao.newInstance().get(parentId);
 
         for (Category current : allCategories) {
             if (current.getCategory().equals(category)) {
@@ -58,7 +76,15 @@ public class CatalogService {
         return categoryDao.get(id);
     }
 
-    public List<Product> getProductsByCategory(Category category) {
+    public List<Product> getProductsByCategory(Long categoryId) {
+        List<Product> products = new ArrayList<>();
+        CategoryDao categoryDao = CategoryDao.newInstance();
+        Category category = categoryDao.get(categoryId);
+
+        if (category != null) {
+
+        }
+
 
         return null;
     }
@@ -74,7 +100,7 @@ public class CatalogService {
     }
 
 
-    public Product getProductById() {
+    public Product getProductById(Long id) {
 
         return null;
     }

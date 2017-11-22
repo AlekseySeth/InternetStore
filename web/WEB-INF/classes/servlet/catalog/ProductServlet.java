@@ -1,8 +1,10 @@
-package servlet;
+package servlet.catalog;
 
 import dao.ProductDao;
 import entity.product.Product;
+import service.CatalogService;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,29 +14,22 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.stream.Collectors;
 
+import static util.ServletUtil.getPath;
+
 /**
  * @author a.shestovsky
  */
 
-@WebServlet("/products")
+@WebServlet("/product")
 public class ProductServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        PrintWriter writer = resp.getWriter();
+        Long id = Long.valueOf(getInitParameter("id"));
+        req.setAttribute("product", CatalogService.newInstance().getProductById(id));
 
-        String result = ProductDao.newInstance().getAll()
-                .stream()
-                .map(this::wrapInParagraph)
-                .collect(Collectors.joining());
-
-        writer.write(result);
+        RequestDispatcher requestDispatcher = req.getServletContext()
+                .getRequestDispatcher(getPath("product"));
+        requestDispatcher.forward(req, resp);
     }
-
-    private String wrapInParagraph(Product product) {
-        return "<p>" + product.toString() + "</p>";
-    }
-
-
 }
