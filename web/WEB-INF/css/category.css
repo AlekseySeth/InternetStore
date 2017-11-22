@@ -27,6 +27,10 @@ ul li {
     padding-bottom: 10px;
 }
 
+.parent-categories {
+    margin-left: 250px;
+}
+
 p{
     text-align: justify;
 }

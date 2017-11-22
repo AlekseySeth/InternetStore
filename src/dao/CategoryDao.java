@@ -58,7 +58,7 @@ public class CategoryDao {
 
     public Category get(Long id) {
         try (Connection connection = ConnectionManager.getConnection()) {
-            String sql = "SELECT * FROM categories c JOIN categories p ON c.parent_id=p.id WHERE id=?";
+            String sql = "SELECT * FROM categories c JOIN categories p ON c.parent_id=p.id WHERE c.id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, id);
 

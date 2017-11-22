@@ -24,7 +24,7 @@ public class AdminServlet extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         String email = req.getParameter("email");
 
-        User userByEmail = new UserService().getUserByEmail(email);
+        User userByEmail = UserService.newInstance().getUserByEmail(email);
 
         writer.write("<p>" + userByEmail.getId() + ". " + userByEmail.getFirstName() + " " + userByEmail.getLastName() + " "
                         + userByEmail.getEmail() + " " + userByEmail.getAddress() + " " + userByEmail.getPhone() + " "

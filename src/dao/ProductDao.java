@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -67,7 +68,7 @@ public class ProductDao {
         try (Connection connection = ConnectionManager.getConnection()) {
             String sql = "SELECT p.name, p.description, p.price, p.qty, p.image_url, c.id, c.name " +
                     "FROM products p JOIN categories c ON p.category_id=c.id " +
-                    "JOIN categories pc ON c.parent_id=pc.id" +
+                    "JOIN categories pc ON c.parent_id=pc.id " +
                     "WHERE p.id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, id);
@@ -103,9 +104,34 @@ public class ProductDao {
         }
         return null;
     }
-
+// переписать
     public List<Product> getProductsByCategory(Category category) {
+        List<Product> products = new ArrayList<>();
+        try (Connection connection = ConnectionManager.getConnection()) {
+            String sql = "SELECT * FROM products p JOIN categories c ON p.category_id=c.id " +
+                    "JOIN categories pc ON c.parent_id=pc.id WHERE c.parent_id=? ORDER BY p.id";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setLong(1, category.getId());
 
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                products.add(new Product(
+                        resultSet.getLong("p.id"),
+                        resultSet.getString("p.name"),
+                        resultSet.getString("p.description"),
+                        resultSet.getBigDecimal("p.price"),
+                        resultSet.getInt("p.qty"),
+                        category,
+                        resultSet.getString("p.image_url")));
+            }
+
+            resultSet.close();
+            statement.close();
+            return products;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
