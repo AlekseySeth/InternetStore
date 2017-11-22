@@ -111,7 +111,7 @@ public class ProductDao {
             String sql = "SELECT * FROM products p JOIN categories c ON p.category_id=c.id " +
                     "JOIN categories pc ON c.parent_id=pc.id WHERE c.parent_id=? ORDER BY p.id";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setLong(1, category.getId());
+            statement.setLong(1, category.getId()); //category.getCategory().getId();
 
             ResultSet resultSet = statement.executeQuery();
 
