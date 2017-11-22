@@ -16,8 +16,23 @@ import java.util.Map;
  * @author a.shestovsky
  */
 @Getter
-@NoArgsConstructor
 public class CartService {
+
+    private static CartService INSTANCE;
+
+    private CartService() {
+    }
+
+    public static CartService newInstance() {
+        if (INSTANCE == null) {
+            synchronized (CartService.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = new CartService();
+                }
+            }
+        }
+        return INSTANCE;
+    }
 
     public void addProductToCart(Product product, int qtyToAdd) {
         // использовать куки, чтобы определенный пользователь добавлял товары в свою корзину

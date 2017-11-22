@@ -12,6 +12,22 @@ import java.util.List;
  */
 public class UserService {
 
+    private static UserService INSTANCE;
+
+    private UserService() {
+    }
+
+    public static UserService newInstance() {
+        if (INSTANCE == null) {
+            synchronized (UserService.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = new UserService();
+                }
+            }
+        }
+        return INSTANCE;
+    }
+
     public User createNewUser(User user) {
         UserDao userDao = UserDao.newInstance();
         return userDao.save(user);

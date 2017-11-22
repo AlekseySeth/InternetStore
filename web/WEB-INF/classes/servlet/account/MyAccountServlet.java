@@ -1,4 +1,4 @@
-package servlet;
+package servlet.account;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServlet;
 /**
  * @author a.shestovsky
  */
-@WebServlet("/my-account/marketer")
-public class MarketerServlet extends HttpServlet {
+@WebServlet("/my-account")
+public class MyAccountServlet extends HttpServlet {
 
 }
