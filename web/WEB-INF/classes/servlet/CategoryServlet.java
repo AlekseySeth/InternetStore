@@ -1,6 +1,5 @@
 package servlet;
 
-import com.sun.org.apache.xml.internal.resolver.Catalog;
 import entity.product.Category;
 import service.CatalogService;
 
@@ -12,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+
+import static util.ServletUtil.getPath;
 
 /**
  * @author a.shestovsky
@@ -26,7 +27,7 @@ public class CategoryServlet extends HttpServlet {
 
 
         RequestDispatcher requestDispatcher = req.getServletContext()
-                .getRequestDispatcher(PathContainer.getPath() + "category.jsp");
+                .getRequestDispatcher(getPath("category"));
         requestDispatcher.forward(req, resp);
     }
 }
