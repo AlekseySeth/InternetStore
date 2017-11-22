@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 /**
  * @author a.shestovsky
@@ -78,6 +79,16 @@ public class CategoryDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return null;
+    }
+
+    public List<Category> getParentCategories() {
+
+        return null;
+    }
+
+    public List<Category> getCategoriesByParentId(Long parentId) {
+
         return null;
     }
 

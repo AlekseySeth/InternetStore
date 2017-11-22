@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -100,6 +101,11 @@ public class ProductDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return null;
+    }
+
+    public List<Product> getProductsByCategory(Category category) {
+
         return null;
     }
 
