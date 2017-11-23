@@ -1,5 +1,7 @@
 package service;
 
+import dao.UserDao;
+import entity.order.Order;
 import entity.user.User;
 
 /**
@@ -23,8 +25,16 @@ public class AuthorizationService {
         return INSTANCE;
     }
 
-    public User signIn() {
+    public Order createInitialOrder(User user) {
+        return new Order(user);
+    }
 
+    public User signIn(String email, String password) {
+        User user = UserDao.newInstance().getByEmail(email);
+
+        if (user.getPassword().equals(password)) {
+            return user;
+        }
         return null;
     }
 }

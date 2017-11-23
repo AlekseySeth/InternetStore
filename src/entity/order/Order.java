@@ -2,8 +2,8 @@ package entity.order;
 
 import entity.product.Product;
 import entity.user.User;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
@@ -17,7 +17,7 @@ import java.util.Map;
 
 @Getter
 @Setter
-@NoArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 public class Order {
     private Long id;
     private Status status;
@@ -41,6 +41,10 @@ public class Order {
         this.totalPrice = totalPrice;
         this.openDate = openDate;
         this.closeDate = closeDate;
+    }
+
+    public Order(User user) {
+        this.user = user;
     }
 
     public void addProduct(Product product, int qty) {
