@@ -1,6 +1,7 @@
 <%--
   Created by a.shestovsky
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -21,6 +22,12 @@
                 <%@include file="category-tree.jsp"%>
 
                 <div class="parent-categories">
+                    <ul>
+                        <c:forEach var="category" items="${requestScope.categories}">
+                            <li>${category.name}<br>${category.description}</li>
+                        </c:forEach>
+
+                    </ul>
 
                 </div>
 

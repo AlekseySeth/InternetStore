@@ -18,18 +18,15 @@ import static util.ServletUtil.getPath;
  */
 @WebServlet("/category")
 public class CategoryServlet extends HttpServlet {
-// переписать: вынести логику создания categoryById в сервис. getProductsByCategory принимает сразу id
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Long id = Long.valueOf(getInitParameter("id"));
-        CatalogService catalogService = CatalogService.newInstance();
-        Category categoryById = catalogService.getCategoryById(id);
+        req.setAttribute("categories", CatalogService.newInstance().getParentCategories());
+        Long id = Long.valueOf(req.getParameter("id"));
+        req.setAttribute("products", CatalogService.newInstance().getProductsByCategory(id));
 
-        req.setAttribute("products", catalogService.getProductsByCategory(categoryById));
-
-        RequestDispatcher requestDispatcher = req.getServletContext()
-                .getRequestDispatcher(getPath("category"));
-        requestDispatcher.forward(req, resp);
-
+        req.getServletContext()
+            .getRequestDispatcher(getPath("category"))
+            .forward(req, resp);
     }
 }

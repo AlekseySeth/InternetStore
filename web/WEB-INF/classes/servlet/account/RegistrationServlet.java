@@ -35,7 +35,7 @@ public class RegistrationServlet extends HttpServlet {
         Date registrationDate = new Date(System.currentTimeMillis());
         Role role = Role.CUSTOMER;
 
-        User newUser = new UserService().createNewUser(
+        User newUser = UserService.newInstance().createNewUser(
                 new User(firstName, lastName, email, password, phone, address, registrationDate, role));
 
 

@@ -2,13 +2,13 @@ package dao;
 
 import connection.ConnectionManager;
 import entity.product.Category;
-import org.apache.tomcat.jdbc.pool.DataSource;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,7 +33,7 @@ public class CategoryDao {
     }
 
     public Category save(Category category) {
-        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
+        try (Connection connection = ConnectionManager.getConnection()) {
             String sql = "INSERT INTO categories (name, description, parent_id) VALUES (?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, category.getName());
@@ -57,8 +57,8 @@ public class CategoryDao {
     }
 
     public Category get(Long id) {
-        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
-            String sql = "SELECT * FROM categories c JOIN categories p ON c.parent_id=p.id WHERE id=?";
+        try (Connection connection = ConnectionManager.getConnection()) {
+            String sql = "SELECT * FROM categories c JOIN categories p ON c.parent_id=p.id WHERE c.id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, id);
 
@@ -83,17 +83,56 @@ public class CategoryDao {
     }
 
     public List<Category> getParentCategories() {
+        List<Category> categories = new ArrayList<>();
+        try (Connection connection = ConnectionManager.getConnection()) {
+            String sql = "SELECT * FROM categories WHERE parent_id IS NULL";
+            PreparedStatement statement = connection.prepareStatement(sql);
 
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                categories.add(new Category(resultSet.getLong("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("description"),
+                        null));
+            }
+
+            resultSet.close();
+            statement.close();
+            return categories;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
-    public List<Category> getCategoriesByParentId(Long parentId) {
+    public List<Category> getCategoriesByParent(Category category) {
+        List<Category> categories = new ArrayList<>();
+        try (Connection connection = ConnectionManager.getConnection()) {
+            String sql = "SELECT * FROM categories c JOIN categories p ON c.parent_id=p.id WHERE c.parent_id=?";
+            PreparedStatement statement = connection.prepareStatement(sql);
 
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+
+                categories.add(new Category(resultSet.getLong("c.id"),
+                        resultSet.getString("c.name"),
+                        null,
+                        category));
+            }
+
+            resultSet.close();
+            statement.close();
+            return categories;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
     public boolean update(Category category) {
-        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
+        try (Connection connection = ConnectionManager.getConnection()) {
             String sql = "UPDATE categories SET name=?, description=?, parent_id=? WHERE id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, category.getName());
@@ -112,7 +151,7 @@ public class CategoryDao {
     }
 
     public boolean delete(Long id) {
-        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
+        try (Connection connection = ConnectionManager.getConnection()) {
             String sql = "DELETE FROM categories WHERE id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, id);

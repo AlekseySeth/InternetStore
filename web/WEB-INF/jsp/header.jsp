@@ -9,7 +9,7 @@
 
 <nav>
     <ul>
-        <li><a href="${pageContext.request.contextPath}/category">Catalog</a></li>
+        <li><a href="${pageContext.request.contextPath}/category-list">Catalog</a></li>
         <li><a href="${pageContext.request.contextPath}/articles">Articles</a></li>
         <li><a href="${pageContext.request.contextPath}/delivery-info">Delivery</a></li>
         <li><a href="${pageContext.request.contextPath}/contact-us">Contact Us</a></li>

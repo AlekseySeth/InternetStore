@@ -31,7 +31,7 @@ public class DeliveryDao {
     }
 
     public Delivery save(Delivery delivery) {
-        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
+        try (Connection connection = ConnectionManager.getConnection()) {
             String sql = "INSERT INTO deliveries (name, cost) VALUES (?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, delivery.getName());
@@ -54,7 +54,7 @@ public class DeliveryDao {
     }
 
     public Delivery get(Long id) {
-        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
+        try (Connection connection = ConnectionManager.getConnection()) {
             String sql = "SELECT name, cost FROM deliveries WHERE id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, id);
@@ -79,7 +79,7 @@ public class DeliveryDao {
     }
 
     public boolean update(Delivery delivery) {
-        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
+        try (Connection connection = ConnectionManager.getConnection()) {
             String sql = "UPDATE deliveries SET name=?, cost=? WHERE id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, delivery.getName());
@@ -97,7 +97,7 @@ public class DeliveryDao {
     }
 
     public boolean delete(Long id) {
-        try (Connection connection = ConnectionManager.dataSource.getConnection()) {
+        try (Connection connection = ConnectionManager.getConnection()) {
             String sql = "DELETE FROM deliveries WHERE id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, id);
