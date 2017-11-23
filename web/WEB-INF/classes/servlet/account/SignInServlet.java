@@ -41,6 +41,7 @@ public class SignInServlet extends HttpServlet {
             Order initialOrder = authorizationService.createInitialOrder(user);
             session.setAttribute("user", user);
             session.setAttribute("order", initialOrder);
+            resp.sendRedirect("/my-account");
         }
     }
 }

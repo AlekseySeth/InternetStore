@@ -21,17 +21,18 @@ import java.sql.Date;
 public class RegistrationServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
-        PrintWriter writer = resp.getWriter();
-        BufferedReader reader = req.getReader();
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String firstName = reader.readLine();
-        String lastName = reader.readLine();
-        String email = reader.readLine();
-        String password = reader.readLine();
-        String phone = reader.readLine();
-        String address = reader.readLine();
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String firstName = req.getParameter("firstName");
+        String lastName = req.getParameter("lastName");
+        String email = req.getParameter("email");
+        String password = req.getParameter("password");
+        String phone = req.getParameter("phone");
+        String address = req.getParameter("address");
         Date registrationDate = new Date(System.currentTimeMillis());
         Role role = Role.CUSTOMER;
 
