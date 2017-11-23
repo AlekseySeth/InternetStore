@@ -28,13 +28,13 @@ public class MyAccountServlet extends HttpServlet {
         }
 
         if (user.getRole().equals(Role.ADMIN)) {
-            req.getServletContext().getRequestDispatcher("admin").forward(req, resp);
+            req.getServletContext().getRequestDispatcher(getPath("admin")).forward(req, resp);
         } else if (user.getRole().equals(Role.MARKETER)) {
-            req.getServletContext().getRequestDispatcher("marketer").forward(req, resp);
+            req.getServletContext().getRequestDispatcher(getPath("marketer")).forward(req, resp);
         } else if (user.getRole().equals(Role.VIP_CUSTOMER)) {
-            req.getServletContext().getRequestDispatcher("vip-customer").forward(req, resp);
+            req.getServletContext().getRequestDispatcher(getPath("vip-customer")).forward(req, resp);
         } else {
-            req.getServletContext().getRequestDispatcher("customer").forward(req, resp);
+            req.getServletContext().getRequestDispatcher(getPath("customer")).forward(req, resp);
         }
     }
 }
