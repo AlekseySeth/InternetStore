@@ -44,11 +44,6 @@ public class CatalogService {
         return categoryDao.save(category);
     }
 
-    public Category getCategoryByName() {
-
-        return null;
-    }
-
     public Category getCategoryById(Long id) {
         CategoryDao categoryDao = CategoryDao.newInstance();
         return categoryDao.get(id);
@@ -56,16 +51,23 @@ public class CatalogService {
 
     public List<Product> getProductsByCategory(Long categoryId) {
         List<Product> products = new ArrayList<>();
-        Category category = CategoryDao.newInstance().get(categoryId);
-        if (category != null) {
-            return ProductDao.newInstance().getProductsByCategory(category);
+        ProductDao productDao = ProductDao.newInstance();
+        CategoryDao categoryDao = CategoryDao.newInstance();
+        Category category = categoryDao.get(categoryId);
+
+        if (category.getCategory() != null) {
+            return productDao.getProductsByCategory(category);
+        } else {
+            List<Category> categoriesByParent = categoryDao.getCategoriesByParent(category);
+            for (Category current : categoriesByParent) {
+                products.addAll(productDao.getProductsByCategory(current));
+            }
         }
-        return null;
+        return products;
     }
 
     public List<Product> getAllProducts() {
-
-        return null;
+        return ProductDao.newInstance().getAll();
     }
 
     public Product getProductByName() {
@@ -75,18 +77,15 @@ public class CatalogService {
 
 
     public Product getProductById(Long id) {
-
-        return null;
+        return ProductDao.newInstance().get(id);
     }
 
-    public Product addNewProduct() {
-
-        return null;
+    public Product addNewProduct(Product product) {
+        return ProductDao.newInstance().save(product);
     }
 
-    public Product updateProduct() {
-
-        return null;
+    public boolean updateProduct(Product product) {
+        return ProductDao.newInstance().update(product);
     }
 
 
