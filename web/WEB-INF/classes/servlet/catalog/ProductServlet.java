@@ -20,7 +20,7 @@ import static util.ServletUtil.getPath;
  * @author a.shestovsky
  */
 
-@WebServlet("/product")
+@WebServlet(urlPatterns = "/product", name = "Product")
 public class ProductServlet extends HttpServlet {
 
     @Override

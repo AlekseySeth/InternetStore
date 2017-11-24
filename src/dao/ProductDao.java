@@ -20,6 +20,7 @@ import java.util.Set;
  */
 public class ProductDao {
 
+    private static final String DEFAULT_IMAGE_PATH = "../resource/images/default.gif";
     private static ProductDao INSTANCE;
 
     private ProductDao() {
@@ -46,7 +47,11 @@ public class ProductDao {
             statement.setBigDecimal(3, product.getPrice());
             statement.setInt(4, product.getQtyInSock());
             statement.setLong(5, product.getCategory().getId());
-            statement.setString(6, product.getImageURL());
+            if (product.getImageURL() != null) {
+                statement.setString(6, product.getImageURL());
+            } else {
+                statement.setString(6, DEFAULT_IMAGE_PATH);
+            }
 
             statement.executeUpdate();
             ResultSet generatedKeys = statement.getGeneratedKeys();
@@ -109,7 +114,7 @@ public class ProductDao {
         List<Product> products = new ArrayList<>();
         try (Connection connection = ConnectionManager.getConnection()) {
             String sql = "SELECT * FROM products p JOIN categories c ON p.category_id=c.id " +
-                    "JOIN categories pc ON c.parent_id=pc.id WHERE c.parent_id=? ORDER BY p.id";
+                    "JOIN categories pc ON c.parent_id=pc.id WHERE c.id=? ORDER BY p.id";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, category.getId()); //category.getCategory().getId();
 
@@ -135,8 +140,8 @@ public class ProductDao {
         return null;
     }
 
-    public Set<Product> getAll() {
-        Set<Product> products = new LinkedHashSet<>();
+    public List<Product> getAll() {
+        List<Product> products = new ArrayList<>();
         try (Connection connection = ConnectionManager.getConnection()) {
             String sql = "SELECT * FROM products p JOIN categories c ON p.category_id=c.id " +
                     "JOIN categories pc ON c.parent_id=pc.id ORDER BY p.id";

@@ -1,6 +1,5 @@
-package servlet;
+package servlet.account;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,13 +12,12 @@ import static util.ServletUtil.getPath;
 /**
  * @author a.shestovsky
  */
-@WebServlet(urlPatterns = "/delivery-info", name = "DeliveryInfo")
-public class DeliveryInfoServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/log-out",  name = "LogOut")
+public class LogOutServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = req.getServletContext()
-                .getRequestDispatcher(getPath("delivery-info"));
-        requestDispatcher.forward(req, resp);
+        req.getSession().invalidate();
+        req.getServletContext().getRequestDispatcher(getPath("index")).forward(req, resp);
     }
 }
