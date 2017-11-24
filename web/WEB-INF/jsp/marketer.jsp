@@ -4,7 +4,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Articles</title>
+    <title>Marketer Account</title>
     <style>
         <%@include file="../css/main.css"%>
         <%@include file="../css/reset.css"%>
