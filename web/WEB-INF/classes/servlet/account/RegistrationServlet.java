@@ -17,7 +17,7 @@ import java.sql.Date;
 /**
  * @author a.shestovsky
  */
-@WebServlet("/registration")
+@WebServlet(urlPatterns = "/registration", name = "Registration")
 public class RegistrationServlet extends HttpServlet {
 
     @Override

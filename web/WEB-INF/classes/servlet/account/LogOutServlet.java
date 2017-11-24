@@ -12,7 +12,7 @@ import static util.ServletUtil.getPath;
 /**
  * @author a.shestovsky
  */
-@WebServlet("/log-out")
+@WebServlet(urlPatterns = "/log-out",  name = "LogOut")
 public class LogOutServlet extends HttpServlet {
 
     @Override

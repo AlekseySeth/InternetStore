@@ -15,7 +15,7 @@ import static util.ServletUtil.getPath;
 /**
  * @author a.shestovsky
  */
-@WebServlet("/category-list")
+@WebServlet(urlPatterns = "/category-list", name = "CategoryList")
 public class CategoryListServlet extends HttpServlet {
 
     @Override

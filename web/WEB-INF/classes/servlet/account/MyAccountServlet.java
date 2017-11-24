@@ -16,7 +16,7 @@ import static util.ServletUtil.getPath;
 /**
  * @author a.shestovsky
  */
-@WebServlet("/my-account")
+@WebServlet(urlPatterns = "/my-account", name = "MyAccount")
 public class MyAccountServlet extends HttpServlet {
 
     @Override

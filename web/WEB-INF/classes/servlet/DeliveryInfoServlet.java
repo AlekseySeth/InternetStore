@@ -13,7 +13,7 @@ import static util.ServletUtil.getPath;
 /**
  * @author a.shestovsky
  */
-@WebServlet("/delivery-info")
+@WebServlet(urlPatterns = "/delivery-info", name = "DeliveryInfo")
 public class DeliveryInfoServlet extends HttpServlet {
 
     @Override

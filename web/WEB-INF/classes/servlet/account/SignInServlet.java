@@ -1,9 +1,9 @@
 package servlet.account;
 
-import com.sun.corba.se.impl.resolver.ORBDefaultInitRefResolverImpl;
 import entity.order.Order;
+import entity.user.Role;
 import entity.user.User;
-import service.AuthorizationService;
+import service.AuthenticationService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +18,7 @@ import static util.ServletUtil.getPath;
 /**
  * @author a.shestovsky
  */
-@WebServlet("/sign-in")
+@WebServlet(urlPatterns = "/sign-in", name = "Registration")
 public class SignInServlet extends HttpServlet {
 
     @Override
@@ -34,13 +34,14 @@ public class SignInServlet extends HttpServlet {
         String password = req.getParameter("password");
         HttpSession session = req.getSession();
 
-        AuthorizationService authorizationService = AuthorizationService.newInstance();
-        User user = authorizationService.signIn(email, password);
+        AuthenticationService authenticationService = AuthenticationService.newInstance();
+        User user = authenticationService.signIn(email, password);
 
         if (user != null) {
-            Order initialOrder = authorizationService.createInitialOrder(user);
             session.setAttribute("user", user);
-            session.setAttribute("order", initialOrder);
+            if (user.getRole().equals(Role.CUSTOMER)) {
+                session.setAttribute("order", authenticationService.createInitialOrder(user));
+            }
             resp.sendRedirect("/my-account");
         }
     }

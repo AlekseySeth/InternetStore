@@ -7,26 +7,22 @@ import entity.user.User;
 /**
  * @author a.shestovsky
  */
-public class AuthorizationService {
+public class AuthenticationService {
 
-    private static AuthorizationService INSTANCE;
+    private static AuthenticationService INSTANCE;
 
-    private AuthorizationService() {
+    private AuthenticationService() {
     }
 
-    public static AuthorizationService newInstance() {
+    public static AuthenticationService newInstance() {
         if (INSTANCE == null) {
-            synchronized (AuthorizationService.class) {
+            synchronized (AuthenticationService.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = new AuthorizationService();
+                    INSTANCE = new AuthenticationService();
                 }
             }
         }
         return INSTANCE;
-    }
-
-    public Order createInitialOrder(User user) {
-        return new Order(user);
     }
 
     public User signIn(String email, String password) {
@@ -36,5 +32,9 @@ public class AuthorizationService {
             return user;
         }
         return null;
+    }
+
+    public Order createInitialOrder(User user) {
+        return new Order(user);
     }
 }

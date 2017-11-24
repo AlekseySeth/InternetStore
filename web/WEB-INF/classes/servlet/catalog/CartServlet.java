@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * @author a.shestovsky
  */
-@WebServlet("/cart")
+@WebServlet(urlPatterns = "/cart", name = "Cart")
 public class CartServlet extends HttpServlet {
 
     @Override
