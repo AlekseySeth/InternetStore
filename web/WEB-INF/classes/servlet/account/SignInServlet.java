@@ -35,6 +35,7 @@ public class SignInServlet extends HttpServlet {
         HttpSession session = req.getSession();
 
         AuthenticationService authenticationService = AuthenticationService.newInstance();
+        password = authenticationService.encryptPassword(email, password);
         User user = authenticationService.signIn(email, password);
 
         if (user != null) {

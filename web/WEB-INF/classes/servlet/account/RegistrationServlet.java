@@ -2,6 +2,7 @@ package servlet.account;
 
 import entity.user.Role;
 import entity.user.User;
+import service.AuthenticationService;
 import service.UserService;
 
 import javax.servlet.ServletException;
@@ -30,14 +31,16 @@ public class RegistrationServlet extends HttpServlet {
         String firstName = req.getParameter("firstName");
         String lastName = req.getParameter("lastName");
         String email = req.getParameter("email");
-        String password = req.getParameter("password");
+        String originalPassword = req.getParameter("password");
         String phone = req.getParameter("phone");
         String address = req.getParameter("address");
         Date registrationDate = new Date(System.currentTimeMillis());
         Role role = Role.CUSTOMER;
 
+        String encryptedPassword = AuthenticationService.newInstance().encryptPassword(email, originalPassword);
+
         User newUser = UserService.newInstance().createNewUser(
-                new User(firstName, lastName, email, password, phone, address, registrationDate, role));
+                new User(firstName, lastName, email, encryptedPassword, phone, address, registrationDate, role));
 
 
         if (newUser.getId() == null) {
