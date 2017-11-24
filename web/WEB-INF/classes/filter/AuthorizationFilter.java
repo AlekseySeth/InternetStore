@@ -12,7 +12,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 import static util.ServletUtil.getPath;
@@ -30,52 +29,51 @@ public class AuthorizationFilter implements Filter {
         if (servletRequest instanceof HttpServletRequest && servletResponse instanceof HttpServletResponse) {
             HttpServletRequest httpReq = (HttpServletRequest) servletRequest;
             HttpServletResponse httpResp = (HttpServletResponse) servletResponse;
-            HttpSession session = httpReq.getSession();
             String requestURI = httpReq.getRequestURI();
-            User user = (User) session.getAttribute("user");
+            User user = (User) httpReq.getSession().getAttribute("user");
 
-            processIfNotLoggedIn(servletRequest, servletResponse, filterChain, httpResp, requestURI, user);
-            processIfAdmin(servletRequest, servletResponse, httpReq, httpResp, requestURI, user);
-            processIfMarketer(servletRequest, servletResponse, httpReq, httpResp, requestURI, user);
-            processIfCustomer(servletRequest, servletResponse, filterChain, httpResp, requestURI);
+            processIfNotLoggedIn(servletRequest, filterChain, httpResp, requestURI, user);
+            processIfAdmin(httpReq, httpResp, requestURI, user);
+            processIfMarketer(httpReq, httpResp, requestURI, user);
+            processIfCustomer(servletRequest, filterChain, httpResp, requestURI);
 
         } else {
             filterChain.doFilter(servletRequest, servletResponse);
         }
     }
 
-    private void processIfCustomer(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain, HttpServletResponse httpResp, String requestURI) throws IOException, ServletException {
+    private void processIfCustomer(ServletRequest servletRequest, FilterChain filterChain, HttpServletResponse httpResp, String requestURI) throws IOException, ServletException {
         if (requestURI.equals("/cart") || requestURI.equals("/my-account")) {
-            filterChain.doFilter(servletRequest, servletResponse);
+            filterChain.doFilter(servletRequest, httpResp);
         } else {
             httpResp.sendRedirect("/my-account");
         }
     }
 
-    private void processIfMarketer(ServletRequest servletRequest, ServletResponse servletResponse, HttpServletRequest httpReq, HttpServletResponse httpResp, String requestURI, User user) throws ServletException, IOException {
+    private void processIfMarketer(HttpServletRequest httpReq, HttpServletResponse httpResp, String requestURI, User user) throws ServletException, IOException {
         if (user.getRole().equals(Role.MARKETER)) {
             if (requestURI.equals("/my-account")) {
-                httpReq.getRequestDispatcher(getPath("marketer")).forward(servletRequest, servletResponse);
+                httpReq.getRequestDispatcher(getPath("marketer")).forward(httpReq, httpResp);
             } else {
                 httpResp.sendRedirect("/my-account");
             }
         }
     }
 
-    private void processIfAdmin(ServletRequest servletRequest, ServletResponse servletResponse, HttpServletRequest httpReq, HttpServletResponse httpResp, String requestURI, User user) throws ServletException, IOException {
+    private void processIfAdmin(HttpServletRequest httpReq, HttpServletResponse httpResp, String requestURI, User user) throws ServletException, IOException {
         if (user.getRole().equals(Role.ADMIN)) {
             if (requestURI.equals("/my-account")) {
-                httpReq.getRequestDispatcher(getPath("admin")).forward(servletRequest, servletResponse);
+                httpReq.getRequestDispatcher(getPath("admin")).forward(httpReq, httpResp);
             } else {
                 httpResp.sendRedirect("/my-account");
             }
         }
     }
 
-    private void processIfNotLoggedIn(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain, HttpServletResponse httpResp, String requestURI, User user) throws IOException, ServletException {
+    private void processIfNotLoggedIn(ServletRequest servletRequest, FilterChain filterChain, HttpServletResponse httpResp, String requestURI, User user) throws IOException, ServletException {
         if (user == null) {
             if (requestURI.equals("/login") || requestURI.equals("/registration")) {
-                filterChain.doFilter(servletRequest, servletResponse);
+                filterChain.doFilter(servletRequest, httpResp);
             }
         } else {
             httpResp.sendRedirect("/login");
