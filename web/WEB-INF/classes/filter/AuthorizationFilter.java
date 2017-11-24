@@ -34,32 +34,52 @@ public class AuthorizationFilter implements Filter {
             String requestURI = httpReq.getRequestURI();
             User user = (User) session.getAttribute("user");
 
-            if (user == null) {
-                if (requestURI.equals("/login") || requestURI.equals("/registration")) {
-                    allowAccess(servletRequest, servletResponse, filterChain);
-                }
-            } else {
-                httpResp.sendRedirect("/login");
-            }
-
-            if (user.getRole().equals(Role.ADMIN)) {
-                httpResp.sendRedirect(getPath("admin"));
-            } else if (user.getRole().equals(Role.MARKETER)) {
-                httpResp.sendRedirect(getPath("marketer"));
-            } else if (requestURI.equals("/cart") || requestURI.equals("/my-account")) {
-                allowAccess(servletRequest, servletResponse, filterChain);
-            } else {
-                httpResp.sendRedirect("/my-account");
-            }
+            processIfNotLoggedIn(servletRequest, servletResponse, filterChain, httpResp, requestURI, user);
+            processIfAdmin(servletRequest, servletResponse, httpReq, httpResp, requestURI, user);
+            processIfMarketer(servletRequest, servletResponse, httpReq, httpResp, requestURI, user);
+            processIfCustomer(servletRequest, servletResponse, filterChain, httpResp, requestURI);
 
         } else {
-            allowAccess(servletRequest, servletResponse, filterChain);
+            filterChain.doFilter(servletRequest, servletResponse);
         }
     }
 
+    private void processIfCustomer(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain, HttpServletResponse httpResp, String requestURI) throws IOException, ServletException {
+        if (requestURI.equals("/cart") || requestURI.equals("/my-account")) {
+            filterChain.doFilter(servletRequest, servletResponse);
+        } else {
+            httpResp.sendRedirect("/my-account");
+        }
+    }
 
-    private void allowAccess(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        filterChain.doFilter(servletRequest, servletResponse);
+    private void processIfMarketer(ServletRequest servletRequest, ServletResponse servletResponse, HttpServletRequest httpReq, HttpServletResponse httpResp, String requestURI, User user) throws ServletException, IOException {
+        if (user.getRole().equals(Role.MARKETER)) {
+            if (requestURI.equals("/my-account")) {
+                httpReq.getRequestDispatcher(getPath("marketer")).forward(servletRequest, servletResponse);
+            } else {
+                httpResp.sendRedirect("/my-account");
+            }
+        }
+    }
+
+    private void processIfAdmin(ServletRequest servletRequest, ServletResponse servletResponse, HttpServletRequest httpReq, HttpServletResponse httpResp, String requestURI, User user) throws ServletException, IOException {
+        if (user.getRole().equals(Role.ADMIN)) {
+            if (requestURI.equals("/my-account")) {
+                httpReq.getRequestDispatcher(getPath("admin")).forward(servletRequest, servletResponse);
+            } else {
+                httpResp.sendRedirect("/my-account");
+            }
+        }
+    }
+
+    private void processIfNotLoggedIn(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain, HttpServletResponse httpResp, String requestURI, User user) throws IOException, ServletException {
+        if (user == null) {
+            if (requestURI.equals("/login") || requestURI.equals("/registration")) {
+                filterChain.doFilter(servletRequest, servletResponse);
+            }
+        } else {
+            httpResp.sendRedirect("/login");
+        }
     }
 
     @Override

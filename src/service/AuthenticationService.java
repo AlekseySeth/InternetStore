@@ -1,6 +1,5 @@
 package service;
 
-import dao.UserDao;
 import entity.order.Order;
 import entity.user.User;
 
@@ -31,10 +30,7 @@ public class AuthenticationService {
     }
 
     public User signIn(String email, String password) {
-        User user = UserDao.newInstance().getByEmail(email);
-
-
-
+        User user = UserService.newInstance().getUserByEmail(email);
         if (user.getPassword().equals(password)) {
             return user;
         }
