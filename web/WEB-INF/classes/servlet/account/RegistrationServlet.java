@@ -44,7 +44,7 @@ public class RegistrationServlet extends HttpServlet {
 
 
         if (newUser.getId() == null) {
-
+//            сообщение об ошибке при регистрации пользователя
         }
 
 

@@ -18,13 +18,13 @@ import static util.ServletUtil.getPath;
 /**
  * @author a.shestovsky
  */
-@WebServlet(urlPatterns = "/sign-in", name = "Registration")
+@WebServlet(urlPatterns = "/login", name = "Login")
 public class SignInServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getServletContext()
-                .getRequestDispatcher(getPath("sign-in"))
+                .getRequestDispatcher(getPath("login"))
                 .forward(req, resp);
     }
 
