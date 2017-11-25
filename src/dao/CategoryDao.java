@@ -58,7 +58,7 @@ public class CategoryDao {
 
     public Category get(Long id) {
         try (Connection connection = ConnectionManager.getConnection()) {
-            String sql = "SELECT * FROM categories c JOIN categories p ON c.parent_id=p.id WHERE c.id=?";
+            String sql = "SELECT * FROM categories c LEFT JOIN categories p ON c.parent_id=p.id WHERE c.id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, id);
 
@@ -66,11 +66,18 @@ public class CategoryDao {
             Category category = null;
 
             if (resultSet.next()) {
-                Category parentCategory = new Category(resultSet.getLong("c.parent_id"),
-                        resultSet.getString("p.name"),
-                        resultSet.getString("p.description"),
-                        null);
-                category = new Category(id, resultSet.getString("c.name"), null, parentCategory);
+                Long parentId = resultSet.getLong("c.parent_id");
+                if (parentId == 0) {
+                    category = new Category(id, resultSet.getString("c.name"),
+                            resultSet.getString("c.description"),
+                            null);
+                } else {
+                    Category parentCategory = new Category(resultSet.getLong("c.parent_id"),
+                            resultSet.getString("p.name"),
+                            resultSet.getString("p.description"),
+                            null);
+                    category = new Category(id, resultSet.getString("c.name"), null, parentCategory);
+                }
             }
 
             resultSet.close();
@@ -90,7 +97,7 @@ public class CategoryDao {
 
             ResultSet resultSet = statement.executeQuery();
 
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 categories.add(new Category(resultSet.getLong("id"),
                         resultSet.getString("name"),
                         resultSet.getString("description"),
@@ -109,13 +116,13 @@ public class CategoryDao {
     public List<Category> getCategoriesByParent(Category category) {
         List<Category> categories = new ArrayList<>();
         try (Connection connection = ConnectionManager.getConnection()) {
-            String sql = "SELECT * FROM categories c JOIN categories p ON c.parent_id=p.id WHERE c.parent_id=?";
+            String sql = "SELECT * FROM categories c LEFT JOIN categories p ON c.parent_id=p.id WHERE c.parent_id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setLong(1, category.getId());
 
             ResultSet resultSet = statement.executeQuery();
 
-            if (resultSet.next()) {
-
+            while (resultSet.next()) {
                 categories.add(new Category(resultSet.getLong("c.id"),
                         resultSet.getString("c.name"),
                         null,

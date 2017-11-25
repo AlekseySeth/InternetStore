@@ -32,7 +32,7 @@ INSERT INTO users (id, first_name, email, password, phone, address, registration
 
 CREATE TABLE categories (
   id INT AUTO_INCREMENT,
-  name VARCHAR(30) UNIQUE NOT NULL,
+  name VARCHAR(30) NOT NULL,
   description TEXT,
   parent_id INT,
   PRIMARY KEY(id),
@@ -40,7 +40,7 @@ CREATE TABLE categories (
 
 CREATE TABLE products (
   id INT AUTO_INCREMENT,
-  name VARCHAR(100) NOT NULL,
+  name VARCHAR(100) UNICODE NOT NULL,
   description TEXT,
   price DOUBLE NOT NULL,
   qty INT NOT NULL,

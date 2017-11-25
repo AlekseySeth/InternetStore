@@ -70,7 +70,7 @@ public class ProductDao {
         try (Connection connection = ConnectionManager.getConnection()) {
             String sql = "SELECT p.name, p.description, p.price, p.qty, p.image_url, c.id, c.name " +
                     "FROM products p JOIN categories c ON p.category_id=c.id " +
-                    "JOIN categories pc ON c.parent_id=pc.id " +
+                    "LEFT JOIN categories pc ON c.parent_id=pc.id " +
                     "WHERE p.id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, id);
@@ -111,7 +111,7 @@ public class ProductDao {
         List<Product> products = new ArrayList<>();
         try (Connection connection = ConnectionManager.getConnection()) {
             String sql = "SELECT * FROM products p JOIN categories c ON p.category_id=c.id " +
-                    "JOIN categories pc ON c.parent_id=pc.id WHERE c.id=? ORDER BY p.id";
+                    "LEFT JOIN categories pc ON c.parent_id=pc.id WHERE c.id=? ORDER BY p.id";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, category.getId()); //category.getCategory().getId();
 
@@ -141,7 +141,7 @@ public class ProductDao {
         List<Product> products = new ArrayList<>();
         try (Connection connection = ConnectionManager.getConnection()) {
             String sql = "SELECT * FROM products p JOIN categories c ON p.category_id=c.id " +
-                    "JOIN categories pc ON c.parent_id=pc.id ORDER BY p.id";
+                    "LEFT JOIN categories pc ON c.parent_id=pc.id ORDER BY p.id";
             PreparedStatement statement = connection.prepareStatement(sql);
 
             ResultSet resultSet = statement.executeQuery();

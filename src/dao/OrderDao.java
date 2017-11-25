@@ -92,8 +92,8 @@ public class OrderDao {
                     "JOIN orders_products op ON o.id=op.order_id " +
                     "JOIN products p ON op.product_id=p.id " +
                     "JOIN deliveries d ON o.delivery_id=d.id " +
-                    "JOIN categories c ON p.category_id=c.id " +
-                    "JOIN categories pc ON c.parent_id=pc.id" +
+                    "LEFT JOIN categories c ON p.category_id=c.id " +
+                    "JOIN categories pc ON c.parent_id=pc.id " +
                     "WHERE o.id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, id);
