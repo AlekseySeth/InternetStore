@@ -12,6 +12,9 @@
         <%@include file="../css/footer.css"%>
         <%@include file="../css/reset.css"%>
     </style>
+    <%--<script type="text/javascript">--%>
+        <%--<%@include file="../js/bootstrap.js"%>--%>
+    <%--</script>--%>
 </head>
     <body>
         <div class="wrapper">

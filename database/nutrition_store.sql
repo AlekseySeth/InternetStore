@@ -9,7 +9,7 @@ CREATE TABLE roles (
 INSERT INTO roles (id, name) VALUES (1, 'Admin');
 INSERT INTO roles (id, name) VALUES (2, 'Marketer');
 INSERT INTO roles (id, name) VALUES (3, 'Customer');
-INSERT INTO roles (id, name) VALUES (4, 'VIP');
+# INSERT INTO roles (id, name) VALUES (4, 'VIP');
 
 CREATE TABLE users (
   id INT AUTO_INCREMENT,
@@ -26,9 +26,9 @@ CREATE TABLE users (
   FOREIGN KEY (role_id) REFERENCES roles(id)) AUTO_INCREMENT=1000;
 
 INSERT INTO users (id, first_name, email, password, phone, address, registration_date, role_id)
-  VALUES (1, 'Admin', 'Admin', 'admin', '-', '-', 0, 1);
+  VALUES (1, 'Admin', 'Admin', 'JaS3MecSfP8f23L0DfTeuBV+AvtCpVcC8ybqb9XVjME=', 'admin@sportpit.by', 'admin@sportpit.by', 2017-12-01, 1);
 INSERT INTO users (id, first_name, email, password, phone, address, registration_date, role_id)
-  VALUES (2, 'Marketer', 'Marketer', 'marketer', '-', '-', 0, 2);
+  VALUES (2, 'Marketer', 'Marketer', 'SOEXTRf5PxsZi4fm4QD5pxiTuMpWF5YUZ4+Ll1YUMes=', 'marketer@sportpit.by', 'marketer@sportpit.by', 2017-12-01, 2);
 
 CREATE TABLE categories (
   id INT AUTO_INCREMENT,
@@ -38,9 +38,6 @@ CREATE TABLE categories (
   PRIMARY KEY(id),
   FOREIGN KEY(parent_id) REFERENCES categories(id));
 
-INSERT INTO categories(name, description) VALUES ('Protein', 'Protein description');
-INSERT INTO categories(id, name, parent_id) VALUES (10, 'Biotech', 1);
-
 CREATE TABLE products (
   id INT AUTO_INCREMENT,
   name VARCHAR(100) NOT NULL,
@@ -48,13 +45,9 @@ CREATE TABLE products (
   price DOUBLE NOT NULL,
   qty INT NOT NULL,
   category_id INT,
-  image_url VARCHAR(100) DEFAULT '../resource/images/default.gif',
+  image_url VARCHAR(100) DEFAULT '/images/default.gif',
   PRIMARY KEY(id),
   FOREIGN KEY(category_id) REFERENCES categories(id)) AUTO_INCREMENT=1000;
-
-INSERT INTO products(name, description, price, qty, category_id) VALUES ('Protein Power Biotech USA 1000', 'Some description for Protein Power Biotech', 25.99, 10, 10);
-INSERT INTO products(name, description, price, qty, category_id) VALUES ('Iso Whey Zero Biotech USA 908', 'Some description for Iso Whey Zero Biotech', 45.99, 10, 10);
-INSERT INTO products(name, description, price, qty, category_id) VALUES ('Biotech Iso Whey Zero lact free 500g', 'Some description for Iso Whey Zero lact free', 24.99, 10, 10);
  
  CREATE TABLE deliveries (
   id INT AUTO_INCREMENT,
@@ -62,7 +55,7 @@ INSERT INTO products(name, description, price, qty, category_id) VALUES ('Biotec
   cost DOUBLE NOT NULL,
   PRIMARY KEY(id));
 
-INSERT INTO deliveries (name, cost) VALUES ('Local Pickup', 0);
+INSERT INTO deliveries (name, cost) VALUES ('Local Pickup', 0.0);
 INSERT INTO deliveries (name, cost) VALUES ('Standard', 3.50);
 INSERT INTO deliveries (name, cost) VALUES ('Premium', 5.00);
 

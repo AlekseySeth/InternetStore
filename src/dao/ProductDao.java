@@ -10,17 +10,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author a.shestovsky
  */
 public class ProductDao {
 
-    private static final String DEFAULT_IMAGE_PATH = "../resource/images/default.gif";
+    private static final String DEFAULT_IMAGE_PATH = "resources/images/default.gif";
     private static ProductDao INSTANCE;
 
     private ProductDao() {

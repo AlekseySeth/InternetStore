@@ -10,16 +10,17 @@ aside {
     padding: 10px;
 }
 
-.catalog-tree {
-
+.tree-element {
+    font-size: 18px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
 }
 
-
-
 div h2 {
-    font-size: 25px;
+    font-size: 24px;
     padding-bottom: 15px;
-    text-align: center;
+    padding-left: 10px;
 }
 
 ul li {
