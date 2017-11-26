@@ -2,6 +2,7 @@
   Created by a.shestovsky
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <title>Registration</title>
@@ -16,51 +17,46 @@
     <%--</script>--%>
 </head>
     <body>
-    <div class="wrapper">
-        <!-- Header -->
-        <%@include file="header.jsp"%>
-
-        <div class="main">
-            <div class="registration-form">
-                <h2>Вход</h2>
-                <form action="${pageContext.request.contextPath}/registration" method="post">
-                    <p>
-                        <label for="firstName">Имя </label>
-                        <input type="text" id="firstName" name="firstName">
-                    </p>
-                    <p>
-                        <label for="lastName">Фамилия </label>
-                        <input type="text" id="lastName" name="lastName">
-                    </p>
-                    <p>
-                    <label for="email">E-mail </label>
-                    <input type="text" id="email" name="email">
-                    </p>
-                    <p>
-                    <label for="password">Пароль </label>
-                    <input type="password" id="password" name="password">
-                    </p>
-                    <p>
-                    <label for="repPassword">Повторите пароль </label>
-                    <input type="password" id="repPassword" name="repPassword">
-                    </p>
-                    <p>
-                    <label for="phone">Телефон </label>
-                    <input type="text" id="phone" name="phone">
-                    </p>
-                    <p>
-                    <label for="address">Адрес  </label>
-                    <input type="text" id="address" name="address">
-                    </p>
-                    <button class="registration-button" type="submit">Зарегистрироваться</button>
-                    <a href="${pageContext.request.contextPath}/login">Вход в аккаунт</a>
-                </form>
+        <div class="wrapper">
+            <%@include file="header.jsp"%>
+            <div class="main">
+                <div id="registration" class="registration-form">
+                    <h2><fmt:message key="registration"/></h2>
+                    <form action="${pageContext.request.contextPath}/registration" method="post">
+                        <div>
+                            <label for="firstName"><fmt:message key="registration.first.name"/></label>
+                            <input type="text" id="firstName" name="firstName">
+                        </div>
+                        <div>
+                            <label for="lastName"><fmt:message key="registration.last.name"/></label>
+                            <input type="text" id="lastName" name="lastName">
+                        </div>
+                        <div>
+                            <label for="email">E-mail </label>
+                            <input type="text" id="email" name="email">
+                        </div>
+                        <div>
+                            <label for="password"><fmt:message key="registration.password"/></label>
+                            <input type="password" id="password" name="password">
+                        </div>
+                        <div>
+                            <label for="repPassword"><fmt:message key="registration.repeat.password"/></label>
+                            <input type="password" id="repPassword" name="repPassword">
+                        </div>
+                        <div>
+                            <label for="phone"><fmt:message key="registration.phone"/></label>
+                            <input type="text" id="phone" name="phone">
+                        </div>
+                        <div>
+                            <label for="address"><fmt:message key="registration.address"/></label>
+                            <input type="text" id="address" name="address">
+                        </div>
+                            <button class="registration-button" type="submit"><fmt:message key="registration.button"/></button>
+                            <p class="login-link"><a  href="${pageContext.request.contextPath}/login"><fmt:message key="registration.login.link"/></a></p>
+                    </form>
+                </div>
             </div>
-
-
+            <%@include file="footer.jsp"%>
         </div>
-
-        <%@include file="footer.jsp"%>
-
     </body>
 </html>

@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,6 +41,7 @@ public class RegistrationServlet extends HttpServlet {
         Date registrationDate = new Date(System.currentTimeMillis());
         Role role = Role.CUSTOMER;
         User newUser = null;
+        HttpSession session = req.getSession();
 
         if (originalPassword.equals(repeatedPassword)) {
             String encryptedPassword = AuthenticationService.newInstance().encryptPassword(email, originalPassword);
@@ -50,7 +52,12 @@ public class RegistrationServlet extends HttpServlet {
         }
 
         if (newUser.getId() == null) {
-//            сообщение об ошибке при регистрации пользователя
+//          сообщение об ошибке при регистрации пользователя
+            System.out.println("Registration error");
+        } else {
+            session.setAttribute("user", newUser);
+            session.setAttribute("order", AuthenticationService.newInstance().createInitialOrder(newUser));
+            resp.sendRedirect("my-account");
         }
     }
 }
