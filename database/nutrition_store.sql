@@ -26,9 +26,9 @@ CREATE TABLE users (
   FOREIGN KEY (role_id) REFERENCES roles(id)) AUTO_INCREMENT=1000;
 
 INSERT INTO users (id, first_name, email, password, phone, address, registration_date, role_id)
-  VALUES (1, 'Admin', 'Admin', 'JaS3MecSfP8f23L0DfTeuBV+AvtCpVcC8ybqb9XVjME=', 'admin@sportpit.by', 'admin@sportpit.by', 2017-12-01, 1);
+  VALUES (1, 'Admin', 'Admin', 'JaS3MecSfP8f23L0DfTeuBV+AvtCpVcC8ybqb9XVjME=', 'admin@sportpit.by', 'admin@sportpit.by', '2017-12-01', 1);
 INSERT INTO users (id, first_name, email, password, phone, address, registration_date, role_id)
-  VALUES (2, 'Marketer', 'Marketer', 'SOEXTRf5PxsZi4fm4QD5pxiTuMpWF5YUZ4+Ll1YUMes=', 'marketer@sportpit.by', 'marketer@sportpit.by', 2017-12-01, 2);
+  VALUES (2, 'Marketer', 'Marketer', 'SOEXTRf5PxsZi4fm4QD5pxiTuMpWF5YUZ4+Ll1YUMes=', 'marketer@sportpit.by', 'marketer@sportpit.by', '2017-12-01', 2);
 
 CREATE TABLE categories (
   id INT AUTO_INCREMENT,

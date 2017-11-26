@@ -74,11 +74,39 @@ p{
     margin-left: 200px;
     height: 60%;
     padding: 10px;
-    border: 1px solid #000000;
     position: relative;
 }
 
 div#image {
     float: left;
     margin: 20px;
+}
+
+.add-to-cart {
+    margin: 100px 0;
+    padding: 10px;
+}
+
+.add-to-cart label {
+    font-size: 20px;
+    margin-left: 40px;
+}
+
+.add-to-cart input {
+    margin-left: 40px;
+    width: 45px;
+    height: 25px;
+    padding: 2px 0 0 3px;
+    font-size: 16px;
+}
+
+.add-to-cart button {
+    margin-left: 40px;
+    height: 25px;
+    font-size: 16px;
+}
+
+.full-description {
+    font-size: 18px;
+    line-height: 20px;
 }

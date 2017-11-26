@@ -33,8 +33,13 @@ public class CartService {
         return INSTANCE;
     }
 
-    public void addProductToCart(Order order, Product product, int qtyToAdd) {
-        order.addProduct(product, qtyToAdd);
+    public void addProductToCart(Order order, Long productId, int qtyToAdd) {
+        Product product = CatalogService.newInstance().getProductById(productId);
+        if (product.getQtyInSock() >= qtyToAdd) {
+            order.addProduct(product, qtyToAdd);
+        } else {
+//            сообщение, что не хватает на складе
+        }
     }
 
     private BigDecimal calculateTotalPrice(Map<Product, Integer> products, Delivery delivery) {

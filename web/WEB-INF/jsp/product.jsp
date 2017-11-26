@@ -23,11 +23,16 @@
                     <div id="image">
                         <img src="${requestScope.product.imageURL}">
                     </div>
-                    <div class="qty">
-                        <form action="${pageContext.request.contextPath}/cart">
+                    <div class="add-to-cart">
+                        <form action="${pageContext.request.contextPath}/cart" method="post">
                             <label for="qty">Количество</label>
                             <input id="qty" type="number" name="qty" value="1">
+                            <input type="hidden" name="productId" value="${requestScope.product.id}">
+                            <button type="submit">Добавить в корзину</button>
                         </form>
+                    </div>
+                    <div class="full-description">
+                        <p>${requestScope.product.description}</p>
                     </div>
                 </div>
             </div>
