@@ -6,7 +6,7 @@ header {
 
 nav {
     background: #e8e8e8;
-    height: 50px;
+    height: 51px;
 }
 
 nav ul {
@@ -18,19 +18,33 @@ nav ul {
 
 nav ul li {
     float: left;
-    padding: 17px 35px;
     text-decoration: none;
     font-weight: bold;
-    color: #069;
     border-right: 1px solid #ccc;
-    display: list-item;
-    text-align: -webkit-match-parent;
     font-size: 18px;
+    position: relative;
 }
+
+li a {
+    display: block;
+    padding: 17px 35px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a#title {
+    display: block;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+
 
 li.my-account {
     float: right;
-    padding: 17px 35px;
     text-decoration: none;
     font-weight: bold;
     color: #069;
@@ -40,14 +54,8 @@ li.my-account {
     text-align: -webkit-match-parent;
 }
 
-div.title {
-    padding-top: 25px;
-    padding-bottom: 25px;
-}
-
 p.store-title {
     text-align: center;
     font-size: 50px;
     font-weight: 500;
-    /*line-height: 45px;*/
 }

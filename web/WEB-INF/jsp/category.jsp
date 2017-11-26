@@ -21,12 +21,13 @@
             <%@include file="header.jsp"%>
             <div class="main">
                 <%@include file="category-tree.jsp"%>
+                <div class="top"><h2>${requestScope.currentCategory.name}</h2></div>
                 <div class="parent-categories">
                     <div>
                         <c:forEach var="product" items="${requestScope.products}">
                             <div class="product-item">
                                 <a href="${pageContext.request.contextPath}/product?id=${product.id}">
-                                <img class="product-image" src="${product.imageURL}">
+                                <img class="product-image" src="${product.imageURL}" height="100" width="100">
                                 <p class="product-name">${product.name}</p>
                                 <div class="short-description">
                                     <p>

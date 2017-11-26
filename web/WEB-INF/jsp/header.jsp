@@ -5,9 +5,13 @@
 <fmt:setLocale value="${sessionScope.language}"/>
 <fmt:setBundle basename="translations"/>
 <header>
+
     <div class="title">
+        <a id="title" href="${pageContext.request.contextPath}/">
         <p class="store-title">Sport Pit</p>
+        </a>
     </div>
+
 </header>
 
 <nav>

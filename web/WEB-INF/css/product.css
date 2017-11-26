@@ -1,0 +1,84 @@
+html, body {
+    background-color: #f2f5f6;
+    /*height: 100%;*/
+}
+a {
+    color: black;
+    text-decoration: none;
+}
+
+aside {
+    float: left;
+    width: 190px;
+    margin: 20px;
+    padding: 10px;
+}
+
+.tree-element {
+    font-size: 18px;
+    height: 30px;
+    border: 1px solid #2e6da4;
+    position: relative;
+}
+
+.tree-element a {
+    padding: 10px 0 0 10px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: block;
+    height: inherit;
+    width: 180px;
+    float: none;
+}
+
+div h2 {
+    font-size: 24px;
+    padding-bottom: 15px;
+    padding-left: 10px;
+}
+
+li.tree-element {
+    padding-bottom: 10px;
+}
+
+.parent-categories {
+    margin-left: 220px;
+}
+
+p{
+    text-align: justify;
+}
+
+.main {
+    background: #FFFFFF;
+    flex: 1 0 auto;
+    padding: 20px;
+}
+
+.wrapper {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 0 10px;
+}
+
+.top {
+    text-align: center;
+}
+
+.product {
+    margin-left: 200px;
+    height: 60%;
+    padding: 10px;
+    border: 1px solid #000000;
+    position: relative;
+}
+
+div#image {
+    float: left;
+    margin: 20px;
+}

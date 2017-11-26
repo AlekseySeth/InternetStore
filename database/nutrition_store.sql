@@ -45,7 +45,7 @@ CREATE TABLE products (
   price DOUBLE NOT NULL,
   qty INT NOT NULL,
   category_id INT,
-  image_url VARCHAR(100) DEFAULT '/images/default.gif',
+  image_url VARCHAR(100) DEFAULT '/images/default.png',
   PRIMARY KEY(id),
   FOREIGN KEY(category_id) REFERENCES categories(id)) AUTO_INCREMENT=1000;
  

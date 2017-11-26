@@ -9,7 +9,7 @@ a {
 
 aside {
     float: left;
-    width: 180px;
+    width: 190px;
     margin: 20px;
     padding: 10px;
 }
@@ -28,7 +28,7 @@ aside {
     bottom: 0;
     display: block;
     height: inherit;
-    width: 170px;
+    width: 180px;
     float: none;
 }
 
@@ -38,13 +38,12 @@ div h2 {
     padding-left: 10px;
 }
 
-ul li {
-    /*padding-top: 10px;*/
+li.tree-element {
     padding-bottom: 10px;
 }
 
 .parent-categories {
-    margin-left: 225px;
+    margin-left: 220px;
 }
 
 p{
@@ -70,7 +69,7 @@ p{
 .product-item {
     height: 100px;
     padding: 10px 10px 10px 0;
-    margin-top: 20px;
+    margin-bottom: 20px;
     border: 1px solid #000000;
     position: relative;
 }
@@ -87,7 +86,7 @@ p{
 
 .short-description p{
     float: left;
-    width: 75%;
+    width: 77%;
     font-size: 14px;
     padding: 10px;
     overflow: hidden;
@@ -101,7 +100,7 @@ p{
     content: "";
     position: absolute;
     float: right;
-    right: 120px;
+    right: 110px;
     bottom: 24px;
     width: 25%;
     height: 15px;
@@ -125,4 +124,8 @@ p{
     height: inherit;
     width: inherit;
     float: none;
+}
+
+.top {
+    text-align: center;
 }

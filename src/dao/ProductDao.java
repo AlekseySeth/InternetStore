@@ -68,7 +68,7 @@ public class ProductDao {
 
     public Product get(Long id) {
         try (Connection connection = ConnectionManager.getConnection()) {
-            String sql = "SELECT p.name, p.description, p.price, p.qty, p.image_url, c.id, c.name " +
+            String sql = "SELECT * " +
                     "FROM products p JOIN categories c ON p.category_id=c.id " +
                     "LEFT JOIN categories pc ON c.parent_id=pc.id " +
                     "WHERE p.id=?";
