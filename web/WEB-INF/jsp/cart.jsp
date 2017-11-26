@@ -2,6 +2,7 @@
   Created by a.shestovsky
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
     <head>
         <title>Cart</title>
@@ -20,8 +21,10 @@
                     <h2>Ваш заказ</h2>
                 </div>
                 <div class="cart">
-                    <p>${sessionScope.order.id}</p>
-                    <p>${sessionScope.order.totalPrice}</p>
+                    <c:forEach var="product" items="${sessionScope.order.products}">
+                        <p>${product.name}</p>
+                        <p>${product.price}</p>
+                    </c:forEach>
                 </div>
                 <div class="delivery">
                     <h3>Выберите способ доставки</h3>

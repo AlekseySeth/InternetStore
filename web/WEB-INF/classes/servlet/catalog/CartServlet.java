@@ -20,7 +20,7 @@ public class CartServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("order", req.getSession().getAttribute("order"));
+        req.setAttribute("deliveries", CartService.newInstance().getAllDeliveries());
         req.getServletContext().getRequestDispatcher(getPath("cart")).forward(req, resp);
     }
 

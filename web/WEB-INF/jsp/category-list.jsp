@@ -29,17 +29,9 @@
                         <c:forEach var="category" items="${requestScope.categories}">
                             <li>${category.name}<br>${category.description}</li>
                         </c:forEach>
-
                     </ul>
-
                 </div>
-
-
-
-
             </div>
-
         <%@include file="footer.jsp"%>
-
     </body>
 </html>

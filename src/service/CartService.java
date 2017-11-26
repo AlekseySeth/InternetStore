@@ -1,5 +1,6 @@
 package service;
 
+import dao.DeliveryDao;
 import dao.OrderDao;
 import entity.order.Delivery;
 import entity.order.Order;
@@ -9,6 +10,7 @@ import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -55,5 +57,9 @@ public class CartService {
         order.setTotalPrice(calculateTotalPrice(products, delivery));
         order.setOpenDate(new Date(System.currentTimeMillis()));
         return OrderDao.newInstance().save(order);
+    }
+
+    public List<Delivery> getAllDeliveries() {
+        return DeliveryDao.newInstance().getAll();
     }
 }
