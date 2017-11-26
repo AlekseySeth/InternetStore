@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class ProductDao {
 
-    private static final String DEFAULT_IMAGE_PATH = "resources/images/default.gif";
+    private static final String DEFAULT_IMAGE_PATH = "resources/images/default.png";
     private static ProductDao INSTANCE;
 
     private ProductDao() {

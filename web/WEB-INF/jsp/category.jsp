@@ -24,7 +24,20 @@
                 <div class="parent-categories">
                     <div>
                         <c:forEach var="product" items="${requestScope.products}">
-                            <div class="product-item">${product.name}</div>
+                            <div class="product-item">
+                                <a href="${pageContext.request.contextPath}/product?id=${product.id}">
+                                <img class="product-image" src="${product.imageURL}">
+                                <p class="product-name">${product.name}</p>
+                                <div class="short-description">
+                                    <p>
+                                        ${product.description}
+                                    </p>
+                                </div>
+                                <p class="product-price">
+                                    ${product.price} руб.
+                                </p>
+                                </a>
+                            </div>
                         </c:forEach>
                     </div>
                 </div>

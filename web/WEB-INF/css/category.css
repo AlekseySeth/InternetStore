@@ -2,19 +2,34 @@ html, body {
     background-color: #f2f5f6;
     /*height: 100%;*/
 }
+a {
+    color: black;
+    text-decoration: none;
+}
 
 aside {
     float: left;
-    width: 200px;
+    width: 180px;
     margin: 20px;
     padding: 10px;
 }
 
 .tree-element {
     font-size: 18px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 10px;
+    height: 30px;
+    border: 1px solid #2e6da4;
+    position: relative;
+}
+
+.tree-element a {
+    padding: 10px 0 0 10px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: block;
+    height: inherit;
+    width: 170px;
+    float: none;
 }
 
 div h2 {
@@ -24,12 +39,12 @@ div h2 {
 }
 
 ul li {
-    padding-top: 10px;
+    /*padding-top: 10px;*/
     padding-bottom: 10px;
 }
 
 .parent-categories {
-    margin-left: 250px;
+    margin-left: 225px;
 }
 
 p{
@@ -50,4 +65,64 @@ p{
     flex-direction: column;
     height: 100%;
     padding: 0 10px;
+}
+
+.product-item {
+    height: 100px;
+    padding: 10px 10px 10px 0;
+    margin-top: 20px;
+    border: 1px solid #000000;
+    position: relative;
+}
+
+.product-image {
+    float: left;
+}
+
+.product-name {
+    float: left;
+    font-size: 18px;
+    padding-left: 10px;
+}
+
+.short-description p{
+    float: left;
+    width: 75%;
+    font-size: 14px;
+    padding: 10px;
+    overflow: hidden;
+    height: 50px;
+    line-height: 15px;
+    text-overflow: ellipsis;
+    position: relative;
+}
+
+.short-description:after {
+    content: "";
+    position: absolute;
+    float: right;
+    right: 120px;
+    bottom: 24px;
+    width: 25%;
+    height: 15px;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 95%);
+}
+
+.product-price {
+    position: absolute;
+    right: 25px;
+    top: 50px;
+    float: right;
+    text-align: center;
+}
+
+.product-item a {
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: block;
+    height: inherit;
+    width: inherit;
+    float: none;
 }
