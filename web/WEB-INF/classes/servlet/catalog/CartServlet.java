@@ -20,16 +20,21 @@ public class CartServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("deliveries", CartService.newInstance().getAllDeliveries());
+        Order order = (Order) req.getSession().getAttribute("order");
+        CartService cartService = CartService.newInstance();
+        req.setAttribute("deliveries", cartService.getAllDeliveries());
+        req.setAttribute("subtotalPrice", cartService.calculateSubtotalPrice(order));
+        order.setTotalPrice(cartService.calculateTotalPrice(order));
         req.getServletContext().getRequestDispatcher(getPath("cart")).forward(req, resp);
     }
 
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int qty = Integer.valueOf(req.getParameter("qty"));
-        Long productId = Long.valueOf(req.getParameter("productId"));
         Order order = (Order) req.getSession().getAttribute("order");
-        CartService.newInstance().addProductToCart(order, productId, qty);
-        resp.sendRedirect(req.getHeader("Referer"));
+        Long deliveryId = Long.valueOf(req.getParameter("delivery"));
+        CartService.newInstance().setOrderDelivery(order, deliveryId);
+        resp.sendRedirect("/cart");
     }
+
 }

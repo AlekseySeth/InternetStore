@@ -43,8 +43,9 @@ public class Order {
         this.closeDate = closeDate;
     }
 
-    public Order(User user) {
+    public Order(User user, Delivery delivery) {
         this.user = user;
+        this.delivery = delivery;
     }
 
     public void addProduct(Product product, int qty) {

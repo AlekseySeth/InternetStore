@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -80,7 +81,26 @@ public class DeliveryDao {
     }
 
     public List<Delivery> getAll() {
+        List<Delivery> deliveries = new ArrayList<>();
+        try (Connection connection = ConnectionManager.getConnection()) {
+            String sql = "SELECT * FROM deliveries";
+            PreparedStatement statement = connection.prepareStatement(sql);
 
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                deliveries.add(new Delivery(
+                        resultSet.getLong("id"),
+                        resultSet.getString("name"),
+                        resultSet.getBigDecimal("cost")));
+            }
+
+            resultSet.close();
+            statement.close();
+            return deliveries;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
