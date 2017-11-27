@@ -17,23 +17,36 @@
         <div class="wrapper">
             <%@include file="header.jsp"%>
             <div class="main">
-                <div class="top">
-                    <h2>Ваш заказ</h2>
-                </div>
-                <div class="cart">
-                    <c:forEach var="product" items="${sessionScope.order.products}">
-                        <p>${product.key.name}</p>
-                        <p>${product.key.price}</p>
-                    </c:forEach>
-                </div>
-
-                <div class="delivery">
-                    <h3>Выберите способ доставки</h3>
-                    <form action="${pageContext.request.contextPath}/cart" method="post">
-                    <c:forEach var="delivery" items="${requestScope.deliveries}">
-                        <input type="radio" name="delivery" value="${delivery.id}" onchange="submit()">${delivery.name}
-                    </c:forEach>
-                    </form>
+                <div class="cart-container">
+                    <div class="top">
+                        <h2>Ваш заказ</h2>
+                    </div>
+                    <table class="cart">
+                        <tr>
+                            <th id="head-name">Наименование продукта</th>
+                            <th>Цена</th>
+                            <th>Количество</th>
+                        </tr>
+                        <c:forEach var="product" items="${sessionScope.order.products}">
+                            <tr><td id="name">${product.key.name}</td><td>${product.key.price} руб.</td><td>${product.value}</td></tr>
+                        </c:forEach>
+                    </table>
+                    <div class="subtotal">
+                        Сумма ${requestScope.subtotalPrice} руб.
+                    </div>
+                    <h3 class="delivery-header">Выберите способ доставки</h3>
+                        <form action="${pageContext.request.contextPath}/cart" method="post">
+                            <table class="delivery">
+                        <c:forEach var="delivery" items="${requestScope.deliveries}">
+                            <tr><td><input id="${delivery.id}" type="radio" name="delivery" value="${delivery.id}" onchange="submit()"><label for="${delivery.id}">${delivery.name}</label></td>
+                                <td>${delivery.cost}</td>
+                                <td>руб.</td></tr>
+                        </c:forEach>
+                        </form>
+                    </table>
+                    <div class="subtotal">
+                        Итого ${sessionScope.order.totalPrice} руб.
+                    </div>
                 </div>
             </div>
             <%@include file="footer.jsp"%>

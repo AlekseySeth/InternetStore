@@ -14,7 +14,7 @@ p{
 .main {
     background: #FFFFFF;
     flex: 1 0 auto;
-    padding: 20px;
+    padding: 20px 250px;
 }
 
 .wrapper {
@@ -27,11 +27,63 @@ p{
     padding: 0 10px;
 }
 
-.top {
-    text-align: left;
-    font-size: 30px;
-    margin-bottom: 20px;
+.cart-container {
+    background-color: aliceblue;
+    padding: 20px;
 }
 
+.top {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.cart {
+    margin-left: 50px;
+    width: 90%;
+}
+
+.cart th {
+    font-size: 20px;
+    height: 40px;
+    font-weight: bold;
+}
+
+th#head-name {
+    text-align: left;
+}
+
+.cart td {
+    font-size: 18px;
+    height: 40px;
+    text-align: center;
+}
+
+td#name {
+    text-align: left;
+}
+
+.subtotal {
+    text-align: right;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-right: 35px;
+}
+
+.delivery-header {
+    font-size: 18px;
+    margin: 20px 0 10px 20px;
+}
+
+.delivery {
+    margin-left: 20px;
+    font-size: 16px;
+    width: 50%;
+}
+
+.delivery td {
+    padding-top: 10px;
+}
 
 
