@@ -27,56 +27,48 @@ public class AuthorizationFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         if (servletRequest instanceof HttpServletRequest && servletResponse instanceof HttpServletResponse) {
-            HttpServletRequest httpReq = (HttpServletRequest) servletRequest;
-            HttpServletResponse httpResp = (HttpServletResponse) servletResponse;
-            String requestURI = httpReq.getRequestURI();
-            User user = (User) httpReq.getSession().getAttribute("user");
+            String requestURI = ((HttpServletRequest) servletRequest).getRequestURI();
+            User user = (User) ((HttpServletRequest) servletRequest).getSession().getAttribute("user");
 
-            processIfNotLoggedIn(servletRequest, filterChain, httpResp, requestURI, user);
-            processIfAdmin(httpReq, httpResp, requestURI, user);
-            processIfMarketer(httpReq, httpResp, requestURI, user);
-            processIfCustomer(servletRequest, filterChain, httpResp, requestURI);
+            if (user == null) {
+                processIfNotLogged(servletRequest, servletResponse, filterChain, requestURI);
+            } else  if (user.getRole().equals(Role.ADMIN)) {
+                processIfAdmin(servletRequest, servletResponse, requestURI);
+            } else
+            if (user.getRole().equals(Role.MARKETER)) {
+                processIfMarketer(servletRequest, servletResponse, requestURI);
+            } else if (requestURI.equals("/cart") || requestURI.equals("/my-account")) {
+                filterChain.doFilter(servletRequest, servletResponse);
+            } else {
+                ((HttpServletResponse) servletResponse).sendRedirect("/my-account");
+            }
 
         } else {
             filterChain.doFilter(servletRequest, servletResponse);
         }
     }
 
-    private void processIfCustomer(ServletRequest servletRequest, FilterChain filterChain, HttpServletResponse httpResp, String requestURI) throws IOException, ServletException {
-        if (requestURI.equals("/cart") || requestURI.equals("/my-account")) {
-            filterChain.doFilter(servletRequest, httpResp);
+    private void processIfMarketer(ServletRequest servletRequest, ServletResponse servletResponse, String requestURI) throws ServletException, IOException {
+        if (requestURI.equals("/my-account")) {
+            servletRequest.getRequestDispatcher(getPath("marketer")).forward(servletRequest, servletResponse);
         } else {
-            httpResp.sendRedirect("/my-account");
+            ((HttpServletResponse) servletResponse).sendRedirect("/my-account");
         }
     }
 
-    private void processIfMarketer(HttpServletRequest httpReq, HttpServletResponse httpResp, String requestURI, User user) throws ServletException, IOException {
-        if (user.getRole().equals(Role.MARKETER)) {
-            if (requestURI.equals("/my-account")) {
-                httpReq.getRequestDispatcher(getPath("marketer")).forward(httpReq, httpResp);
-            } else {
-                httpResp.sendRedirect("/my-account");
-            }
-        }
-    }
-
-    private void processIfAdmin(HttpServletRequest httpReq, HttpServletResponse httpResp, String requestURI, User user) throws ServletException, IOException {
-        if (user.getRole().equals(Role.ADMIN)) {
-            if (requestURI.equals("/my-account")) {
-                httpReq.getRequestDispatcher(getPath("admin")).forward(httpReq, httpResp);
-            } else {
-                httpResp.sendRedirect("/my-account");
-            }
-        }
-    }
-
-    private void processIfNotLoggedIn(ServletRequest servletRequest, FilterChain filterChain, HttpServletResponse httpResp, String requestURI, User user) throws IOException, ServletException {
-        if (user == null) {
-            if (requestURI.equals("/login") || requestURI.equals("/registration")) {
-                filterChain.doFilter(servletRequest, httpResp);
-            }
+    private void processIfAdmin(ServletRequest servletRequest, ServletResponse servletResponse, String requestURI) throws ServletException, IOException {
+        if (requestURI.equals("/my-account")) {
+            servletRequest.getRequestDispatcher(getPath("admin")).forward(servletRequest, servletResponse);
         } else {
-            httpResp.sendRedirect("/login");
+            ((HttpServletResponse) servletResponse).sendRedirect("/my-account");
+        }
+    }
+
+    private void processIfNotLogged(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain, String requestURI) throws IOException, ServletException {
+        if (requestURI.equals("/login") || requestURI.equals("/registration")) {
+            filterChain.doFilter(servletRequest, servletResponse);
+        } else {
+            ((HttpServletResponse) servletResponse).sendRedirect("/login");
         }
     }
 

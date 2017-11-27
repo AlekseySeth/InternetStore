@@ -66,66 +66,47 @@ p{
     padding: 0 10px;
 }
 
-.product-item {
-    height: 100px;
-    padding: 10px 10px 10px 0;
-    margin-bottom: 20px;
-    border: 1px solid #000000;
-    position: relative;
-}
-
-.product-image {
-    float: left;
-}
-
-.product-name {
-    float: left;
-    font-size: 18px;
-    padding-left: 10px;
-}
-
-.short-description p{
-    float: left;
-    width: 77%;
-    font-size: 14px;
-    padding: 10px;
-    overflow: hidden;
-    height: 50px;
-    line-height: 15px;
-    text-overflow: ellipsis;
-    position: relative;
-}
-
-.short-description:after {
-    content: "";
-    position: absolute;
-    float: right;
-    right: 110px;
-    bottom: 24px;
-    width: 25%;
-    height: 15px;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 95%);
-}
-
-.product-price {
-    position: absolute;
-    right: 25px;
-    top: 50px;
-    float: right;
-    text-align: center;
-}
-
-.product-item a {
-    padding: 10px;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    display: block;
-    height: inherit;
-    width: inherit;
-    float: none;
-}
-
 .top {
     text-align: center;
+}
+
+.product {
+    margin-left: 200px;
+    height: 60%;
+    padding: 10px;
+    position: relative;
+}
+
+div#image {
+    float: left;
+    margin: 20px;
+}
+
+.add-to-cart {
+    margin: 100px 0;
+    padding: 10px;
+}
+
+.add-to-cart label {
+    font-size: 20px;
+    margin-left: 40px;
+}
+
+.add-to-cart input {
+    margin-left: 40px;
+    width: 45px;
+    height: 25px;
+    padding: 2px 0 0 3px;
+    font-size: 16px;
+}
+
+.add-to-cart button {
+    margin-left: 40px;
+    height: 25px;
+    font-size: 16px;
+}
+
+.full-description {
+    font-size: 18px;
+    line-height: 20px;
 }

@@ -25,7 +25,8 @@ public class ProductServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Long id = Long.valueOf(getInitParameter("id"));
+        req.setAttribute("categories", CatalogService.newInstance().getParentCategories());
+        Long id = Long.valueOf(req.getParameter("id"));
         req.setAttribute("product", CatalogService.newInstance().getProductById(id));
 
         RequestDispatcher requestDispatcher = req.getServletContext()

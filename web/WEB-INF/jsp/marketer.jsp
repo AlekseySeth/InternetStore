@@ -11,6 +11,9 @@
         <%@include file="../css/header.css"%>
         <%@include file="../css/footer.css"%>
     </style>
+    <%--<script type="text/javascript">--%>
+        <%--<%@include file="../js/bootstrap.js"%>--%>
+    <%--</script>--%>
 </head>
     <body>
     <div class="wrapper">

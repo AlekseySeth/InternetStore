@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 /**
  * @author a.shestovsky
@@ -75,6 +76,11 @@ public class DeliveryDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return null;
+    }
+
+    public List<Delivery> getAll() {
+
         return null;
     }
 

@@ -40,3 +40,93 @@ p{
     height: 100%;
     padding: 0 10px;
 }
+
+div#login h2 {
+    padding: 5px;
+    font-size: 34px;
+    text-align: center;
+}
+
+div#login input {
+    float: right;
+    height: 30px;
+    padding-left: 5px;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.login-button {
+    margin-top: 20px;
+    padding: 5px;
+    height: 40px;
+    font-size: 22px;
+    width: 100%;
+}
+
+.login-form {
+    margin-top: 100px;
+    margin-left: 450px;
+    width: 300px;
+    height: 245px;
+    padding: 20px;
+    border-style: ridge;
+    background-color: aliceblue;
+}
+
+.registration-link {
+    font-size: 22px;
+    margin-top: 20px;
+    padding: 5px;
+    text-align: center;
+}
+
+.registration-form {
+    margin-top: 20px;
+    margin-left: 410px;
+    width: 350px;
+    height: 580px;
+    padding: 10px 20px;
+    border: 8px skyblue;
+    background-color: aliceblue;
+}
+
+div#registration h2 {
+    padding: 5px;
+    font-size: 34px;
+    text-align: center;
+}
+
+div#registration input {
+    float: right;
+    height: 30px;
+    margin-top: 3px;
+    margin-bottom: 10px;
+    padding-left: 5px;
+    font-size: 16px;
+    width: 100%;
+}
+
+div#registration label {
+    font-size: 18px;
+    width: 100%;
+}
+
+div#registration div {
+    margin-top: 15px;
+}
+
+.registration-button {
+    margin-top: 15px;
+    padding: 5px;
+    height: 40px;
+    font-size: 22px;
+    width: 100%;
+}
+
+.login-link {
+    font-size: 20px;
+    margin-top: 15px;
+    padding: 5px;
+    text-align: center;
+}

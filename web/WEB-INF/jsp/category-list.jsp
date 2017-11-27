@@ -12,6 +12,9 @@
         <%@include file="../css/footer.css"%>
         <%@include file="../css/reset.css"%>
     </style>
+    <%--<script type="text/javascript">--%>
+        <%--<%@include file="../js/bootstrap.js"%>--%>
+    <%--</script>--%>
 </head>
     <body>
         <div class="wrapper">
@@ -26,17 +29,9 @@
                         <c:forEach var="category" items="${requestScope.categories}">
                             <li>${category.name}<br>${category.description}</li>
                         </c:forEach>
-
                     </ul>
-
                 </div>
-
-
-
-
             </div>
-
         <%@include file="footer.jsp"%>
-
     </body>
 </html>

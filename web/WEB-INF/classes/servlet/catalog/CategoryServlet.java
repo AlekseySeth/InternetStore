@@ -24,6 +24,7 @@ public class CategoryServlet extends HttpServlet {
         req.setAttribute("categories", CatalogService.newInstance().getParentCategories());
         Long id = Long.valueOf(req.getParameter("id"));
         req.setAttribute("products", CatalogService.newInstance().getProductsByCategory(id));
+        req.setAttribute("currentCategory", CatalogService.newInstance().getCategoryById(id));
 
         req.getServletContext()
             .getRequestDispatcher(getPath("category"))

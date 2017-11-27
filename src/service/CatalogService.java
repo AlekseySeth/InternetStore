@@ -55,13 +55,13 @@ public class CatalogService {
         CategoryDao categoryDao = CategoryDao.newInstance();
         Category category = categoryDao.get(categoryId);
 
-        if (category.getCategory() != null) {
-            return productDao.getProductsByCategory(category);
-        } else {
+        if (category.getCategory() == null) {
             List<Category> categoriesByParent = categoryDao.getCategoriesByParent(category);
             for (Category current : categoriesByParent) {
                 products.addAll(productDao.getProductsByCategory(current));
             }
+        } else {
+            return productDao.getProductsByCategory(category);
         }
         return products;
     }
