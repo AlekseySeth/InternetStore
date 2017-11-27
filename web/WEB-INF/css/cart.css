@@ -86,4 +86,13 @@ td#name {
     padding-top: 10px;
 }
 
+p#order-placed {
+    text-align: center;
+    align-self: center;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 50px 0;
+    margin-top: 20px;
+    background-color: aliceblue;
+}
 

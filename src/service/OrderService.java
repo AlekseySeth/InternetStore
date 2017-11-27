@@ -1,5 +1,6 @@
 package service;
 
+import dao.OrderDao;
 import entity.order.Order;
 import entity.user.User;
 
@@ -46,9 +47,8 @@ public class OrderService {
         return null;
     }
 
-    public Order getOrderById() {
-
-        return null;
+    public Order getOrderById(Long id) {
+        return OrderDao.newInstance().get(id);
     }
 
     public Order updateOrder() {

@@ -38,7 +38,7 @@
                         <form action="${pageContext.request.contextPath}/cart" method="post">
                             <table class="delivery">
                         <c:forEach var="delivery" items="${requestScope.deliveries}">
-                            <tr><td><input id="${delivery.id}" type="radio" name="delivery" value="${delivery.id}" onchange="submit()"><label for="${delivery.id}">${delivery.name}</label></td>
+                            <tr><td><input id="${delivery.id}" type="radio" name="delivery" value="${delivery.id}" ${sessionScope.order.delivery.id eq delivery.id ? "checked" : ""} onchange="submit()"><label for="${delivery.id}">${delivery.name}</label></td>
                                 <td>${delivery.cost}</td>
                                 <td>руб.</td></tr>
                         </c:forEach>
@@ -47,6 +47,10 @@
                     <div class="subtotal">
                         Итого ${sessionScope.order.totalPrice} руб.
                     </div>
+                    <form action="${pageContext.request.contextPath}/order-placed" method="post">
+                        <input type="hidden" name="isPlaced" value="true">
+                        <button class="place-order" type="submit">Разместить заказ</button>
+                    </form>
                 </div>
             </div>
             <%@include file="footer.jsp"%>
