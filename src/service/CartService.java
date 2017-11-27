@@ -44,22 +44,35 @@ public class CartService {
         }
     }
 
-    private BigDecimal calculateTotalPrice(Map<Product, Integer> products, Delivery delivery) {
-        BigDecimal totalPrice = new BigDecimal(0.0);
-        for (Map.Entry<Product, Integer> entry : products.entrySet()) {
-            totalPrice = totalPrice.add(entry.getKey().getPrice());
+    public List<Delivery> getAllDeliveries() {
+        return DeliveryDao.newInstance().getAll();
+    }
+
+    public void setOrderDelivery(Order order, Long deliveryId) {
+        Delivery delivery = DeliveryDao.newInstance().get(deliveryId);
+        order.setDelivery(delivery);
+    }
+
+    public BigDecimal calculateSubtotalPrice(Order order) {
+        BigDecimal subtotalPrice = new BigDecimal(0.0);
+        for (Map.Entry<Product, Integer> entry : order.getProducts().entrySet()) {
+            BigDecimal productPrice = entry.getKey().getPrice();
+            BigDecimal productQty = BigDecimal.valueOf(entry.getValue());
+            subtotalPrice = subtotalPrice.add(productPrice.multiply(productQty));
         }
-        totalPrice = totalPrice.add(delivery.getCost());
+        return subtotalPrice;
+    }
+
+    public BigDecimal calculateTotalPrice(Order order) {
+        BigDecimal totalPrice = new BigDecimal(0.0);
+        totalPrice = totalPrice
+                .add(calculateSubtotalPrice(order))
+                .add(order.getDelivery().getCost());
         return totalPrice;
     }
 
-    public Order placeOrder(Order order, Map<Product, Integer> products, User user, Delivery delivery) {
-        order.setTotalPrice(calculateTotalPrice(products, delivery));
+    public Order placeOrder(Order order) {
         order.setOpenDate(new Date(System.currentTimeMillis()));
         return OrderDao.newInstance().save(order);
-    }
-
-    public List<Delivery> getAllDeliveries() {
-        return DeliveryDao.newInstance().getAll();
     }
 }

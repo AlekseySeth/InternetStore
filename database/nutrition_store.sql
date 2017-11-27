@@ -55,19 +55,19 @@ CREATE TABLE products (
   cost DOUBLE NOT NULL,
   PRIMARY KEY(id));
 
-INSERT INTO deliveries (name, cost) VALUES ('Local Pickup', 0.0);
-INSERT INTO deliveries (name, cost) VALUES ('Standard', 3.50);
-INSERT INTO deliveries (name, cost) VALUES ('Premium', 5.00);
+INSERT INTO deliveries (name, cost) VALUES ('Самовывоз', 0.0);
+INSERT INTO deliveries (name, cost) VALUES ('Стандартная доставка', 3.50);
+INSERT INTO deliveries (name, cost) VALUES ('Экспресс доставка', 5.00);
 
 CREATE TABLE statuses (
   id INT AUTO_INCREMENT,
   name VARCHAR(15) UNIQUE NOT NULL,
   PRIMARY KEY(id));
   
-INSERT INTO statuses (name) VALUES ('Open');
-INSERT INTO statuses (name) VALUES ('In Progress');
-INSERT INTO statuses (name) VALUES ('Completed');
-INSERT INTO statuses (name) VALUES ('Closed');
+INSERT INTO statuses (name) VALUES ('Открыт');
+INSERT INTO statuses (name) VALUES ('В обработке');
+INSERT INTO statuses (name) VALUES ('Доставлен');
+INSERT INTO statuses (name) VALUES ('Отменен');
   
 CREATE TABLE orders (
   id INT AUTO_INCREMENT,

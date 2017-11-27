@@ -26,9 +26,14 @@
                         <p>${product.price}</p>
                     </c:forEach>
                 </div>
+
                 <div class="delivery">
                     <h3>Выберите способ доставки</h3>
-                    <input type="radio" name="delivery" value="">
+                    <form action="${pageContext.request.contextPath}/cart" method="post">
+                    <c:forEach var="delivery" items="${requestScope.deliveries}">
+                        <input type="radio" name="delivery" value="${delivery.id}" onchange="submit()">${delivery.name}
+                    </c:forEach>
+                    </form>
                 </div>
             </div>
             <%@include file="footer.jsp"%>

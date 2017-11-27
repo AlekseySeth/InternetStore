@@ -1,5 +1,7 @@
 package service;
 
+import dao.DeliveryDao;
+import entity.order.Delivery;
 import entity.order.Order;
 import entity.user.User;
 
@@ -13,6 +15,7 @@ import java.util.Base64;
  */
 public class AuthenticationService {
 
+    public static final long DEFAULT_DELIVERY_ID = 1L;
     private static AuthenticationService INSTANCE;
 
     private AuthenticationService() {
@@ -38,7 +41,8 @@ public class AuthenticationService {
     }
 
     public Order createInitialOrder(User user) {
-        return new Order(user);
+        Delivery delivery = DeliveryDao.newInstance().get(DEFAULT_DELIVERY_ID);
+        return new Order(user, delivery);
     }
 
     public String encryptPassword(String email, String originalPassword) {
