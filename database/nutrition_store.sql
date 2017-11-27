@@ -6,9 +6,9 @@ CREATE TABLE roles (
   name VARCHAR(10),
   PRIMARY KEY(id));
 
-INSERT INTO roles (id, name) VALUES (1, 'Admin');
-INSERT INTO roles (id, name) VALUES (2, 'Marketer');
-INSERT INTO roles (id, name) VALUES (3, 'Customer');
+INSERT INTO roles (id, name) VALUES (1, 'Администратор');
+INSERT INTO roles (id, name) VALUES (2, 'Маркетолог');
+INSERT INTO roles (id, name) VALUES (3, 'Покупатель');
 # INSERT INTO roles (id, name) VALUES (4, 'VIP');
 
 CREATE TABLE users (

@@ -17,16 +17,13 @@
 </head>
     <body>
     <div class="wrapper">
-        <!-- Header -->
         <%@include file="header.jsp"%>
-
         <div class="main">
-
-
-
+            <h1>Наши контакты</h1>
+            <p>Данный раздел находится в разработке</p>
+            <%--вставить картинку--%>
+            <p>По всем вопросам обращайтесь по адресу admin@sportpit.by</p>
         </div>
-
         <%@include file="footer.jsp"%>
-
     </body>
 </html>

@@ -17,16 +17,12 @@
 </head>
     <body>
     <div class="wrapper">
-        <!-- Header -->
         <%@include file="header.jsp"%>
-
         <div class="main">
-
-
-
+            <h1>Статьи</h1>
+            <p>Данный раздел находится в разработке</p>
+                        <%--вставить картинку--%>
         </div>
-
         <%@include file="footer.jsp"%>
-
     </body>
 </html>
