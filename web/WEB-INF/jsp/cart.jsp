@@ -22,8 +22,8 @@
                 </div>
                 <div class="cart">
                     <c:forEach var="product" items="${sessionScope.order.products}">
-                        <p>${product.name}</p>
-                        <p>${product.price}</p>
+                        <p>${product.key.name}</p>
+                        <p>${product.key.price}</p>
                     </c:forEach>
                 </div>
 
