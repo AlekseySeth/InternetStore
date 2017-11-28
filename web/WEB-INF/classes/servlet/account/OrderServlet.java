@@ -23,17 +23,11 @@ public class OrderServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Order order = OrderService.newInstance().getOrderById(Long.valueOf(req.getParameter("orderId")));
         User user = (User) req.getSession().getAttribute("user");
-        if (order.getUser().getId().equals(user.getId())) {
+        if ((user != null) && order.getUser().getId().equals(user.getId())) {
+            req.setAttribute("orderInfo", order);
             req.getRequestDispatcher(getPath("order")).forward(req, resp);
+        } else {
+            resp.sendRedirect("/my-account");
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Order order = OrderService.newInstance()
-                .getOrderById(Long.valueOf(req.getParameter("orderId")));
-        req.getParameter("userId");
-        req.setAttribute("order", order);
-
     }
 }
