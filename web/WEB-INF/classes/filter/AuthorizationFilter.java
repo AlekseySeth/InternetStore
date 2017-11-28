@@ -28,7 +28,7 @@ public class AuthorizationFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         if (servletRequest instanceof HttpServletRequest && servletResponse instanceof HttpServletResponse) {
             String requestURI = ((HttpServletRequest) servletRequest).getRequestURI();
-            User user = (User) ((HttpServletRequest) servletRequest).getSession().getAttribute("user");
+            User user = (User) ((HttpServletRequest) servletRequest).getAttribute("user");
 
             if (user == null) {
                 processIfNotLogged(servletRequest, servletResponse, filterChain, requestURI);
