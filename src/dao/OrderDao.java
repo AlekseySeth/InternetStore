@@ -69,7 +69,7 @@ public class OrderDao {
                 ordersProductsStatement.setLong(2, entry.getKey().getId());
                 ordersProductsStatement.setInt(3, entry.getValue());
 
-                usersOrdersStatement.executeUpdate();
+                ordersProductsStatement.executeUpdate();
                 ordersProductsStatement.close();
             }
 

@@ -3,7 +3,7 @@ USE nutrition_store;
 
 CREATE TABLE roles (
   id INT,
-  name VARCHAR(10),
+  name VARCHAR(15),
   PRIMARY KEY(id));
 
 INSERT INTO roles (id, name) VALUES (1, 'Администратор');

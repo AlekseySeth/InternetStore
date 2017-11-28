@@ -19,6 +19,7 @@
             <div class="main">
                 <div class="top">
                     <h2>Заказ успешно размещен</h2>
+                    <p id="order-placed">Номер заказа ${sessionScope.order.id}</p>
                 </div>
 
             </div>

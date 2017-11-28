@@ -1,6 +1,7 @@
 package servlet.catalog;
 
 import entity.order.Order;
+import entity.user.User;
 import service.CartService;
 import service.CatalogService;
 
@@ -33,10 +34,15 @@ public class ProductServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int qty = Integer.valueOf(req.getParameter("qty"));
-        Long id = Long.valueOf(req.getParameter("id"));
-        Order order = (Order) req.getSession().getAttribute("order");
-        CartService.newInstance().addProductToCart(order, id, qty);
-        resp.sendRedirect(req.getHeader("Referer"));
+        User user = (User) req.getSession().getAttribute("user");
+        if (user == null) {
+            resp.sendRedirect("/login");
+        } else {
+            int qty = Integer.valueOf(req.getParameter("qty"));
+            Long id = Long.valueOf(req.getParameter("id"));
+            Order order = (Order) req.getSession().getAttribute("order");
+            CartService.newInstance().addProductToCart(order, id, qty);
+            resp.sendRedirect(req.getHeader("Referer"));
+        }
     }
 }

@@ -88,7 +88,7 @@ public class DeliveryDao {
 
             ResultSet resultSet = statement.executeQuery();
 
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 deliveries.add(new Delivery(
                         resultSet.getLong("id"),
                         resultSet.getString("name"),
