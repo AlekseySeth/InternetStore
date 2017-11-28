@@ -57,14 +57,12 @@
                             <td>${order.totalPrice}</td>
                             <td>
                                 <form action="/order" method="get">
-                                    <input type="hidden" name="userId" value="${sessionScope.user.id}">
                                     <input type="hidden" name="orderId" value="${order.id}">
                                     <button type="submit">Открыть заказ</button>
                                 </form>
                             </td>
                             <td>
                                 <form action="/download-order" method="post">
-                                    <input type="hidden" name="userId" value="${sessionScope.user.id}">
                                     <input type="hidden" name="orderId" value="${order.id}">
                                     <button type="submit">Скачать файлом</button>
                                 </form>
