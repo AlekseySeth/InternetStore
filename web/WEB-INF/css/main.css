@@ -131,8 +131,8 @@ div#registration div {
     text-align: center;
 }
 
-input:invalid:not(:placeholder-shown):not(:focus) {border-color: red;}
-input:valid:not(:placeholder-shown):not(:focus) {border-color: green;}
+/*input:invalid:not(:placeholder-shown):not(:focus) {border-color: red;}*/
+/*input:valid:not(:placeholder-shown):not(:focus) {border-color: green;}*/
 
 .form-error {
     color: red;
@@ -142,3 +142,4 @@ input:valid:not(:placeholder-shown):not(:focus) {border-color: green;}
     margin-top: 3px;
     display: none;
 }
+

@@ -1,14 +1,18 @@
 package service;
 
+import dao.AuthorizationDao;
 import dao.DeliveryDao;
 import entity.order.Delivery;
 import entity.order.Order;
+import entity.user.Role;
 import entity.user.User;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author a.shestovsky
@@ -30,6 +34,10 @@ public class AuthenticationService {
             }
         }
         return INSTANCE;
+    }
+
+    public Map<Role, List<String>> getPermissions() {
+        return AuthorizationDao.newInstance().getPermissions();
     }
 
     public User signIn(String email, String password) {

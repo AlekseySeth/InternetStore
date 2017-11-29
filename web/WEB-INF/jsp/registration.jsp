@@ -25,11 +25,11 @@
                     <form action="${pageContext.request.contextPath}/registration" method="post">
                         <div>
                             <label for="firstName"><fmt:message key="registration.first.name"/></label>
-                            <input type="text" id="firstName" name="firstName" required>
+                            <input type="text" id="firstName" name="firstName" placeholder=" " required>
                         </div>
                         <div>
                             <label for="lastName"><fmt:message key="registration.last.name"/></label>
-                            <input type="text" id="lastName" name="lastName">
+                            <input type="text" id="lastName" name="lastName" placeholder=" ">
                         </div>
                         <div>
                             <label for="email">E-mail </label>
@@ -38,19 +38,19 @@
                         </div>
                         <div>
                             <label for="password"><fmt:message key="registration.password"/></label>
-                            <input type="password" id="password" name="password" required>
+                            <input type="password" id="password" name="password" placeholder=" " required>
                         </div>
                         <div>
                             <label for="repPassword"><fmt:message key="registration.repeat.password"/></label>
-                            <input type="password" id="repPassword" name="repPassword" required>
+                            <input type="password" id="repPassword" name="repPassword" placeholder=" " required>
                         </div>
                         <div>
                             <label for="phone"><fmt:message key="registration.phone"/></label>
-                            <input type="tel" id="phone" name="phone" required>
+                            <input type="tel" id="phone" name="phone" placeholder=" " required>
                         </div>
                         <div>
                             <label for="address"><fmt:message key="registration.address"/></label>
-                            <input type="text" id="address" name="address" required>
+                            <input type="text" id="address" name="address" placeholder=" " required>
                         </div>
                             <button class="registration-button" type="submit"><fmt:message key="registration.button"/></button>
                             <p class="login-link"><a  href="${pageContext.request.contextPath}/login"><fmt:message key="registration.login.link"/></a></p>

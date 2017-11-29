@@ -23,8 +23,9 @@
                 <div id="login" class="login-form">
                     <h2><fmt:message key="login"/></h2>
                     <form action="${pageContext.request.contextPath}/login" method="post">
-                        <p><input type="text" id="email" name="email" placeholder="email"></p>
-                        <p><input type="password" id="password" name="password" placeholder="<fmt:message key="login.password"/>"></p>
+                        <p><input type="text" id="email" name="email" placeholder="email" required></p>
+                        <span class="form-error">Это поле должно содержать E-mail в формате example@site.com</span>
+                        <p><input type="password" id="password" name="password" placeholder="<fmt:message key="login.password"/>" required></p>
                         <button class="login-button" type="submit"><fmt:message key="login.button"/></button>
                         <p class="registration-link"><a href="${pageContext.request.contextPath}/registration"><fmt:message key="login.registration.link"/></a></p>
                     </form>
