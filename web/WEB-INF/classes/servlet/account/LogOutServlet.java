@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static util.ServletUtil.getPath;
-
 /**
  * @author a.shestovsky
  */
@@ -17,7 +15,17 @@ public class LogOutServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getSession().invalidate();
-        req.getServletContext().getRequestDispatcher(getPath("index")).forward(req, resp);
+        resp.sendRedirect("/my-account");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String logOut = req.getParameter("logOut");
+        if (logOut == null) {
+            resp.sendRedirect(req.getHeader("Referer"));
+        } else if (logOut.equals("true")) {
+            req.getSession().invalidate();
+            resp.sendRedirect("");
+        }
     }
 }

@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author a.shestovsky
@@ -62,6 +64,35 @@ public class UserDao {
         return null;
     }
 
+    public List<User> getAll() {
+        List<User> users = new ArrayList<>();
+        try (Connection connection = ConnectionManager.getConnection()) {
+            String sql = "SELECT * FROM users";
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                users.add(new User(
+                        resultSet.getLong("id"),
+                        resultSet.getString("first_name"),
+                        resultSet.getString("last_name"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password"),
+                        resultSet.getString("phone"),
+                        resultSet.getString("address"),
+                        resultSet.getDate("registration_date"),
+                        Role.values()[resultSet.getInt("role_id") - CORRECTION_FACTOR]));
+            }
+            resultSet.close();
+            statement.close();
+            return users;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public User get(Long id) {
         try (Connection connection = ConnectionManager.getConnection()) {
             String sql = "SELECT * FROM users WHERE id=?";
@@ -69,10 +100,9 @@ public class UserDao {
             statement.setLong(1, id);
 
             ResultSet resultSet = statement.executeQuery();
-            User user = null;
 
             if (resultSet.next()) {
-                user = new User(
+                return new User(
                         id,
                         resultSet.getString("first_name"),
                         resultSet.getString("last_name"),
@@ -82,7 +112,6 @@ public class UserDao {
                         resultSet.getString("address"),
                         resultSet.getDate("registration_date"),
                         Role.values()[resultSet.getInt("role_id") - CORRECTION_FACTOR]);
-                return user;
             }
 
             resultSet.close();
@@ -100,10 +129,9 @@ public class UserDao {
             statement.setString(1, email);
 
             ResultSet resultSet = statement.executeQuery();
-            User user = null;
 
             if (resultSet.next()) {
-                user = new User(
+                User user = new User(
                         resultSet.getLong("id"),
                         resultSet.getString("first_name"),
                         resultSet.getString("last_name"),
@@ -136,6 +164,42 @@ public class UserDao {
             statement.setString(5, user.getAddress());
             statement.setInt(6, user.getRole().ordinal() + CORRECTION_FACTOR);
             statement.setLong(7, user.getId());
+
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean updatePassword(User user) {
+        try (Connection connection = ConnectionManager.getConnection()) {
+            String sql = "UPDATE users SET password=? WHERE id=?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, user.getPassword());
+            statement.setLong(2, user.getId());
+
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean updateProfile(User user) {
+        try (Connection connection = ConnectionManager.getConnection()) {
+            String sql = "UPDATE users SET first_name=?, last_name=?, phone=?, address=? " +
+                    "WHERE id=?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, user.getFirstName());
+            statement.setString(2, user.getLastName());
+            statement.setString(3, user.getPhone());
+            statement.setString(4, user.getAddress());
+            statement.setLong(5, user.getId());
 
             statement.executeUpdate();
             statement.close();

@@ -1,8 +1,5 @@
-package servlet.catalog;
+package servlet.account;
 
-import service.CatalogService;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,14 +12,11 @@ import static util.ServletUtil.getPath;
 /**
  * @author a.shestovsky
  */
-@WebServlet(urlPatterns = "/category-list", name = "CategoryList")
-public class CategoryListServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/marketer", name = "Marketer")
+public class MarketerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("categories", CatalogService.newInstance().getParentCategories());
-        req.getServletContext()
-                .getRequestDispatcher(getPath("category-list"))
-                .forward(req, resp);
+        getServletContext().getRequestDispatcher(getPath("marketer")).forward(req, resp);
     }
 }
