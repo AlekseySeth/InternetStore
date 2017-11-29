@@ -130,3 +130,15 @@ div#registration div {
     padding: 5px;
     text-align: center;
 }
+
+input:invalid:not(:placeholder-shown):not(:focus) {border-color: red;}
+input:valid:not(:placeholder-shown):not(:focus) {border-color: green;}
+
+.form-error {
+    color: red;
+    text-align: left;
+    font-size: 12px;
+    display: block;
+    margin-top: 3px;
+    display: none;
+}
