@@ -22,60 +22,73 @@ import static util.ServletUtil.getPath;
 /**
  * @author a.shestovsky
  */
-@WebFilter(servletNames = {"MyAccount", "Cart", "Registration", "Login"})
+@WebFilter(urlPatterns = "/*")
 public class AuthorizationFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        Map<Role, List<String>> permissions = AuthenticationService.newInstance().getPermissions();
     }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        Map<Role, List<String>> permissions = AuthenticationService.newInstance().getPermissions();
         if (servletRequest instanceof HttpServletRequest && servletResponse instanceof HttpServletResponse) {
             String requestURI = ((HttpServletRequest) servletRequest).getRequestURI();
+            if (requestURI.contains("/images")) {
+                filterChain.doFilter(servletRequest, servletResponse);
+            }
             User user = (User) ((HttpServletRequest) servletRequest).getSession().getAttribute("user");
 
             if (user == null) {
-                processIfNotLogged(servletRequest, servletResponse, filterChain, requestURI);
+                processIfGuest(servletRequest, servletResponse, requestURI, filterChain, permissions);
             } else  if (user.getRole().equals(Role.ADMIN)) {
-                processIfAdmin(servletRequest, servletResponse, requestURI);
+                processIfAdmin(servletRequest, servletResponse, requestURI, filterChain, permissions);
             } else
             if (user.getRole().equals(Role.MARKETER)) {
-                processIfMarketer(servletRequest, servletResponse, requestURI);
+                processIfMarketer(servletRequest, servletResponse, requestURI, filterChain, permissions);
             } else if (user.getRole().equals(Role.CUSTOMER)) {
-                processIfCustomer(servletRequest, servletResponse, requestURI);
+                processIfCustomer(servletRequest, servletResponse, requestURI, filterChain, permissions);
             }
         } else {
             filterChain.doFilter(servletRequest, servletResponse);
         }
     }
 
-    private void processIfMarketer(ServletRequest servletRequest, ServletResponse servletResponse, String requestURI) throws ServletException, IOException {
+    private void processIfAdmin(ServletRequest servletRequest, ServletResponse servletResponse, String requestURI, FilterChain filterChain, Map<Role, List<String>> permissions) throws ServletException, IOException {
+        List<String> restrictedPages = permissions.get(Role.ADMIN);
+        if (requestURI.equals("/my-account")) {
+            servletRequest.getRequestDispatcher(getPath("admin")).forward(servletRequest, servletResponse);
+        } else if (restrictedPages.contains(requestURI)) {
+            ((HttpServletResponse) servletResponse).sendRedirect("/my-account");
+        } else {
+            filterChain.doFilter(servletRequest, servletResponse);
+        }
+    }
+
+    private void processIfMarketer(ServletRequest servletRequest, ServletResponse servletResponse, String requestURI, FilterChain filterChain, Map<Role, List<String>> permissions) throws ServletException, IOException {
+        List<String> restrictedPages = permissions.get(Role.MARKETER);
         if (requestURI.equals("/my-account")) {
             servletRequest.getRequestDispatcher(getPath("marketer")).forward(servletRequest, servletResponse);
-        } else {
+        } else if (restrictedPages.contains(requestURI)) {
             ((HttpServletResponse) servletResponse).sendRedirect("/my-account");
+        } else {
+            filterChain.doFilter(servletRequest, servletResponse);
         }
     }
 
-    private void processIfAdmin(ServletRequest servletRequest, ServletResponse servletResponse, String requestURI) throws ServletException, IOException {
+    private void processIfCustomer(ServletRequest servletRequest, ServletResponse servletResponse, String requestURI, FilterChain filterChain, Map<Role, List<String>> permissions) throws ServletException, IOException {
+        List<String> restrictedPages = permissions.get(Role.CUSTOMER);
         if (requestURI.equals("/my-account")) {
-            servletRequest.getRequestDispatcher(getPath("admin")).forward(servletRequest, servletResponse);
-        } else {
+            servletRequest.getRequestDispatcher(getPath("my-account")).forward(servletRequest, servletResponse);
+        } else if (restrictedPages.contains(requestURI)) {
             ((HttpServletResponse) servletResponse).sendRedirect("/my-account");
+        } else {
+            filterChain.doFilter(servletRequest, servletResponse);
         }
     }
 
-    private void processIfCustomer(ServletRequest servletRequest, ServletResponse servletResponse, String requestURI) throws ServletException, IOException {
-        if (requestURI.equals("/my-account")) {
-            servletRequest.getRequestDispatcher(getPath("admin")).forward(servletRequest, servletResponse);
-        } else {
-            ((HttpServletResponse) servletResponse).sendRedirect("/my-account");
-        }
-    }
-
-    private void processIfNotLogged(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain, String requestURI) throws IOException, ServletException {
-        if (requestURI.equals("/login") || requestURI.equals("/registration")) {
+    private void processIfGuest(ServletRequest servletRequest, ServletResponse servletResponse, String requestURI, FilterChain filterChain, Map<Role, List<String>> permissions) throws IOException, ServletException {
+        List<String> allowedPages = permissions.get(Role.GUEST);
+        if (allowedPages.contains(requestURI)) {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
             ((HttpServletResponse) servletResponse).sendRedirect("/login");

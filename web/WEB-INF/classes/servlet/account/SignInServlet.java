@@ -44,6 +44,8 @@ public class SignInServlet extends HttpServlet {
                 session.setAttribute("order", authenticationService.createInitialOrder(user));
             }
             resp.sendRedirect("/my-account");
+        } else {
+            resp.sendRedirect("/login");
         }
     }
 }

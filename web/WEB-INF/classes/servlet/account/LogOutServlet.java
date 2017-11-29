@@ -25,7 +25,7 @@ public class LogOutServlet extends HttpServlet {
             resp.sendRedirect(req.getHeader("Referer"));
         } else if (logOut.equals("true")) {
             req.getSession().invalidate();
-            resp.sendRedirect("");
+            resp.sendRedirect("/");
         }
     }
 }

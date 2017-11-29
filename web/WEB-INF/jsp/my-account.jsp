@@ -21,7 +21,7 @@
         <%@include file="header.jsp"%>
         <div class="main">
             <h2>Добро пожаловать, ${sessionScope.user.firstName} ${sessionScope.user.lastName}</h2>
-            <form action="/log-out" class="log-out" method="post">
+            <form action="${pageContext.request.contextPath}/log-out" class="log-out" method="post">
                 <input type="hidden" name="logOut" value="true">
                 <button type="submit">Выйти из аккаунта</button>
             </form>
@@ -33,11 +33,11 @@
                 <tr><td><fmt:message key="registration.phone"/></td><td>${sessionScope.user.phone}</td></tr>
                 <tr><td><fmt:message key="registration.address"/></td><td>${sessionScope.user.address}</td></tr>
             </table>
-            <form action="/update-profile" class="update-profile" method="post">
+            <form action="${pageContext.request.contextPath}/update-profile" class="update-profile" method="post">
                 <input type="hidden" name="userId" value="${sessionScope.user.id}">
                 <button type="submit">Редактировать данные</button>
             </form>
-            <form action="/update-password" class="update-password" method="post">
+            <form action="${pageContext.request.contextPath}/update-password" class="update-password" method="post">
                 <input type="hidden" name="userId" value="${sessionScope.user.id}">
                 <button type="submit">Изменить пароль</button>
             </form>
@@ -56,13 +56,13 @@
                             <td>${order.openDate}</td>
                             <td>${order.totalPrice}</td>
                             <td>
-                                <form action="/order" method="get">
+                                <form action="${pageContext.request.contextPath}/order" method="get">
                                     <input type="hidden" name="orderId" value="${order.id}">
                                     <button type="submit">Открыть заказ</button>
                                 </form>
                             </td>
                             <td>
-                                <form action="/download-order" method="post">
+                                <form action="${pageContext.request.contextPath}/download-order" method="post">
                                     <input type="hidden" name="orderId" value="${order.id}">
                                     <button type="submit">Скачать файлом</button>
                                 </form>
