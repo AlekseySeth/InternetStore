@@ -47,15 +47,15 @@ public class AuthorizationDao {
             while (resultSet.next()) {
                 int role_id = resultSet.getInt("role_id");
                 if (role_id == 1) {
-                    pages.add("url");
+                    pages.add(resultSet.getString("url"));
                     permissions.put(Role.ADMIN, pages);
                 }
                 if (role_id == 2) {
-                    pages.add("url");
+                    pages.add(resultSet.getString("url"));
                     permissions.put(Role.MARKETER, pages);
                 }
                 if (role_id == 3) {
-                    pages.add("url");
+                    pages.add(resultSet.getString("url"));
                     permissions.put(Role.CUSTOMER, pages);
                 }
             }
