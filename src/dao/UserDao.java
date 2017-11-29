@@ -100,10 +100,9 @@ public class UserDao {
             statement.setString(1, email);
 
             ResultSet resultSet = statement.executeQuery();
-            User user = null;
 
             if (resultSet.next()) {
-                user = new User(
+                User user = new User(
                         resultSet.getLong("id"),
                         resultSet.getString("first_name"),
                         resultSet.getString("last_name"),
@@ -136,6 +135,42 @@ public class UserDao {
             statement.setString(5, user.getAddress());
             statement.setInt(6, user.getRole().ordinal() + CORRECTION_FACTOR);
             statement.setLong(7, user.getId());
+
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean updatePassword(User user) {
+        try (Connection connection = ConnectionManager.getConnection()) {
+            String sql = "UPDATE users SET password=? WHERE id=?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, user.getPassword());
+            statement.setLong(2, user.getId());
+
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean updateProfile(User user) {
+        try (Connection connection = ConnectionManager.getConnection()) {
+            String sql = "UPDATE users SET first_name=?, last_name=?, phone=?, address=? " +
+                    "WHERE id=?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, user.getFirstName());
+            statement.setString(2, user.getLastName());
+            statement.setString(3, user.getPhone());
+            statement.setString(4, user.getAddress());
+            statement.setLong(5, user.getId());
 
             statement.executeUpdate();
             statement.close();

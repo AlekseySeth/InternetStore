@@ -35,9 +35,24 @@ public class UserService {
 
 
 
-    public User updateUser() {
+    public boolean updatePassword(User user, String password) {
+        String newPassword = AuthenticationService.newInstance().encryptPassword(user.getEmail(), password);
+        user.setPassword(newPassword);
+        return UserDao.newInstance().updatePassword(user);
+    }
 
-        return null;
+    public boolean updateProfile(User user, String firstName, String lastName, String phone, String address) {
+        if (firstName.length() > 0) {
+            user.setFirstName(firstName);
+        }
+        user.setLastName(lastName);
+        if (phone.length() > 0) {
+            user.setFirstName(phone);
+        }
+        if (address.length() > 0) {
+            user.setFirstName(address);
+        }
+        return UserDao.newInstance().updateProfile(user);
     }
 
     public List<User> getUsersList() {

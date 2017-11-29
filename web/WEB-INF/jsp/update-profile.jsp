@@ -19,12 +19,11 @@
         <div class="wrapper">
             <%@include file="header.jsp"%>
             <div class="main">
-                <div class="password-change-container">ы
-                    <h2 id="password-update">Смена пароля</h2>
-                    <form action="${pageContext.request.contextPath}/update-password" method="post">
-                        <p><input type="password" id="newPassword" name="newPassword" placeholder="новый пароль" required></p>
-                        <p><input type="password" id="confirmNewPassword" name="confirmNewPassword" placeholder="подтвердите новый пароль" required></p>
-                        <button type="submit" onclick="comparePasswords()"">Изменить пароль</button>
+                <div class="profile-change-container">
+                    <h2 id="profile-update">Смена пароля</h2>
+                    <form action="${pageContext.request.contextPath}/update-profile" method="post">
+
+                        <button type="submit">Изменить данные</button>
                     </form>
                 </div>
             </div>
