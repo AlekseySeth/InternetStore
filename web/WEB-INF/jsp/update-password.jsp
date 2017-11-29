@@ -24,7 +24,7 @@
                     <form action="${pageContext.request.contextPath}/update-password" method="post">
                         <p><input type="password" id="newPassword" name="newPassword" placeholder="новый пароль" required></p>
                         <p><input type="password" id="confirmNewPassword" name="confirmNewPassword" placeholder="подтвердите новый пароль" required></p>
-                        <button type="submit" onclick="comparePasswords()"">Изменить пароль</button>
+                        <button type="submit" onclick="comparePasswords()">Изменить пароль</button>
                     </form>
                 </div>
             </div>

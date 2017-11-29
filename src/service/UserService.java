@@ -56,8 +56,7 @@ public class UserService {
     }
 
     public List<User> getUsersList() {
-
-        return null;
+        return UserDao.newInstance().getAll();
     }
 
     public User getUserById(Long id) {
