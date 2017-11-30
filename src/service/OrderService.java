@@ -2,14 +2,18 @@ package service;
 
 import dao.OrderDao;
 import dto.OrderDto;
+import dto.OrderFullDto;
 import entity.order.Order;
+import entity.order.Status;
 import entity.product.Product;
+import entity.user.Role;
 import entity.user.User;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -49,18 +53,22 @@ public class OrderService {
         return null;
     }
 
-    public List<Order> getAllOrders() {
-
-        return null;
+    public List<OrderFullDto> getAllOrders() {
+        return OrderDao.newInstance().getAll();
     }
 
     public Order getOrderById(Long id) {
         return OrderDao.newInstance().get(id);
     }
 
-    public Order updateOrder() {
-
-        return null;
+    public boolean updateOrder(Order order, String status) {
+        if (Status.valueOf(status).equals(Status.CLOSED) || Status.valueOf(status).equals(Status.COMPLETED)) {
+            order.setStatus(Status.valueOf(status));
+            order.setCloseDate(new Date(System.currentTimeMillis()));
+        } else {
+            order.setStatus(Status.valueOf(status));
+        }
+        return true;
     }
 
     public File generateInvoice(Long orderId, String fileName) {

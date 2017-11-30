@@ -24,6 +24,8 @@ public class DownloadOrder extends HttpServlet {
         String fileName = "Order_" + orderId + ".txt";
         resp.setHeader("Content-disposition","attachment; filename=" + fileName);
 
+        OrderService.newInstance().generateInvoice(orderId, fileName);
+
         ServletOutputStream outputStream = resp.getOutputStream();
         FileInputStream fileInputStream = new FileInputStream(fileName);
 
