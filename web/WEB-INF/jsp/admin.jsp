@@ -19,19 +19,19 @@
     <div class="wrapper">
         <%@include file="header.jsp"%>
         <div class="main">
-            <form action="/users-list" method="get">
+            <form action="${pageContext.request.contextPath}/users-list" method="get">
                 <input type="hidden" name="orderId" value="${order.id}">
                 <button type="submit">Список пользователей</button>
             </form>
-            <form action="/products-list" method="get">
+            <form action="${pageContext.request.contextPath}/products-list" method="get">
                 <input type="hidden" name="orderId" value="${order.id}">
                 <button type="submit">Список продуктов</button>
             </form>
-            <form action="/orders-list" method="get">
+            <form action="${pageContext.request.contextPath}/orders-list" method="get">
                 <input type="hidden" name="orderId" value="${order.id}">
                 <button type="submit">Список заказов</button>
             </form>
-            <form action="/log-out" class="log-out" method="post">
+            <form action="${pageContext.request.contextPath}/log-out" class="log-out" method="post">
                 <input type="hidden" name="logOut" value="true">
                 <button type="submit">Выйти из аккаунта</button>
             </form>

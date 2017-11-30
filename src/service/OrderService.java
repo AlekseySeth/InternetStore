@@ -27,7 +27,7 @@ public class OrderService {
         return INSTANCE;
     }
 
-    public List<Order> getOrdersByUser() {
+    public List<Order> getOrdersByUser(User user) {
 
         return null;
     }

@@ -20,7 +20,7 @@
             <%@include file="header.jsp"%>
             <div class="main">
                 <div class="profile-change-container">
-                    <h2 id="profile-update">Смена пароля</h2>
+                    <h2 id="profile-update">Изменение персональных данных</h2>
                     <form action="${pageContext.request.contextPath}/update-profile" method="post">
 
                         <button type="submit">Изменить данные</button>

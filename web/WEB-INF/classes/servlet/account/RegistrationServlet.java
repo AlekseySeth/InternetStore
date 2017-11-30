@@ -57,7 +57,7 @@ public class RegistrationServlet extends HttpServlet {
         } else {
             session.setAttribute("user", newUser);
             session.setAttribute("order", AuthenticationService.newInstance().createInitialOrder(newUser));
-            resp.sendRedirect("my-account");
+            resp.sendRedirect("/my-account");
         }
     }
 }

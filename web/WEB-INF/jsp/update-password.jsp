@@ -19,7 +19,7 @@
         <div class="wrapper">
             <%@include file="header.jsp"%>
             <div class="main">
-                <div class="password-change-container">ы
+                <div class="password-change-container">
                     <h2 id="password-update">Смена пароля</h2>
                     <form action="${pageContext.request.contextPath}/update-password" method="post">
                         <p><input type="password" id="newPassword" name="newPassword" placeholder="новый пароль" required></p>

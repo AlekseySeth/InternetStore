@@ -18,7 +18,7 @@ import java.io.IOException;
 /**
  * @author a.shestovsky
  */
-@WebFilter("/*")
+//@WebFilter("/*")
 public class OrderFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {}

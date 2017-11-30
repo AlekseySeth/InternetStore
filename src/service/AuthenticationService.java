@@ -1,14 +1,20 @@
 package service;
 
+import dao.AuthorizationDao;
 import dao.DeliveryDao;
 import entity.order.Delivery;
 import entity.order.Order;
+import entity.user.Role;
 import entity.user.User;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Base64;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author a.shestovsky
@@ -32,12 +38,22 @@ public class AuthenticationService {
         return INSTANCE;
     }
 
+    public Map<Role, List<String>> getPermissions() {
+        List<String> allowedPages = new ArrayList<>(
+                Arrays.asList("/", "/articles", "/contact-us", "/delivery-info", "/category",
+                        "/product", "/category-list", "/login", "/registration", "/language"));
+        Map<Role, List<String>> permissions = AuthorizationDao.newInstance().getPermissions();
+        permissions.put(Role.GUEST, allowedPages);
+        return permissions;
+    }
+
     public User signIn(String email, String password) {
         User user = UserService.newInstance().getUserByEmail(email);
         if (user.getPassword().equals(password)) {
             return user;
+        } else {
+            return null;
         }
-        return null;
     }
 
     public Order createInitialOrder(User user) {
