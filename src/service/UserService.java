@@ -1,10 +1,8 @@
 package service;
 
 import dao.UserDao;
-import entity.user.Role;
 import entity.user.User;
 
-import java.sql.Date;
 import java.util.List;
 
 /**
@@ -33,8 +31,6 @@ public class UserService {
         return userDao.save(user);
     }
 
-
-
     public boolean updatePassword(User user, String password) {
         String newPassword = AuthenticationService.newInstance().encryptPassword(user.getEmail(), password);
         user.setPassword(newPassword);
@@ -60,8 +56,7 @@ public class UserService {
     }
 
     public User getUserById(Long id) {
-
-        return null;
+        return UserDao.newInstance().get(id);
     }
 
     public User getUserByEmail(String email) {

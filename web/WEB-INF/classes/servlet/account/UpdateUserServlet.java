@@ -15,14 +15,21 @@ import static util.ServletUtil.getPath;
 /**
  * @author a.shestovsky
  */
-@WebServlet(urlPatterns = "/user-info", name = "UserInfo")
-public class UserInfoServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/update-user", name = "UpdateUser")
+public class UpdateUserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Long id = Long.valueOf(req.getParameter("id"));
-        User user = UserService.newInstance().getUserById(id);
-        req.setAttribute("foundUser", user);
-        req.getServletContext().getRequestDispatcher(getPath("user-info")).forward(req, resp);
+        Long userId = Long.valueOf(req.getParameter("userId"));
+        User user = UserService.newInstance().getUserById(userId);
+        req.setAttribute("user", user);
+        req.getServletContext().getRequestDispatcher(getPath("update-user")).forward(req, resp);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+    }
+
+
 }

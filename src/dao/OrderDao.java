@@ -1,6 +1,8 @@
 package dao;
 
 import connection.ConnectionManager;
+import dto.OrderDto;
+import dto.OrderFullDto;
 import entity.order.Delivery;
 import entity.order.Order;
 import entity.order.Status;
@@ -14,6 +16,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -169,6 +173,74 @@ public class OrderDao {
         }
         return null;
     }
+
+    public List<OrderDto> getByUser(User user) {
+        List<OrderDto> orders = new ArrayList<>();
+        try (Connection connection = ConnectionManager.getConnection()) {
+            String sql = "SELECT * FROM orders o " +
+                    "JOIN users_orders uo ON o.id=uo.order_id " +
+                    "JOIN users u ON uo.user_id=u.id " +
+                    "WHERE u.id=?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setLong(1, user.getId());
+
+            ResultSet resultSet = statement.executeQuery();
+            OrderDto orderDto = null;
+
+            while (resultSet.next()) {
+                orderDto = new OrderDto(
+                        resultSet.getLong("o.id"),
+                        resultSet.getBigDecimal("o.total_price"),
+                        resultSet.getDate("o.open_date"),
+                        resultSet.getDate("o.close_date"));
+
+                Status status = Status.values()[resultSet.getInt("o.status_id") - CORRECTION_FACTOR];
+                orderDto.setStatus(status.getAsString());
+                orderDto.setUser(user);
+                orders.add(orderDto);
+            }
+            resultSet.close();
+            statement.close();
+            return orders;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<OrderFullDto> getAll() {
+        List<OrderFullDto> orders = new ArrayList<>();
+        try (Connection connection = ConnectionManager.getConnection()) {
+            String sql = "SELECT * FROM orders o " +
+                    "JOIN users_orders uo ON o.id=uo.order_id " +
+                    "JOIN users u ON uo.user_id=u.id " +
+                    "JOIN deliveries d ON o.delivery_id=d.id ";
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            ResultSet resultSet = statement.executeQuery();
+            OrderFullDto orderFullDto = null;
+
+            while (resultSet.next()) {
+                Status status = Status.values()[resultSet.getInt("o.status_id") - CORRECTION_FACTOR];
+                orderFullDto = new OrderFullDto(
+                        resultSet.getLong("o.id"),
+                        status.getAsString(),
+                        resultSet.getString("d.name"),
+                        resultSet.getBigDecimal("o.total_price"),
+                        resultSet.getDate("o.open_date"),
+                        resultSet.getDate("o.close_date"),
+                        resultSet.getString("u.email"));
+                orders.add(orderFullDto);
+            }
+            resultSet.close();
+            statement.close();
+            return orders;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     public boolean update(Order order) {
         try (Connection connection = ConnectionManager.getConnection()) {

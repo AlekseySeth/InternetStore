@@ -31,10 +31,10 @@ public class UsersListServlet extends HttpServlet {
         String parameter = req.getParameter("findBy");
         if (parameter.equals("email")) {
             User userByEmail = UserService.newInstance().getUserByEmail(parameter);
-            resp.sendRedirect("/user-info?id=" + userByEmail.getId());
+            resp.sendRedirect("/user?id=" + userByEmail.getId());
         } else if (parameter.equals("id")) {
             Long id = Long.valueOf(parameter);
-            resp.sendRedirect("/user-info?id=" + id);
+            resp.sendRedirect("/user?id=" + id);
         }
     }
 }
