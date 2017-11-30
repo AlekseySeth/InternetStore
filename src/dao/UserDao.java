@@ -17,7 +17,6 @@ import java.util.List;
  */
 public class UserDao {
 
-    private static final int CORRECTION_FACTOR = 1;
     private static UserDao INSTANCE;
 
     private UserDao() {
@@ -46,7 +45,7 @@ public class UserDao {
             statement.setString(5, user.getPhone());
             statement.setString(6, user.getAddress());
             statement.setDate(7, user.getRegistrationDate());
-            statement.setInt(8, user.getRole().ordinal() + 1);
+            statement.setInt(8, user.getRole().ordinal());
 
             statement.executeUpdate();
 
@@ -82,7 +81,7 @@ public class UserDao {
                         resultSet.getString("phone"),
                         resultSet.getString("address"),
                         resultSet.getDate("registration_date"),
-                        Role.values()[resultSet.getInt("role_id") - CORRECTION_FACTOR]));
+                        Role.values()[resultSet.getInt("role_id")]));
             }
             resultSet.close();
             statement.close();
@@ -111,7 +110,7 @@ public class UserDao {
                         resultSet.getString("phone"),
                         resultSet.getString("address"),
                         resultSet.getDate("registration_date"),
-                        Role.values()[resultSet.getInt("role_id") - CORRECTION_FACTOR]);
+                        Role.values()[resultSet.getInt("role_id")]);
             }
 
             resultSet.close();
@@ -140,7 +139,7 @@ public class UserDao {
                         resultSet.getString("phone"),
                         resultSet.getString("address"),
                         resultSet.getDate("registration_date"),
-                        Role.values()[resultSet.getInt("role_id") - CORRECTION_FACTOR]);
+                        Role.values()[resultSet.getInt("role_id")]);
                 return user;
             }
 
@@ -162,7 +161,7 @@ public class UserDao {
             statement.setString(3, user.getPassword());
             statement.setString(4, user.getPhone());
             statement.setString(5, user.getAddress());
-            statement.setInt(6, user.getRole().ordinal() + CORRECTION_FACTOR);
+            statement.setInt(6, user.getRole().ordinal());
             statement.setLong(7, user.getId());
 
             statement.executeUpdate();

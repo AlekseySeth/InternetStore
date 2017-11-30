@@ -56,7 +56,7 @@
                             <td>${order.openDate}</td>
                             <td>${order.totalPrice}</td>
                             <td>
-                                <form action="${pageContext.request.contextPath}/order" method="get">
+                                <form action="${pageContext.request.contextPath}/order?id=${order.id}" method="get">
                                     <input type="hidden" name="orderId" value="${order.id}">
                                     <button type="submit">Открыть заказ</button>
                                 </form>

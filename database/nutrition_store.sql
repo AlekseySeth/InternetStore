@@ -6,10 +6,10 @@ CREATE TABLE roles (
   name VARCHAR(15),
   PRIMARY KEY(id));
 
+INSERT INTO roles (id, name) VALUES (0, 'Гость');
 INSERT INTO roles (id, name) VALUES (1, 'Администратор');
 INSERT INTO roles (id, name) VALUES (2, 'Маркетолог');
 INSERT INTO roles (id, name) VALUES (3, 'Покупатель');
-# INSERT INTO roles (id, name) VALUES (4, 'VIP');
 
 CREATE TABLE users (
   id INT AUTO_INCREMENT,
@@ -106,47 +106,35 @@ CREATE TABLE roles_pages (
   FOREIGN KEY (role_id) REFERENCES roles(id),
   FOREIGN KEY (page_id) REFERENCES pages(id));
 
-INSERT INTO pages (url) VALUES ('');
+INSERT INTO pages (url) VALUES ('/');
 INSERT INTO pages (url) VALUES ('/admin');
-INSERT INTO pages (url) VALUES ('/articles');
 INSERT INTO pages (url) VALUES ('/cart');
-INSERT INTO pages (url) VALUES ('/category');
-INSERT INTO pages (url) VALUES ('/category-list');
-INSERT INTO pages (url) VALUES ('/contact-us');
-INSERT INTO pages (url) VALUES ('/delivery-info');
+INSERT INTO pages (url) VALUES ('/download-order');
 INSERT INTO pages (url) VALUES ('/login');
+INSERT INTO pages (url) VALUES ('/log-out');
 INSERT INTO pages (url) VALUES ('/marketer');
 INSERT INTO pages (url) VALUES ('/my-account');
+INSERT INTO pages (url) VALUES ('/order');
 INSERT INTO pages (url) VALUES ('/order-placed');
-INSERT INTO pages (url) VALUES ('/product');
-INSERT INTO pages (url) VALUES ('/registration');
-INSERT INTO pages (url) VALUES ('/update-password');
-INSERT INTO pages (url) VALUES ('/update-profile');
-INSERT INTO pages (url) VALUES ('/users-list');
+INSERT INTO pages (url) VALUES ('/orders-list');
 INSERT INTO pages (url) VALUES ('/products-list');
-INSERT INTO pages (url) VALUES ('/user-info');
+INSERT INTO pages (url) VALUES ('/registration');
+INSERT INTO pages (url) VALUES ('/update-order');
+INSERT INTO pages (url) VALUES ('/update-password');
+INSERT INTO pages (url) VALUES ('/update-product');
+INSERT INTO pages (url) VALUES ('/update-profile');
+INSERT INTO pages (url) VALUES ('/update-user');
+INSERT INTO pages (url) VALUES ('/user');
+INSERT INTO pages (url) VALUES ('/users-list');
+
+
+
+INSERT INTO roles_pages (role_id, page_id) VALUES (0, 0);
 
 INSERT INTO roles_pages (role_id, page_id) VALUES (1, 4);
-INSERT INTO roles_pages (role_id, page_id) VALUES (1, 10);
-INSERT INTO roles_pages (role_id, page_id) VALUES (1, 12);
-INSERT INTO roles_pages (role_id, page_id) VALUES (1, 15);
-INSERT INTO roles_pages (role_id, page_id) VALUES (1, 16);
-INSERT INTO roles_pages (role_id, page_id) VALUES (1, 9);
-INSERT INTO roles_pages (role_id, page_id) VALUES (1, 14);
+
 INSERT INTO roles_pages (role_id, page_id) VALUES (2, 2);
-INSERT INTO roles_pages (role_id, page_id) VALUES (2, 4);
-INSERT INTO roles_pages (role_id, page_id) VALUES (2, 10);
-INSERT INTO roles_pages (role_id, page_id) VALUES (2, 12);
-INSERT INTO roles_pages (role_id, page_id) VALUES (2, 15);
-INSERT INTO roles_pages (role_id, page_id) VALUES (2, 16);
-INSERT INTO roles_pages (role_id, page_id) VALUES (2, 9);
-INSERT INTO roles_pages (role_id, page_id) VALUES (2, 14);
+
 INSERT INTO roles_pages (role_id, page_id) VALUES (3, 2);
-INSERT INTO roles_pages (role_id, page_id) VALUES (3, 10);
-INSERT INTO roles_pages (role_id, page_id) VALUES (3, 17);
-INSERT INTO roles_pages (role_id, page_id) VALUES (3, 18);
-INSERT INTO roles_pages (role_id, page_id) VALUES (3, 19);
-INSERT INTO roles_pages (role_id, page_id) VALUES (3, 9);
-INSERT INTO roles_pages (role_id, page_id) VALUES (3, 14);
 
 #DROP DATABASE nutrition_store;

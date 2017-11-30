@@ -15,14 +15,14 @@ import static util.ServletUtil.getPath;
 /**
  * @author a.shestovsky
  */
-@WebServlet(urlPatterns = "/user-info", name = "UserInfo")
-public class UserInfoServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/user", name = "UserInfo")
+public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Long id = Long.valueOf(req.getParameter("id"));
         User user = UserService.newInstance().getUserById(id);
         req.setAttribute("foundUser", user);
-        req.getServletContext().getRequestDispatcher(getPath("user-info")).forward(req, resp);
+        req.getServletContext().getRequestDispatcher(getPath("user")).forward(req, resp);
     }
 }

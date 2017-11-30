@@ -39,12 +39,7 @@ public class AuthenticationService {
     }
 
     public Map<Role, List<String>> getPermissions() {
-        List<String> allowedPages = new ArrayList<>(
-                Arrays.asList("/", "/articles", "/contact-us", "/delivery-info", "/category",
-                        "/product", "/category-list", "/login", "/registration", "/language"));
-        Map<Role, List<String>> permissions = AuthorizationDao.newInstance().getPermissions();
-        permissions.put(Role.GUEST, allowedPages);
-        return permissions;
+        return AuthorizationDao.newInstance().getPermissions();
     }
 
     public User signIn(String email, String password) {

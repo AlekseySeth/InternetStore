@@ -33,9 +33,6 @@ public class AuthorizationFilter implements Filter {
         Map<Role, List<String>> permissions = AuthenticationService.newInstance().getPermissions();
         if (servletRequest instanceof HttpServletRequest && servletResponse instanceof HttpServletResponse) {
             String requestURI = ((HttpServletRequest) servletRequest).getRequestURI();
-            if (requestURI.contains("/images")) {
-                filterChain.doFilter(servletRequest, servletResponse);
-            }
             User user = (User) ((HttpServletRequest) servletRequest).getSession().getAttribute("user");
 
             if (user == null) {
@@ -77,9 +74,11 @@ public class AuthorizationFilter implements Filter {
 
     private void processIfCustomer(ServletRequest servletRequest, ServletResponse servletResponse, String requestURI, FilterChain filterChain, Map<Role, List<String>> permissions) throws ServletException, IOException {
         List<String> restrictedPages = permissions.get(Role.CUSTOMER);
+        String referer = ((HttpServletRequest) servletRequest).getHeader("Referer");
         if (requestURI.equals("/my-account")) {
             servletRequest.getRequestDispatcher(getPath("my-account")).forward(servletRequest, servletResponse);
-        } else if (restrictedPages.contains(requestURI)) {
+        } else if (restrictedPages.contains(requestURI)
+                || (referer.equals("/order-placed") && requestURI.equals("/cart"))) {
             ((HttpServletResponse) servletResponse).sendRedirect("/my-account");
         } else {
             filterChain.doFilter(servletRequest, servletResponse);
@@ -87,11 +86,11 @@ public class AuthorizationFilter implements Filter {
     }
 
     private void processIfGuest(ServletRequest servletRequest, ServletResponse servletResponse, String requestURI, FilterChain filterChain, Map<Role, List<String>> permissions) throws IOException, ServletException {
-        List<String> allowedPages = permissions.get(Role.GUEST);
-        if (allowedPages.contains(requestURI)) {
-            filterChain.doFilter(servletRequest, servletResponse);
-        } else {
+        List<String> restrictedPages = permissions.get(Role.GUEST);
+        if (restrictedPages.contains(requestURI)) {
             ((HttpServletResponse) servletResponse).sendRedirect("/login");
+        } else {
+            filterChain.doFilter(servletRequest, servletResponse);
         }
     }
 

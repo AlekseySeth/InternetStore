@@ -46,6 +46,10 @@ public class AuthorizationDao {
 
             while (resultSet.next()) {
                 int role_id = resultSet.getInt("role_id");
+                if (role_id == 0) {
+                    pages.add(resultSet.getString("url"));
+                    permissions.put(Role.GUEST, pages);
+                }
                 if (role_id == 1) {
                     pages.add(resultSet.getString("url"));
                     permissions.put(Role.ADMIN, pages);
