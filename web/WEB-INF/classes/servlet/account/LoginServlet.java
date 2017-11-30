@@ -1,6 +1,5 @@
 package servlet.account;
 
-import entity.order.Order;
 import entity.user.Role;
 import entity.user.User;
 import service.AuthenticationService;
@@ -19,7 +18,7 @@ import static util.ServletUtil.getPath;
  * @author a.shestovsky
  */
 @WebServlet(urlPatterns = "/login", name = "Login")
-public class SignInServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

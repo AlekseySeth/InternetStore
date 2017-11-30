@@ -1,0 +1,71 @@
+USE nutrition_store;
+
+INSERT INTO pages (url) VALUES ('/admin');
+INSERT INTO pages (url) VALUES ('/cart');
+INSERT INTO pages (url) VALUES ('/download-order');
+INSERT INTO pages (url) VALUES ('/login');
+INSERT INTO pages (url) VALUES ('/log-out');
+INSERT INTO pages (url) VALUES ('/marketer');
+INSERT INTO pages (url) VALUES ('/my-account');
+INSERT INTO pages (url) VALUES ('/order');
+INSERT INTO pages (url) VALUES ('/order-placed');
+INSERT INTO pages (url) VALUES ('/orders-list');
+INSERT INTO pages (url) VALUES ('/products-list');
+INSERT INTO pages (url) VALUES ('/registration');
+INSERT INTO pages (url) VALUES ('/update-order');
+INSERT INTO pages (url) VALUES ('/update-password');
+INSERT INTO pages (url) VALUES ('/update-product');
+INSERT INTO pages (url) VALUES ('/update-profile');
+INSERT INTO pages (url) VALUES ('/update-user');
+INSERT INTO pages (url) VALUES ('/user');
+INSERT INTO pages (url) VALUES ('/users-list');
+
+INSERT INTO roles_pages (role_id, page_id) VALUES (0, 1);
+INSERT INTO roles_pages (role_id, page_id) VALUES (0, 2);
+INSERT INTO roles_pages (role_id, page_id) VALUES (0, 3);
+INSERT INTO roles_pages (role_id, page_id) VALUES (0, 5);
+INSERT INTO roles_pages (role_id, page_id) VALUES (0, 6);
+INSERT INTO roles_pages (role_id, page_id) VALUES (0, 7);
+INSERT INTO roles_pages (role_id, page_id) VALUES (0, 8);
+INSERT INTO roles_pages (role_id, page_id) VALUES (0, 9);
+INSERT INTO roles_pages (role_id, page_id) VALUES (0, 10);
+INSERT INTO roles_pages (role_id, page_id) VALUES (0, 11);
+INSERT INTO roles_pages (role_id, page_id) VALUES (0, 13);
+INSERT INTO roles_pages (role_id, page_id) VALUES (0, 14);
+INSERT INTO roles_pages (role_id, page_id) VALUES (0, 15);
+INSERT INTO roles_pages (role_id, page_id) VALUES (0, 16);
+INSERT INTO roles_pages (role_id, page_id) VALUES (0, 17);
+INSERT INTO roles_pages (role_id, page_id) VALUES (0, 18);
+INSERT INTO roles_pages (role_id, page_id) VALUES (0, 19);
+
+
+INSERT INTO roles_pages (role_id, page_id) VALUES (1, 2);
+INSERT INTO roles_pages (role_id, page_id) VALUES (1, 3);
+INSERT INTO roles_pages (role_id, page_id) VALUES (1, 4);
+INSERT INTO roles_pages (role_id, page_id) VALUES (1, 6);
+INSERT INTO roles_pages (role_id, page_id) VALUES (1, 9);
+INSERT INTO roles_pages (role_id, page_id) VALUES (1, 12);
+INSERT INTO roles_pages (role_id, page_id) VALUES (1, 16);
+
+INSERT INTO roles_pages (role_id, page_id) VALUES (2, 1);
+INSERT INTO roles_pages (role_id, page_id) VALUES (2, 2);
+INSERT INTO roles_pages (role_id, page_id) VALUES (2, 3);
+INSERT INTO roles_pages (role_id, page_id) VALUES (2, 4);
+INSERT INTO roles_pages (role_id, page_id) VALUES (2, 9);
+INSERT INTO roles_pages (role_id, page_id) VALUES (2, 12);
+INSERT INTO roles_pages (role_id, page_id) VALUES (2, 16);
+INSERT INTO roles_pages (role_id, page_id) VALUES (2, 17);
+INSERT INTO roles_pages (role_id, page_id) VALUES (2, 18);
+INSERT INTO roles_pages (role_id, page_id) VALUES (2, 19);
+
+INSERT INTO roles_pages (role_id, page_id) VALUES (3, 1);
+INSERT INTO roles_pages (role_id, page_id) VALUES (3, 4);
+INSERT INTO roles_pages (role_id, page_id) VALUES (3, 6);
+INSERT INTO roles_pages (role_id, page_id) VALUES (3, 10);
+INSERT INTO roles_pages (role_id, page_id) VALUES (3, 11);
+INSERT INTO roles_pages (role_id, page_id) VALUES (3, 12);
+INSERT INTO roles_pages (role_id, page_id) VALUES (3, 13);
+INSERT INTO roles_pages (role_id, page_id) VALUES (3, 15);
+INSERT INTO roles_pages (role_id, page_id) VALUES (3, 17);
+INSERT INTO roles_pages (role_id, page_id) VALUES (3, 18);
+INSERT INTO roles_pages (role_id, page_id) VALUES (3, 19);

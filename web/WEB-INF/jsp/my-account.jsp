@@ -33,12 +33,10 @@
                 <tr><td><fmt:message key="registration.phone"/></td><td>${sessionScope.user.phone}</td></tr>
                 <tr><td><fmt:message key="registration.address"/></td><td>${sessionScope.user.address}</td></tr>
             </table>
-            <form action="${pageContext.request.contextPath}/update-profile" class="update-profile" method="post">
-                <input type="hidden" name="userId" value="${sessionScope.user.id}">
+            <form action="${pageContext.request.contextPath}/update-profile" class="update-profile" method="get">
                 <button type="submit">Редактировать данные</button>
             </form>
-            <form action="${pageContext.request.contextPath}/update-password" class="update-password" method="post">
-                <input type="hidden" name="userId" value="${sessionScope.user.id}">
+            <form action="${pageContext.request.contextPath}/update-password" class="update-password" method="get">
                 <button type="submit">Изменить пароль</button>
             </form>
             <h2 id="orders-header">Мои заказы</h2>

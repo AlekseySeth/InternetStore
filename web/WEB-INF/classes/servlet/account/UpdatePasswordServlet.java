@@ -20,18 +20,20 @@ public class UpdatePasswordServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.getWriter().write("<p id=\"message\">Пароль успешно изменен</p>");
+
         getServletContext().getRequestDispatcher(getPath("update-password")).forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
         String newPassword = req.getParameter("newPassword");
         String confirmNewPassword = req.getParameter("confirmNewPassword");
         User user = (User) req.getSession().getAttribute("user");
 
         if (newPassword.equals(confirmNewPassword)
                 && UserService.newInstance().updatePassword(user, newPassword)) {
-            resp.getWriter().write("<p id=\"message\">Пароль успешно изменен</p>");
             resp.sendRedirect("/update-password");
         } else {
             resp.sendRedirect("/update-password");

@@ -21,10 +21,9 @@ public class OrderDto {
     private Date closeDate;
     private User user;
 
-    public OrderDto(Long id, BigDecimal totalPrice, Date openDate, Date closeDate) {
+    public OrderDto(Long id, BigDecimal totalPrice, Date openDate) {
         this.id = id;
         this.totalPrice = totalPrice;
         this.openDate = openDate;
-        this.closeDate = closeDate;
     }
 }

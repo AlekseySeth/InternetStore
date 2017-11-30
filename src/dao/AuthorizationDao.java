@@ -7,7 +7,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +35,11 @@ public class AuthorizationDao {
 
     public Map<Role, List<String>> getPermissions() {
         Map<Role, List<String>> permissions = new HashMap<>();
-        List<String> pages = new ArrayList<>();
+        List<String> guestPages = new ArrayList<>();
+        List<String> adminPages = new ArrayList<>();
+        List<String> marketerPages = new ArrayList<>();
+        List<String> customerPages = new ArrayList<>();
+
         try (Connection connection = ConnectionManager.getConnection()) {
             String sql = "SELECT * FROM pages p JOIN roles_pages rp ON p.id=rp.page_id " +
                     "JOIN roles r ON rp.role_id = r.id";
@@ -47,20 +50,20 @@ public class AuthorizationDao {
             while (resultSet.next()) {
                 int role_id = resultSet.getInt("role_id");
                 if (role_id == 0) {
-                    pages.add(resultSet.getString("url"));
-                    permissions.put(Role.GUEST, pages);
+                    guestPages.add(resultSet.getString("url"));
+                    permissions.put(Role.GUEST, guestPages);
                 }
                 if (role_id == 1) {
-                    pages.add(resultSet.getString("url"));
-                    permissions.put(Role.ADMIN, pages);
+                    adminPages.add(resultSet.getString("url"));
+                    permissions.put(Role.ADMIN, adminPages);
                 }
                 if (role_id == 2) {
-                    pages.add(resultSet.getString("url"));
-                    permissions.put(Role.MARKETER, pages);
+                    marketerPages.add(resultSet.getString("url"));
+                    permissions.put(Role.MARKETER, marketerPages);
                 }
                 if (role_id == 3) {
-                    pages.add(resultSet.getString("url"));
-                    permissions.put(Role.CUSTOMER, pages);
+                    customerPages.add(resultSet.getString("url"));
+                    permissions.put(Role.CUSTOMER, customerPages);
                 }
             }
             resultSet.close();

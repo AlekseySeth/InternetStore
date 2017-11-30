@@ -11,7 +11,7 @@ import java.sql.SQLException;
  */
 public final class ConnectionManager {
 
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/nutrition_store?autoReconnect=true&useSSL=false&characterEncoding=UTF-8";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/nutrition_store?autoReconnect=true&useSSL=false&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull";
     private static final String USER = "root";
     private static final String PASSWORD = "root";
     private static DataSource dataSource;
