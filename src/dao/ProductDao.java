@@ -185,8 +185,9 @@ public class ProductDao {
             statement.setString(2, product.getDescription());
             statement.setBigDecimal(3, product.getPrice());
             statement.setInt(4, product.getQtyInSock());
-            statement.setString(5, product.getImageURL());
-            statement.setLong(6, product.getId());
+            statement.setLong(5, product.getCategory().getId());
+            statement.setString(6, product.getImageURL());
+            statement.setLong(7, product.getId());
 
             statement.executeUpdate();
             statement.close();

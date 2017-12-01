@@ -1,0 +1,178 @@
+Способ 1
+
+html
+
+<div class="b-container">
+    Sample Text
+</div>
+<div class="b-popup">
+    <div class="b-popup-content">
+        Text in Popup
+    </div>
+</div>
+
+css
+
+*{
+    font-family: Areal;
+}
+.b-container{
+    width:200px;
+    height:150px;
+    background-color: #ccc;
+    margin:0px auto;
+    padding:10px;
+    font-size:30px;
+    color: #fff;
+}
+.b-popup{
+    width:100%;
+    height: 2000px;
+    background-color: rgba(0,0,0,0.5);
+    overflow:hidden;
+    position:fixed;
+    top:0px;
+}
+.b-popup .b-popup-content{
+    margin:40px auto 0px auto;
+    width:100px;
+    height: 40px;
+    padding:10px;
+    background-color: #c5c5c5;
+    border-radius:5px;
+    box-shadow: 0px 0px 10px #000;
+}
+
+
+Способ 2
+
+Этот способ не отличается кардинально от Способа 1, но я считаю его более удобным.
+Html (без изменений)
+
+<div class="b-container">
+    Sample Text
+</div>
+<div class="b-popup">
+    <div class="b-popup-content">
+        Text in Popup
+    </div>
+</div>
+
+Css
+
+*{
+    font-family: Areal;
+}
+.b-container{
+    width:200px;
+    height:150px;
+    background-color: #ccc;
+    margin:0px auto;
+    padding:10px;
+    font-size:30px;
+    color: #fff;
+}
+.b-popup{
+    width:100%;
+    min-height:100%;
+    background-color: rgba(0,0,0,0.5);
+    overflow:hidden;
+    position:fixed;
+    top:0px;
+}
+.b-popup .b-popup-content{
+    margin:40px auto 0px auto;
+    width:100px;
+    height: 40px;
+    padding:10px;
+    background-color: #c5c5c5;
+    border-radius:5px;
+    box-shadow: 0px 0px 10px #000;
+}
+
+
+<script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
+<script>
+    $(document).ready(function(){
+        //Скрыть PopUp при загрузке страницы
+        PopUpHide();
+    });
+    //Функция отображения PopUp
+    function PopUpShow(){
+        $("#popup1").show();
+    }
+    //Функция скрытия PopUp
+    function PopUpHide(){
+        $("#popup1").hide();
+    }
+</script>
+
+
+Также необходимо обновить Html:
+
+<div class="b-container">
+    Sample Text
+    <a href="javascript:PopUpShow()">Show popup</a>
+</div>
+<div class="b-popup" id="popup1">
+    <div class="b-popup-content">
+        Text in Popup
+    <a href="javascript:PopUpHide()">Hide popup</a>
+    </div>
+</div>
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <link href="https://code.jquery.com/ui/1.11.0/themes/ui-lightness/jquery-ui.css" rel="stylesheet" type="text/css"/>
+        <link href="/css/template.css" rel="stylesheet" type="text/css"/>
+
+        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
+
+        <script src="/js/jquery-msg.js"></script>
+    </head>
+
+    <script type=text/javascript>
+        $(function () {
+            $('.btn-error').click(function () {
+                window.dialogs.error.show('Что-то случилось', 'Подробное описание проблемы');
+            });
+            $('.btn-confirm').click(function () {
+                window.dialogs.confirm.show(
+                    'Подтверждение запроса',
+                    'Подтвердите, что вы действительно хотите чай?',
+                    function () {
+                        alert('Вы отменили запрос');
+                    },
+                    function () {
+                        alert('Вы подтвердили запрос');
+                    }
+                );
+            });
+            $('.btn-wait').click(function () {
+                window.dialogs.wait.show();
+                setTimeout(function () {
+                    window.dialogs.wait.hide();
+                }, 2000);
+            });
+            $('.btn-info').click(function () {
+                window.dialogs.info.show('Выполнение операции', 'Операция выполнена успешно!');
+            });
+        });
+    </script>
+
+    <body>
+        <button class="btn-error">Показать ошибку</button>
+        <br/>
+        <button class="btn-confirm">Подтвердите действие</button>
+        <br/>
+        <button class="btn-wait">Загрузка</button>
+        <br/>
+        <button class="btn-info">Информация</button>
+    </body>
+</html>

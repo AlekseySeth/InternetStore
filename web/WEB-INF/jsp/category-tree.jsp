@@ -12,7 +12,7 @@
                 	<a href="${pageContext.request.contextPath}/category?id=${category.id}">${category.name}</a>
                 </li>
                 <ul>
-                	<c:forEach var="child" items="${requestScope.subCategories}">
+                	<c:forEach var="child" items="${requestScope.childCategories}">
                 		<li class="child-element">
                 			<c:if test="${category.id eq child.category.id}">
                 				<a href="${pageContext.request.contextPath}/category?id=${child.id}">${child.name}</a>

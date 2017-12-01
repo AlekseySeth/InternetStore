@@ -34,7 +34,7 @@
                         <div>
                             <label for="email">E-mail </label>
                             <input type="email" id="email" name="email" required>
-                            <span class="form-error">Это поле должно содержать E-mail в формате example@site.com</span>
+                            <%--<span class="form-error">Это поле должно содержать E-mail в формате example@site.com</span>--%>
                         </div>
                         <div>
                             <label for="password"><fmt:message key="registration.password"/></label>
