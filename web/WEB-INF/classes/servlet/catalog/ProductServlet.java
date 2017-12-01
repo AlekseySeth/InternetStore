@@ -1,6 +1,7 @@
 package servlet.catalog;
 
 import entity.order.Order;
+import entity.product.Category;
 import entity.user.User;
 import service.CartService;
 import service.CatalogService;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static util.ServletUtil.getPath;
 
@@ -23,7 +26,15 @@ public class ProductServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("categories", CatalogService.newInstance().getParentCategories());
+        List<Category> parentCategories = CatalogService.newInstance().getParentCategories();
+        List<Category> childCategories = new ArrayList<>();
+        req.setAttribute("categories", parentCategories);
+
+        for (Category parent : parentCategories) {
+            List<Category> subCategories = CatalogService.newInstance().getCategoriesByParentId(parent.getId());
+            childCategories.addAll(subCategories);
+        }
+        req.setAttribute("childCategories", childCategories);
         Long id = Long.valueOf(req.getParameter("id"));
         req.setAttribute("product", CatalogService.newInstance().getProductById(id));
 

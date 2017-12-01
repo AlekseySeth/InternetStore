@@ -15,7 +15,7 @@
                 	<c:forEach var="child" items="${requestScope.childCategories}">
                 		<li class="child-element">
                 			<c:if test="${category.id eq child.category.id}">
-                				<a href="${pageContext.request.contextPath}/category?id=${child.id}">${child.name}</a>
+                				<a href="${pageContext.request.contextPath}/category?id=${child.id}">- ${child.name}</a>
                 			</c:if>
                 		</li>
                 	</c:forEach>

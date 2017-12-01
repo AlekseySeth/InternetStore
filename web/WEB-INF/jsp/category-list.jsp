@@ -18,16 +18,15 @@
 </head>
     <body>
         <div class="wrapper">
-
             <%@include file="header.jsp"%>
-
             <div class="main">
                 <%@include file="category-tree.jsp"%>
-
+                <div class="top-category">
+                    <h2>Все категории</h2></div>
                 <div class="parent-categories">
                     <ul>
                         <c:forEach var="category" items="${requestScope.categories}">
-                            <li>${category.name}<br>${category.description}</li>
+                            <li><a class="category-link" href="${pageContext.request.contextPath}/category?id=${category.id}"><h3>${category.name}</h3>${category.description}</a></li>
                         </c:forEach>
                     </ul>
                 </div>

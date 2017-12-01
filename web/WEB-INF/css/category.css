@@ -32,6 +32,11 @@ aside {
     float: none;
 }
 
+.child-element a{
+    font-size: 14px;
+    padding: 5px;
+}
+
 div h2 {
     font-size: 24px;
     padding-bottom: 15px;
@@ -44,6 +49,25 @@ li.tree-element {
 
 .parent-categories {
     margin-left: 220px;
+}
+
+.parent-categories li {
+    text-align: justify;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: solid 1px #8c8c8c;
+}
+
+.parent-categories h3 {
+    font-size: 18px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    font-weight: bold;
+}
+
+a.category-link {
+    padding: 0;
 }
 
 p{
@@ -101,9 +125,9 @@ p{
     position: absolute;
     float: right;
     right: 110px;
-    bottom: 24px;
+    bottom: 22px;
     width: 25%;
-    height: 15px;
+    height: 17px;
     background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 95%);
 }
 
@@ -126,6 +150,7 @@ p{
     float: none;
 }
 
-.top {
+.top-category {
     text-align: center;
 }
+

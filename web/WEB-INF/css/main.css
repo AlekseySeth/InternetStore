@@ -131,6 +131,76 @@ div#registration div {
     text-align: center;
 }
 
+/*my account*/
+
+h2#welcome {
+    font-size: 26px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    font-weight: bold;
+}
+
+h2#profile-header {
+    font-size: 20px;
+    padding-bottom: 5px;
+    font-weight: bold;
+    padding-left: 100px;
+}
+
+.profile-container {
+    float: left;
+    width: 35%;
+    margin-left: 20px;
+    padding: 10px;
+    background-color: #66afe9;
+}
+
+.profile {
+    font-size: 20px;
+    line-height: 30px;
+}
+
+.row-title {
+    padding-left: 35px;
+}
+
+.row-value {
+    padding-left: 125px;
+}
+
+.profile-button {
+    height: 40px;
+    font-size: 18px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.my-orders-container {
+    float: right;
+    padding: 10px;
+    margin-right: 20px;
+    margin-left: 20px;
+    width: 55%;
+    background-color: silver;
+}
+
+h2#orders-header {
+    font-size: 20px;
+    padding-bottom: 5px;
+    font-weight: bold;
+    padding-left: 250px;
+}
+
+.my-orders th {
+    font-size: 18px;
+    text-align: center;
+    padding: 5px;
+}
+
+
+
+
+
 /*input:invalid:not(:placeholder-shown):not(:focus) {border-color: red;}*/
 /*input:valid:not(:placeholder-shown):not(:focus) {border-color: green;}*/
 

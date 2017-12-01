@@ -21,7 +21,8 @@
             <%@include file="header.jsp"%>
             <div class="main">
                 <%@include file="category-tree.jsp"%>
-                <div class="top"><h2>${requestScope.currentCategory.name}</h2></div>
+                <div class="top-category">
+                    <h2>${requestScope.parentCategory.name} ${requestScope.currentCategory.name}</h2></div>
                 <div class="parent-categories">
                     <div>
                         <c:forEach var="product" items="${requestScope.products}">
