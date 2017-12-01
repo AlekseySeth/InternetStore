@@ -11,7 +11,9 @@ import entity.product.Product;
 import entity.user.Role;
 import entity.user.User;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -188,13 +190,19 @@ public class OrderDao {
             OrderDto orderDto = null;
 
             while (resultSet.next()) {
+
                 orderDto = new OrderDto(
                         resultSet.getLong("o.id"),
-                        resultSet.getBigDecimal("o.total_price"),
-                        resultSet.getDate("o.open_date"),
-                        resultSet.getDate("o.close_date"));
+                        resultSet.getBigDecimal("total_price"),
+                        resultSet.getDate("open_date"));
 
-                Status status = Status.values()[resultSet.getInt("o.status_id") - CORRECTION_FACTOR];
+                Date closeDate = resultSet.getDate("close_date");
+
+                if (closeDate != null) {
+                    orderDto.setCloseDate(closeDate);
+                }
+
+                Status status = Status.values()[resultSet.getInt("status_id") - CORRECTION_FACTOR];
                 orderDto.setStatus(status.getAsString());
                 orderDto.setUser(user);
                 orders.add(orderDto);
@@ -214,7 +222,7 @@ public class OrderDao {
             String sql = "SELECT * FROM orders o " +
                     "JOIN users_orders uo ON o.id=uo.order_id " +
                     "JOIN users u ON uo.user_id=u.id " +
-                    "JOIN deliveries d ON o.delivery_id=d.id ";
+                    "JOIN deliveries d ON o.delivery_id=d.id";
             PreparedStatement statement = connection.prepareStatement(sql);
 
             ResultSet resultSet = statement.executeQuery();

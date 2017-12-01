@@ -1,5 +1,6 @@
 package filter;
 
+import com.sun.deploy.net.HttpResponse;
 import entity.user.Role;
 import entity.user.User;
 import service.AuthenticationService;
@@ -11,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -53,7 +55,7 @@ public class AuthorizationFilter implements Filter {
     private void processIfAdmin(ServletRequest servletRequest, ServletResponse servletResponse, String requestURI, FilterChain filterChain, Map<Role, List<String>> permissions) throws ServletException, IOException {
         List<String> restrictedPages = permissions.get(Role.ADMIN);
         if (requestURI.equals("/my-account")) {
-            servletRequest.getRequestDispatcher(getPath("admin")).forward(servletRequest, servletResponse);
+            ((HttpServletResponse) servletResponse).sendRedirect("/admin");
         } else if (restrictedPages.contains(requestURI)) {
             ((HttpServletResponse) servletResponse).sendRedirect("/my-account");
         } else {
@@ -64,7 +66,7 @@ public class AuthorizationFilter implements Filter {
     private void processIfMarketer(ServletRequest servletRequest, ServletResponse servletResponse, String requestURI, FilterChain filterChain, Map<Role, List<String>> permissions) throws ServletException, IOException {
         List<String> restrictedPages = permissions.get(Role.MARKETER);
         if (requestURI.equals("/my-account")) {
-            servletRequest.getRequestDispatcher(getPath("marketer")).forward(servletRequest, servletResponse);
+            ((HttpServletResponse) servletResponse).sendRedirect("/marketer");
         } else if (restrictedPages.contains(requestURI)) {
             ((HttpServletResponse) servletResponse).sendRedirect("/my-account");
         } else {
@@ -75,9 +77,7 @@ public class AuthorizationFilter implements Filter {
     private void processIfCustomer(ServletRequest servletRequest, ServletResponse servletResponse, String requestURI, FilterChain filterChain, Map<Role, List<String>> permissions) throws ServletException, IOException {
         List<String> restrictedPages = permissions.get(Role.CUSTOMER);
         String referer = ((HttpServletRequest) servletRequest).getHeader("Referer");
-        if (requestURI.equals("/my-account")) {
-            servletRequest.getRequestDispatcher(getPath("my-account")).forward(servletRequest, servletResponse);
-        } else if (restrictedPages.contains(requestURI)
+        if (restrictedPages.contains(requestURI)
                 || (referer.equals("/order-placed") && requestURI.equals("/cart"))) {
             ((HttpServletResponse) servletResponse).sendRedirect("/my-account");
         } else {

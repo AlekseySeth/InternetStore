@@ -73,6 +73,7 @@ public class CartService {
 
     public Order placeOrder(Order order) {
         order.setOpenDate(new Date(System.currentTimeMillis()));
+        order.setCloseDate(new Date(0));
         return OrderDao.newInstance().save(order);
     }
 }

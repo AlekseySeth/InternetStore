@@ -21,7 +21,6 @@ CREATE TABLE users (
   address VARCHAR(100) NOT NULL,
   registration_date TIMESTAMP,
   role_id INT,
-  #ref_code VARCHAR(8) UNIQUE,
   PRIMARY KEY(id),
   FOREIGN KEY (role_id) REFERENCES roles(id)) AUTO_INCREMENT=1000;
 
@@ -105,36 +104,5 @@ CREATE TABLE roles_pages (
   page_id INT,
   FOREIGN KEY (role_id) REFERENCES roles(id),
   FOREIGN KEY (page_id) REFERENCES pages(id));
-
-INSERT INTO pages (url) VALUES ('/');
-INSERT INTO pages (url) VALUES ('/admin');
-INSERT INTO pages (url) VALUES ('/cart');
-INSERT INTO pages (url) VALUES ('/download-order');
-INSERT INTO pages (url) VALUES ('/login');
-INSERT INTO pages (url) VALUES ('/log-out');
-INSERT INTO pages (url) VALUES ('/marketer');
-INSERT INTO pages (url) VALUES ('/my-account');
-INSERT INTO pages (url) VALUES ('/order');
-INSERT INTO pages (url) VALUES ('/order-placed');
-INSERT INTO pages (url) VALUES ('/orders-list');
-INSERT INTO pages (url) VALUES ('/products-list');
-INSERT INTO pages (url) VALUES ('/registration');
-INSERT INTO pages (url) VALUES ('/update-order');
-INSERT INTO pages (url) VALUES ('/update-password');
-INSERT INTO pages (url) VALUES ('/update-product');
-INSERT INTO pages (url) VALUES ('/update-profile');
-INSERT INTO pages (url) VALUES ('/update-user');
-INSERT INTO pages (url) VALUES ('/user');
-INSERT INTO pages (url) VALUES ('/users-list');
-
-
-
-INSERT INTO roles_pages (role_id, page_id) VALUES (0, 0);
-
-INSERT INTO roles_pages (role_id, page_id) VALUES (1, 4);
-
-INSERT INTO roles_pages (role_id, page_id) VALUES (2, 2);
-
-INSERT INTO roles_pages (role_id, page_id) VALUES (3, 2);
 
 #DROP DATABASE nutrition_store;

@@ -43,10 +43,10 @@ public class UserService {
         }
         user.setLastName(lastName);
         if (phone.length() > 0) {
-            user.setFirstName(phone);
+            user.setPhone(phone);
         }
         if (address.length() > 0) {
-            user.setFirstName(address);
+            user.setAddress(address);
         }
         return UserDao.newInstance().updateProfile(user);
     }
