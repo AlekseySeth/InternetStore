@@ -5,6 +5,7 @@ import dao.ProductDao;
 import entity.product.Category;
 import entity.product.Product;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +76,6 @@ public class CatalogService {
         return null;
     }
 
-
     public Product getProductById(Long id) {
         return ProductDao.newInstance().get(id);
     }
@@ -84,9 +84,27 @@ public class CatalogService {
         return ProductDao.newInstance().save(product);
     }
 
-    public boolean updateProduct(Product product) {
+    public boolean updateProduct(Product product, String name, String description, String priceString,
+                                 int qtyInStock, Long categoryId, String imageURL) {
+
+        BigDecimal price = BigDecimal.valueOf(Double.valueOf(priceString));
+        Category category = CategoryDao.newInstance().get(categoryId);
+
+        if (name.length() > 0) {
+            product.setName(name);
+        }
+        if (description.length() > 0) {
+            product.setDescription(description);
+        }
+        if (price != null && price.compareTo(new BigDecimal(0.0)) >= 0) {
+            product.setPrice(price);
+        }
+        if (category != null) {
+            product.setCategory(category);
+        }
+        if (imageURL.length() > 0) {
+            product.setImageURL(imageURL);
+        }
         return ProductDao.newInstance().update(product);
     }
-
-
 }

@@ -1,9 +1,7 @@
 package servlet.catalog;
 
 import entity.product.Product;
-import entity.user.User;
 import service.CatalogService;
-import service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,6 +28,21 @@ public class UpdateProductServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Long productId = Long.valueOf(req.getParameter("productId"));
+        String name = req.getParameter("name");
+        String description = req.getParameter("description");
+        String price = req.getParameter("price");
+        int qtyInStock = Integer.valueOf(req.getParameter("qtyInStock"));
+        Long categoryId = Long.valueOf(req.getParameter("categoryId"));
+        String imageURL = req.getParameter("imageURL");
 
+        CatalogService catalogService = CatalogService.newInstance();
+        Product product = catalogService.getProductById(productId);
+
+        if (catalogService.updateProduct(product, name, description, price, qtyInStock, categoryId, imageURL)) {
+            resp.sendRedirect("/update-product");
+        } else {
+            resp.sendRedirect("/update-product");
+        }
     }
 }

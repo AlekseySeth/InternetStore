@@ -70,9 +70,10 @@ p{
     text-align: center;
 }
 
+// надо пересмотреть высоту
 .product {
     margin-left: 200px;
-    height: 60%;
+    height: 60%; 
     padding: 10px;
     position: relative;
 }

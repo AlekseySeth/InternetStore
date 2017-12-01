@@ -1,6 +1,7 @@
 package entity.product;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 public class Category {
     private Long id;
     private String name;
