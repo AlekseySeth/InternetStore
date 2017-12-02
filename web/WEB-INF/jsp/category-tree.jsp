@@ -9,7 +9,7 @@
         <ul>
             <c:forEach var="category" items="${requestScope.categories}">
                 <li class="tree-element">
-                	<a href="${pageContext.request.contextPath}/category?id=${category.id}">${category.name}</a>
+                	<a class="navigation" href="${pageContext.request.contextPath}/category?id=${category.id}">${category.name}</a>
                 </li>
                 <ul>
                 	<c:forEach var="child" items="${requestScope.childCategories}">

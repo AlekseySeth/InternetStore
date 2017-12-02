@@ -26,9 +26,4 @@ public class ProductsListServlet extends HttpServlet {
 
         req.getServletContext().getRequestDispatcher(getPath("products-list")).forward(req, resp);
     }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-    }
 }

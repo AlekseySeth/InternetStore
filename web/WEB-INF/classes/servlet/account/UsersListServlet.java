@@ -25,16 +25,4 @@ public class UsersListServlet extends HttpServlet {
         req.setAttribute("users", users);
         req.getServletContext().getRequestDispatcher(getPath("users-list")).forward(req, resp);
     }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String parameter = req.getParameter("findBy");
-        if (parameter.equals("email")) {
-            User userByEmail = UserService.newInstance().getUserByEmail(parameter);
-            resp.sendRedirect("/user?id=" + userByEmail.getId());
-        } else if (parameter.equals("id")) {
-            Long id = Long.valueOf(parameter);
-            resp.sendRedirect("/user?id=" + id);
-        }
-    }
 }

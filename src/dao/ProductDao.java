@@ -42,7 +42,7 @@ public class ProductDao {
             statement.setString(1, product.getName());
             statement.setString(2, product.getDescription());
             statement.setBigDecimal(3, product.getPrice());
-            statement.setInt(4, product.getQtyInSock());
+            statement.setInt(4, product.getQtyInStock());
             statement.setLong(5, product.getCategory().getId());
             if (product.getImageURL() != null) {
                 statement.setString(6, product.getImageURL());
@@ -154,17 +154,17 @@ public class ProductDao {
                         null,
                         new Category(resultSet.getLong("c.parent_id"),
                                 resultSet.getString("pc.name"),
-                                resultSet.getString("pc.descriprion"),
+                                resultSet.getString("pc.description"),
                                 null));
 
                 products.add(new Product(
                         resultSet.getLong("p.id"),
                         resultSet.getString("p.name"),
                         resultSet.getString("p.description"),
-                        resultSet.getBigDecimal("p.price"),
-                        resultSet.getInt("p.qty"),
+                        resultSet.getBigDecimal("price"),
+                        resultSet.getInt("qty"),
                         category,
-                        resultSet.getString("p.image_url")));
+                        resultSet.getString("image_url")));
             }
 
             resultSet.close();
@@ -184,7 +184,7 @@ public class ProductDao {
             statement.setString(1, product.getName());
             statement.setString(2, product.getDescription());
             statement.setBigDecimal(3, product.getPrice());
-            statement.setInt(4, product.getQtyInSock());
+            statement.setInt(4, product.getQtyInStock());
             statement.setLong(5, product.getCategory().getId());
             statement.setString(6, product.getImageURL());
             statement.setLong(7, product.getId());

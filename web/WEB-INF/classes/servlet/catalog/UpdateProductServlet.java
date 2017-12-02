@@ -20,10 +20,15 @@ public class UpdateProductServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Long productId = Long.valueOf(req.getParameter("productId"));
-        Product product = CatalogService.newInstance().getProductById(productId);
-        req.setAttribute("product", product);
-        req.getServletContext().getRequestDispatcher(getPath("update-product")).forward(req, resp);
+        String productIdString = req.getParameter("productId");
+        if (productIdString == null || productIdString.isEmpty()) {
+            resp.sendRedirect("/my-account");
+        } else {
+            Long productId = Long.valueOf(productIdString);
+            Product product = CatalogService.newInstance().getProductById(productId);
+            req.setAttribute("product", product);
+            req.getServletContext().getRequestDispatcher(getPath("update-product")).forward(req, resp);
+        }
     }
 
     @Override

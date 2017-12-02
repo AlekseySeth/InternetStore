@@ -28,7 +28,7 @@ aside {
     bottom: 0;
     display: block;
     height: inherit;
-    width: 180px;
+    width: 178px;
     float: none;
 }
 
@@ -53,6 +53,7 @@ li.tree-element {
 
 .parent-categories li {
     text-align: justify;
+    margin-bottom: 5px;
     padding-bottom: 10px;
     padding-left: 10px;
     padding-right: 10px;

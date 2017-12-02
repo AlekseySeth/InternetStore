@@ -21,10 +21,15 @@ public class UpdateOrderServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Long orderId = Long.valueOf(req.getParameter("orderId"));
-        Order order = OrderService.newInstance().getOrderById(orderId);
-        req.setAttribute("order", order);
-        req.getServletContext().getRequestDispatcher(getPath("update-order")).forward(req, resp);
+        String orderIdString = req.getParameter("orderId");
+        if (orderIdString == null || orderIdString.isEmpty()) {
+            resp.sendRedirect("/my-account");
+        } else {
+            Long orderId = Long.valueOf(orderIdString);
+            Order order = OrderService.newInstance().getOrderById(orderId);
+            req.setAttribute("order", order);
+            req.getServletContext().getRequestDispatcher(getPath("update-order")).forward(req, resp);
+        }
     }
 
     @Override

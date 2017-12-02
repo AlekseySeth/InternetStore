@@ -65,7 +65,7 @@ div#login input {
 }
 
 .login-form {
-    margin-top: 100px;
+    margin-top: 80px;
     margin-left: 440px;
     width: 300px;
     height: 245px;
@@ -184,32 +184,287 @@ h2#profile-header {
     background-color: silver;
 }
 
+.my-orders {
+    width: 100%;
+}
+
 h2#orders-header {
     font-size: 20px;
-    padding-bottom: 5px;
     font-weight: bold;
     padding-left: 250px;
 }
 
 .my-orders th {
     font-size: 18px;
+    font-weight: bold;
+    padding: 5px 10px 0 20px;
+    line-height: 30px;
+}
+
+.my-orders td {
+    font-size: 18px;
+    padding-left: 22px;
+    line-height: 25px;
+}
+
+td#date {
+    padding-left: 50px;
+}
+
+td#sum {
+    padding-left: 30px;
+}
+
+td.button {
+    padding: 0;
+}
+
+.my-orders button {
+    width: 100px;
+}
+
+.order-info-container {
+    float: left;
+    margin-left: 10px;
+    margin-top: 10px;
+    background-color: silver;
+    padding: 10px;
+    font-size: 18px;
+    line-height: 30px;
+    width: 33%;
+}
+
+td.oi_title {
+    padding-left: 20px;
+}
+
+td.oi_value {
+    padding-left: 60px;
+}
+
+.order-info-products-container {
+    margin-right: 10px;
+    margin-top: 10px;
+    float: right;
+    padding: 10px;
+    background-color: silver;
+    width: 58%;
+    font-size: 18px;
+    line-height: 30px;
+
+}
+
+.order-info-products {
+    width: 100%;
+}
+
+.order-info-products td {
     text-align: center;
-    padding: 5px;
+}
+
+.order-info-products th {
+    font-weight: bold;
+}
+
+th.price {
+    text-align: left;
+}
+
+td.price {
+    text-align: left;
+}
+
+th#head-name {
+    text-align: left;
+    padding-left: 30px;
+}
+
+td#name {
+    text-align: left;
+    padding-left: 10px;
+}
+
+/*Update profile*/
+
+.profile-change-container {
+    margin-left: 350px;
+    margin-top: 50px;
+    width: 30%;
+    background-color: silver;
+    font-size: 19px;
+    padding: 20px;
+}
+
+h2#profile-update {
+    font-size: 22px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.profile-update-element {
+    margin-bottom: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.profile-change-container input {
+    float: right;
+    font-size: 16px;
+    padding-left: 5px;
+    width: 75%;
+    height: 25px;
+}
+
+/*Update password*/
+.password-change-container {
+    margin-left: 420px;
+    margin-top: 50px;
+    width: 20%;
+    background-color: silver;
+    font-size: 19px;
+    padding: 20px;
+}
+
+h2#password-update {
+    font-size: 22px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.password-change-container input {
+    width: 100%;
+    padding-left: 5px;
+    height: 30px;
+    font-size: 16px;
+}
+
+/*Admin account*/
+
+.left-navigation-bar {
+    float: left;
+    width: 25%;
+    padding: 10px;
+    background-color: silver;
+}
+
+.lnb-button {
+    width: 100%;
+    height: 30px;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+button.find {
+    float: right;
+    height: 30px;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.left-navigation-bar input {
+    width: 75%;
+    padding-left: 5px;
+    height: 30px;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.users-list {
+    float: right;
+    width: 70%;
+    background-color: silver;
+    padding: 10px;
+}
+
+table#users {
+    width: 100%;
+}
+
+table#users th {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+table#users td {
+    text-align: center;
+    font-size: 16px;
+    padding-bottom: 10px;
 }
 
 
 
+.user-container {
+    float: right;
+    width: 70%;
+    background-color: silver;
+    padding: 10px;
+}
 
+.user {
+    font-size: 18px;
+    line-height: 20px;
+    width: 50%;
+}
 
-/*input:invalid:not(:placeholder-shown):not(:focus) {border-color: red;}*/
-/*input:valid:not(:placeholder-shown):not(:focus) {border-color: green;}*/
+.user-row-title {
+    padding-left: 20px;
+}
 
-/*.form-error {*/
-    /*color: red;*/
-    /*text-align: left;*/
-    /*font-size: 12px;*/
-    /*display: block;*/
-    /*margin-top: 3px;*/
-    /*display: none;*/
-/*}*/
+.user-row-value {
+    padding-left: 10px;
+}
 
+h2#user-orders-list {
+    font-size: 20px;
+    font-weight: bold;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.user-my-orders {
+    width: 100%;
+}
+
+.user-my-orders th {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 5px 10px 0 20px;
+    line-height: 30px;
+}
+
+.user-my-orders td {
+    font-size: 18px;
+    padding-left: 50px;
+    line-height: 25px;
+}
+
+td.id {
+    padding-left: 40px;
+}
+
+td.sum {
+    padding-left: 50px;
+}
+
+td#open-date {
+    padding-left: 80px;
+}
+
+td#close-date {
+    padding-left: 120px;
+}
+
+.products-list-container {
+    float: right;
+    width: 70%;
+    background-color: silver;
+    padding: 10px;
+}
+
+.products-list-container table {
+    width: 100%;
+}

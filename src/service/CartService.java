@@ -5,7 +5,6 @@ import dao.OrderDao;
 import entity.order.Delivery;
 import entity.order.Order;
 import entity.product.Product;
-import entity.user.User;
 import lombok.Getter;
 
 import java.math.BigDecimal;
@@ -37,7 +36,7 @@ public class CartService {
 
     public void addProductToCart(Order order, Long productId, int qtyToAdd) {
         Product product = CatalogService.newInstance().getProductById(productId);
-        if (product.getQtyInSock() >= qtyToAdd) {
+        if (product.getQtyInStock() >= qtyToAdd) {
             order.addProduct(product, qtyToAdd);
         } else {
 //            сообщение, что не хватает на складе

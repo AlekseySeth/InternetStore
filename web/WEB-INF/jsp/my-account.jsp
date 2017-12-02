@@ -54,18 +54,18 @@
                             <tr>
                                 <td>${order.id}</td>
                                 <td>${order.status}</td>
-                                <td>${order.openDate}</td>
-                                <td>${order.totalPrice}</td>
-                                <td>
+                                <td id="date">${order.openDate}</td>
+                                <td id="sum">${order.totalPrice}</td>
+                                <td class="button">
                                     <form action="${pageContext.request.contextPath}/order?id=${order.id}" method="get">
                                         <input type="hidden" name="orderId" value="${order.id}">
-                                        <button type="submit">Открыть заказ</button>
+                                        <button type="submit">Открыть</button>
                                     </form>
                                 </td>
-                                <td>
+                                <td class="button">
                                     <form action="${pageContext.request.contextPath}/download-order" method="post">
                                         <input type="hidden" name="orderId" value="${order.id}">
-                                        <button type="submit">Скачать файлом</button>
+                                        <button type="submit">Скачать</button>
                                     </form>
                                 </td>
                             </tr>

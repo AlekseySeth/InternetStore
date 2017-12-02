@@ -14,18 +14,18 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = false, exclude = {"category", "qtyInSock"})
+@EqualsAndHashCode(callSuper = false, exclude = {"category", "qtyInStock"})
 public class Product {
     private Long id;
     private String name;
     private String description;
     private BigDecimal price;
-    private int qtyInSock;
+    private int qtyInStock;
     private Category category;
     private String imageURL;
 
     @Override
     public String toString() {
-        return id + ". " + name + " - " + description + " | " + price + "$ | " + qtyInSock + " | " + category.getName();
+        return id + ". " + name + " - " + description + " | " + price + "$ | " + qtyInStock + " | " + category.getName();
     }
 }
