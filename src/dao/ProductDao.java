@@ -178,16 +178,15 @@ public class ProductDao {
 
     public boolean update(Product product) {
         try (Connection connection = ConnectionManager.getConnection()) {
-            String sql = "UPDATE products SET name=?, description=?, price=?, qty=?, category_id=?, image_url=? " +
+            String sql = "UPDATE products SET name=?, description=?, price=?, qty=?, image_url=? " +
                     "WHERE id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, product.getName());
             statement.setString(2, product.getDescription());
             statement.setBigDecimal(3, product.getPrice());
             statement.setInt(4, product.getQtyInStock());
-            statement.setLong(5, product.getCategory().getId());
-            statement.setString(6, product.getImageURL());
-            statement.setLong(7, product.getId());
+            statement.setString(5, product.getImageURL());
+            statement.setLong(6, product.getId());
 
             statement.executeUpdate();
             statement.close();

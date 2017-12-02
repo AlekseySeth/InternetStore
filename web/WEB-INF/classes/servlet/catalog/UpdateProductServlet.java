@@ -1,5 +1,6 @@
 package servlet.catalog;
 
+import entity.product.Category;
 import entity.product.Product;
 import service.CatalogService;
 
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static util.ServletUtil.getPath;
 
@@ -38,13 +41,12 @@ public class UpdateProductServlet extends HttpServlet {
         String description = req.getParameter("description");
         String price = req.getParameter("price");
         int qtyInStock = Integer.valueOf(req.getParameter("qtyInStock"));
-        Long categoryId = Long.valueOf(req.getParameter("categoryId"));
         String imageURL = req.getParameter("imageURL");
 
         CatalogService catalogService = CatalogService.newInstance();
         Product product = catalogService.getProductById(productId);
 
-        if (catalogService.updateProduct(product, name, description, price, qtyInStock, categoryId, imageURL)) {
+        if (catalogService.updateProduct(product, name, description, price, qtyInStock, imageURL)) {
             resp.sendRedirect("/update-product");
         } else {
             resp.sendRedirect("/update-product");

@@ -526,6 +526,15 @@ table#orders-list td#delivery {
     background-color: silver;
 }
 
+h2#order-update {
+    font-size: 22px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    margin-bottom: 5px;
+    margin-left: 80px;
+    padding-top: 5px;
+}
+
 h2#uo-products {
     font-size: 18px;
     font-weight: bold;
@@ -568,4 +577,48 @@ table#update-order-products td {
     font-size: 16px;
     padding-bottom: 5px;
     text-align: center;
+}
+
+.update-product-container {
+    float: right;
+    margin-right: 180px;
+    width: 52%;
+    background-color: silver;
+    padding: 10px 0 10px 20px;
+}
+
+table#update-product {
+    font-size: 18px;
+    line-height: 25px;
+}
+
+table#update-product input {
+    padding-left: 5px;
+    width: 100%;
+}
+
+table#update-product td {
+    padding-left: 10px;
+}
+
+h2#prod-update {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+}
+
+button#pu-button {
+    height: 30px;
+    font-size: 18px;
+    margin-right: 20px;
+    margin-left: 10px;
+    width: 94%;
+}
+
+button#pu-button-delete {
+    height: 30px;
+    font-size: 18px;
+    margin-right: 20px;
+    margin-left: 10px;
+    width: 94%;
 }

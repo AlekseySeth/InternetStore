@@ -30,7 +30,7 @@
                         <th>Дочерняя категория</th>
                         <c:forEach var="product" items="${requestScope.products}">
                             <tr>
-                                <td><a href="${pageContext.request.contextPath}/update-product?productId="></a>${product.id}</td>
+                                <td>${product.id}</td>
                                 <td id="pl-product-name">${product.name}</td>
                                 <td>${product.price}</td>
                                 <td>${product.qtyInStock}</td>

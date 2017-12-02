@@ -1,4 +1,4 @@
-package servlet.account;
+package servlet.catalog;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,8 +10,8 @@ import java.io.IOException;
 /**
  * @author a.shestovsky
  */
-@WebServlet(urlPatterns = "/delete-order", name = "DeleteOrder")
-public class DeleteOrderServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/delete-product", name = "DeleteProduct")
+public class DeleteProductServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

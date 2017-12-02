@@ -21,7 +21,7 @@
             <div class="main">
                 <%@include file="admin-left-navigation-bar.jsp"%>
                 <div class="update-order-container">
-                    <h2 id="profile-update">Изменение заказа</h2>
+                    <h2 id="order-update">Изменение заказа</h2>
                     <form action="${pageContext.request.contextPath}/update-order" method="post">
                     <table id="update-order">
                         <tr><td>ID</td><td>${requestScope.order.id}</td></tr>

@@ -85,10 +85,9 @@ public class CatalogService {
     }
 
     public boolean updateProduct(Product product, String name, String description, String priceString,
-                                 int qtyInStock, Long categoryId, String imageURL) {
+                                 int qtyInStock, String imageURL) {
 
         BigDecimal price = BigDecimal.valueOf(Double.valueOf(priceString));
-        Category category = CategoryDao.newInstance().get(categoryId);
 
         if (name.length() > 0) {
             product.setName(name);
@@ -96,11 +95,11 @@ public class CatalogService {
         if (description.length() > 0) {
             product.setDescription(description);
         }
-        if (price != null && price.compareTo(new BigDecimal(0.0)) >= 0) {
+        if (price.compareTo(new BigDecimal(0.0)) >= 0) {
             product.setPrice(price);
         }
-        if (category != null) {
-            product.setCategory(category);
+        if (qtyInStock >= 0) {
+            product.setQtyInStock(qtyInStock);
         }
         if (imageURL.length() > 0) {
             product.setImageURL(imageURL);
