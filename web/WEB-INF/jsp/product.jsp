@@ -18,28 +18,28 @@
             <%@include file="header.jsp"%>
             <div class="main">
                 <%@include file="category-tree.jsp"%>
-                <div class="top"><h2>${requestScope.product.name}</h2></div>
+                <div class="top"><h2>${requestScope.productPage.name}</h2></div>
                 <div class="product">
                     <div id="image">
-                        <img src="${requestScope.product.imageURL}" width="200" height="200">
+                        <img src="${requestScope.productPage.imageURL}" width="200" height="200">
                     </div>
                     <div class="add-to-cart">
-                        <p class="price">${requestScope.product.price} руб.</p>
+                        <p class="price">${requestScope.productPage.price} руб.</p>
                         <form action="${pageContext.request.contextPath}/product" method="post">
-                            <input type="hidden" name="id" value="${requestScope.product.id}">
+                            <input type="hidden" name="id" value="${requestScope.productPage.id}">
                             <label for="qty">Количество</label>
                             <input id="qty" type="number" name="qty" value="1">
                             <button type="submit">Добавить в корзину</button>
                         </form>
-                        <c:if test="${requestScope.product.qtyInSock gt 0}">
+                        <c:if test="${requestScope.productPage.qtyInStock gt 0}">
                             <p class="stock" style="color: green">В наличии</p>
                         </c:if>
-                        <c:if test="${requestScope.product.qtyInSock eq 0}">
+                        <c:if test="${requestScope.productPage.qtyInStock eq 0}">
                             <p class="stock" style="color: red">Нет на складе</p>
                         </c:if>
                     </div>
                     <div class="full-description">
-                        <p>${requestScope.product.description}</p>
+                        <p>${requestScope.productPage.description}</p>
                     </div>
                 </div>
             </div>

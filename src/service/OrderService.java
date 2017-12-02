@@ -65,8 +65,10 @@ public class OrderService {
         if (Status.valueOf(status).equals(Status.CLOSED) || Status.valueOf(status).equals(Status.COMPLETED)) {
             order.setStatus(Status.valueOf(status));
             order.setCloseDate(new Date(System.currentTimeMillis()));
+            OrderDao.newInstance().update(order);
         } else {
             order.setStatus(Status.valueOf(status));
+            OrderDao.newInstance().update(order);
         }
         return true;
     }

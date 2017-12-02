@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
     <head>
-        <title>User Information</title>
+        <title>Update Order</title>
         <style>
             <%@include file="../css/main.css"%>
             <%@include file="../css/header.css"%>
@@ -19,36 +19,37 @@
         <div class="wrapper">
             <%@include file="header.jsp"%>
             <div class="main">
-                <div class="left-navigation-bar">
-                    <form action="${pageContext.request.contextPath}/users-list">
-                        <button class="lnb-button" type="submit">Список пользователей</button>
+                <%@include file="admin-left-navigation-bar.jsp"%>
+                <div class="update-order-container">
+                    <h2 id="profile-update">Изменение заказа</h2>
+                    <form action="${pageContext.request.contextPath}/update-order" method="post">
+                    <table id="update-order">
+                        <tr><td>ID</td><td>${requestScope.order.id}</td></tr>
+                        <tr><td>Статус</td>
+                            <td><select name="status">
+                                <c:forEach var="statusItem" items="${requestScope.statuses}">
+                                    <option value="${statusItem}" ${statusItem eq requestScope.order.status ? 'selected' : ''}>${statusItem.getAsString()}</option>
+                                </c:forEach>
+                            </select></td>
+                        </tr>
+                        <tr><td>Сумма</td><td>${requestScope.order.totalPrice}</td></tr>
+                        <tr><td>Доставка</td><td>${requestScope.order.getDelivery().name}</td></tr>
+                        <tr><td>Дата размещения</td><td>${requestScope.order.openDate}</td></tr>
+                        <tr><td>Дата закрытия</td><td>${requestScope.order.closeDate}</td></tr>
+                        <tr><td>Пользователь</td><td>${requestScope.order.getUser().email}</td></tr>
+                    </table>
+                        <input type="hidden" name="orderId" value="${requestScope.order.id}">
+                        <button id="change-status" type="submit">Изменить статус</button>
                     </form>
-                    <form action="${pageContext.request.contextPath}/user">
-                        <input type="text" name="userId" placeholder="введите ID пользователя">
-                        <button class="find" type="submit">Найти</button>
-                    </form>
-                    <form action="${pageContext.request.contextPath}/user">
-                        <input type="text" name="userEmail" placeholder="введите e-mail пользователя">
-                        <button class="find" type="submit">Найти</button>
-                    </form>
-                    <form action="${pageContext.request.contextPath}/products-list">
-                        <button class="lnb-button" type="submit">Список продуктов</button>
-                    </form>
-                    <form action="${pageContext.request.contextPath}/update-product">
-                        <input type="text" placeholder="введите ID продукта">
-                        <button class="find" type="submit">Найти</button>
-                    </form>
-                    <form action="${pageContext.request.contextPath}/orders-list">
-                        <button class="lnb-button" type="submit">Список заказов</button>
-                    </form>
-                    <form action="${pageContext.request.contextPath}/update-order">
-                        <input type="text" placeholder="введите ID заказа">
-                        <button class="find" type="submit">Найти</button>
-                    </form>
-                    <form action="${pageContext.request.contextPath}/log-out" class="log-out" method="post">
-                        <input type="hidden" name="logOut" value="true">
-                        <button class="lnb-button" type="submit">Выйти из аккаунта</button>
-                    </form>
+                    <h2 id="uo-products">Продукты в заказе</h2>
+                    <table id="update-order-products">
+                        <th style="text-align: left">Наименование</th>
+                        <th>Цена</th>
+                        <th>Количество</th>
+                        <c:forEach var="product" items="${requestScope.order.products}">
+                            <tr><td style="text-align: left">${product.key.name}</td><td>${product.key.price} руб.</td><td>${product.value}</td></tr>
+                        </c:forEach>
+                    </table>
                 </div>
             </div>
             <%@include file="footer.jsp"%>

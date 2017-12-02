@@ -36,7 +36,7 @@ public class ProductServlet extends HttpServlet {
         }
         req.setAttribute("childCategories", childCategories);
         Long id = Long.valueOf(req.getParameter("id"));
-        req.setAttribute("product", CatalogService.newInstance().getProductById(id));
+        req.setAttribute("productPage", CatalogService.newInstance().getProductById(id));
 
         req.getServletContext()
             .getRequestDispatcher(getPath("product"))

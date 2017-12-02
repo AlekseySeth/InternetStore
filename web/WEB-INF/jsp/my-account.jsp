@@ -53,7 +53,7 @@
                     <c:forEach var="order" items="${requestScope.orders}">
                             <tr>
                                 <td>${order.id}</td>
-                                <td>${order.status}</td>
+                                <td id="order-status">${order.status}</td>
                                 <td id="date">${order.openDate}</td>
                                 <td id="sum">${order.totalPrice}</td>
                                 <td class="button">

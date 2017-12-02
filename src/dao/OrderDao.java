@@ -251,12 +251,20 @@ public class OrderDao {
 
     public boolean update(Order order) {
         try (Connection connection = ConnectionManager.getConnection()) {
-            String sql = "UPDATE orders SET status_id=?, close_date=? WHERE id=?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setLong(1, order.getStatus().ordinal() + CORRECTION_FACTOR);
-            statement.setDate(2, order.getCloseDate());
-            statement.setLong(3, order.getId());
-
+            String sql;
+            PreparedStatement statement;
+            if (order.getCloseDate() != null) {
+                sql = "UPDATE orders SET status_id=?, close_date=? WHERE id=?";
+                statement = connection.prepareStatement(sql);
+                statement.setLong(1, order.getStatus().ordinal() + CORRECTION_FACTOR);
+                statement.setDate(2, order.getCloseDate());
+                statement.setLong(3, order.getId());
+            } else {
+                sql = "UPDATE orders SET status_id=? WHERE id=?";
+                statement = connection.prepareStatement(sql);
+                statement.setLong(1, order.getStatus().ordinal() + CORRECTION_FACTOR);
+                statement.setLong(2, order.getId());
+            }
             statement.executeUpdate();
             statement.close();
         } catch (SQLException e) {

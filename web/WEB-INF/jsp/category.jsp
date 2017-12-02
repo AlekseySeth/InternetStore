@@ -25,7 +25,7 @@
                     <h2>${requestScope.parentCategory.name} ${requestScope.currentCategory.name}</h2></div>
                 <div class="parent-categories">
                     <div>
-                        <c:forEach var="product" items="${requestScope.products}">
+                        <c:forEach var="product" items="${requestScope.productsCatalog}">
                             <div class="product-item">
                                 <a href="${pageContext.request.contextPath}/product?id=${product.id}">
                                 <img class="product-image" src="${product.imageURL}" height="100" width="100">

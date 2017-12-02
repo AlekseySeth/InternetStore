@@ -19,36 +19,28 @@
         <div class="wrapper">
             <%@include file="header.jsp"%>
             <div class="main">
-                <div class="left-navigation-bar">
-                    <form action="${pageContext.request.contextPath}/users-list">
-                        <button class="lnb-button" type="submit">Список пользователей</button>
-                    </form>
-                    <form action="${pageContext.request.contextPath}/user">
-                        <input type="text" name="userId" placeholder="введите ID пользователя">
-                        <button class="find" type="submit">Найти</button>
-                    </form>
-                    <form action="${pageContext.request.contextPath}/user">
-                        <input type="text" name="userEmail" placeholder="введите e-mail пользователя">
-                        <button class="find" type="submit">Найти</button>
-                    </form>
-                    <form action="${pageContext.request.contextPath}/products-list">
-                        <button class="lnb-button" type="submit">Список продуктов</button>
-                    </form>
-                    <form action="${pageContext.request.contextPath}/update-product">
-                        <input type="text" placeholder="введите ID продукта">
-                        <button class="find" type="submit">Найти</button>
-                    </form>
-                    <form action="${pageContext.request.contextPath}/orders-list">
-                        <button class="lnb-button" type="submit">Список заказов</button>
-                    </form>
-                    <form action="${pageContext.request.contextPath}/update-order">
-                        <input type="text" placeholder="введите ID заказа">
-                        <button class="find" type="submit">Найти</button>
-                    </form>
-                    <form action="${pageContext.request.contextPath}/log-out" class="log-out" method="post">
-                        <input type="hidden" name="logOut" value="true">
-                        <button class="lnb-button" type="submit">Выйти из аккаунта</button>
-                    </form>
+                <%@include file="admin-left-navigation-bar.jsp"%>
+                <div class="orders-list-container">
+                    <table id="orders-list">
+                        <th>ID</th>
+                        <th>Статус</th>
+                        <th>Доставка</th>
+                        <th>Сумма</th>
+                        <th>Дата размещения</th>
+                        <th>Дата закрытия</th>
+                        <th>Пользователь</th>
+                        <c:forEach var="orderItem" items="${requestScope.orders}">
+                            <tr>
+                                <td>${orderItem.id}</td>
+                                <td>${orderItem.status}</td>
+                                <td id="delivery">${orderItem.delivery}</td>
+                                <td>${orderItem.totalPrice}</td>
+                                <td>${orderItem.openDate}</td>
+                                <td>${orderItem.closeDate}</td>
+                                <td>${orderItem.userEmail}</td>
+                            </tr>
+                        </c:forEach>
+                    </table>
                 </div>
 
             </div>

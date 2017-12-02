@@ -33,7 +33,7 @@ public class CategoryServlet extends HttpServlet {
         }
         req.setAttribute("childCategories", childCategories);
         Long id = Long.valueOf(req.getParameter("id"));
-        req.setAttribute("products", CatalogService.newInstance().getProductsByCategory(id));
+        req.setAttribute("productsCatalog", CatalogService.newInstance().getProductsByCategory(id));
         Category currentCategory = CatalogService.newInstance().getCategoryById(id);
         if (currentCategory.getCategory() != null) {
             req.setAttribute("parentCategory", currentCategory.getCategory());

@@ -207,6 +207,11 @@ h2#orders-header {
     line-height: 25px;
 }
 
+td#order-status {
+    font-size: 16px;
+    padding-left: 10px;
+}
+
 td#date {
     padding-left: 50px;
 }
@@ -291,7 +296,6 @@ td#name {
     margin-top: 50px;
     width: 30%;
     background-color: silver;
-    font-size: 19px;
     padding: 20px;
 }
 
@@ -299,21 +303,21 @@ h2#profile-update {
     font-size: 22px;
     font-weight: bold;
     padding-bottom: 10px;
-    text-align: center;
-}
-
-.profile-update-element {
     margin-bottom: 5px;
     padding-top: 5px;
-    padding-bottom: 5px;
 }
 
 .profile-change-container input {
     float: right;
     font-size: 16px;
     padding-left: 5px;
-    width: 75%;
+    width: 70%;
     height: 25px;
+}
+
+.profile-update-element {
+    font-size: 19px;
+    padding-top: 10px;
 }
 
 /*Update password*/
@@ -465,6 +469,103 @@ td#close-date {
     padding: 10px;
 }
 
-.products-list-container table {
+table#products-list {
     width: 100%;
+}
+
+table#products-list th{
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+table#products-list td{
+    font-size: 16px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+table#products-list td#pl-product-name {
+    text-align: left;
+    padding-left: 20px;
+}
+
+.orders-list-container {
+    float: right;
+    width: 70%;
+    background-color: silver;
+    padding: 10px;
+}
+
+table#orders-list {
+    width: 100%;
+}
+
+table#orders-list th{
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+table#orders-list td{
+    font-size: 16px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+table#orders-list td#delivery {
+    text-align: left;
+    padding-left: 15px;
+}
+
+.update-order-container {
+    width: 40%;
+    float: right;
+    margin-right: 300px;
+    padding: 10px 10px 10px 30px;
+    background-color: silver;
+}
+
+h2#uo-products {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+table#update-order {
+    width: 100%;
+    font-size: 18px;
+    line-height: 25px;
+}
+
+table#update-order select {
+    width: 120px;
+    height: 25px;
+    font-size: 14px;
+}
+
+table#update-order-products {
+    width: 100%;
+}
+
+button#change-status {
+    height: 30px;
+    width: 100%;
+    float: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+table#update-order-products th {
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+table#update-order-products td {
+    font-size: 16px;
+    padding-bottom: 5px;
+    text-align: center;
 }

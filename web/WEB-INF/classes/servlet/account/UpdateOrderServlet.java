@@ -27,6 +27,7 @@ public class UpdateOrderServlet extends HttpServlet {
         } else {
             Long orderId = Long.valueOf(orderIdString);
             Order order = OrderService.newInstance().getOrderById(orderId);
+            req.setAttribute("statuses", Status.values());
             req.setAttribute("order", order);
             req.getServletContext().getRequestDispatcher(getPath("update-order")).forward(req, resp);
         }
@@ -34,7 +35,7 @@ public class UpdateOrderServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Long orderId = Long.valueOf(req.getParameter("orderID"));
+        Long orderId = Long.valueOf(req.getParameter("orderId"));
         Order order = OrderService.newInstance().getOrderById(orderId);
         String status = req.getParameter("status");
 

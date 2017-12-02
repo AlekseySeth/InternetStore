@@ -39,9 +39,6 @@
                             <input type="text" id="address" name="address" placeholder=" " value="${sessionScope.user.address}">
                         </div>
                         <button class="profile-button" type="submit">Изменить данные</button>
-                        <%--<c:if test="${requestScope.result eq true}">--%>
-                            <%--<p id="message">Данные успешно изменены</p>--%>
-                        <%--</c:if>--%>
                     </form>
                 </div>
             </div>
