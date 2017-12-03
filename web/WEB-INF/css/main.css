@@ -2,17 +2,6 @@ html, body {
     background-color: #f2f5f6;
 }
 
-article {
-    background: #dbe1ff;
-    margin-right: 280px;
-    margin-top: 20px;
-    padding: 10px;
-}
-
-article.article-main {
-    padding: 10px;
-}
-
 p{
     text-align: justify;
 }
@@ -38,6 +27,17 @@ p{
     flex-direction: column;
     height: 100%;
     padding: 0 10px;
+}
+
+.main-header {
+    font-size: 22px;
+    padding: 20px;
+    font-weight: bold;
+}
+
+p.delivery {
+    font-size: 16px;
+    padding: 0 100px 10px 20px;
 }
 
 div#login h2 {
