@@ -63,7 +63,7 @@
                                     </form>
                                 </td>
                                 <td class="button">
-                                    <form action="${pageContext.request.contextPath}/download-order" method="post">
+                                    <form action="${pageContext.request.contextPath}/download-order" method="get">
                                         <input type="hidden" name="orderId" value="${order.id}">
                                         <button type="submit">Скачать</button>
                                     </form>

@@ -19,7 +19,12 @@
         <div class="wrapper">
             <%@include file="header.jsp"%>
             <div class="main">
-                <%@include file="admin-left-navigation-bar.jsp"%>
+                <c:if test="${sessionScope.user.role eq 'ADMIN'}">
+                    <%@include file="admin-left-navigation-bar.jsp"%>
+                </c:if>
+                <c:if test="${sessionScope.user.role eq 'MARKETER'}">
+                    <%@include file="marketer-left-navigation-bar.jsp"%>
+                </c:if>
                 <div class="update-product-container">
                     <h2 id="prod-update">Изменение продукта</h2>
                     <form action="${pageContext.request.contextPath}/update-product" method="post">

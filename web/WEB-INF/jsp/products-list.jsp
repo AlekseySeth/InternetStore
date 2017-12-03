@@ -19,7 +19,12 @@
         <div class="wrapper">
             <%@include file="header.jsp"%>
             <div class="main">
-                <%@include file="admin-left-navigation-bar.jsp"%>
+                <c:if test="${sessionScope.user.role eq 'ADMIN'}">
+                    <%@include file="admin-left-navigation-bar.jsp"%>
+                </c:if>
+                <c:if test="${sessionScope.user.role eq 'MARKETER'}">
+                    <%@include file="marketer-left-navigation-bar.jsp"%>
+                </c:if>
                 <div class="products-list-container">
                     <table id="products-list">
                         <th>ID</th>

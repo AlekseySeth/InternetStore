@@ -22,7 +22,6 @@ import java.util.Map;
  */
 public class OrderService {
 
-    private static final String PATH = "web" + File.separator + "invoices";
     private static OrderService INSTANCE;
 
     private OrderService() {
@@ -75,17 +74,17 @@ public class OrderService {
 
     public File generateInvoice(Long orderId, String fileName) {
         Order order = OrderService.newInstance().getOrderById(orderId);
-        File invoice = new File(PATH, fileName);
+        File invoice = new File(fileName);
         Map<Product, Integer> products = order.getProducts();
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(invoice))) {
-            writer.write("Заказ №" + order.getId()
-            + "           Наименование продукта                            Цена                 Количество");
+            writer.write("Заказ №" + order.getId() + "\r\n");
+            writer.write("\r\nНаименование продукта             Цена                Количество");
             for (Map.Entry entry : products.entrySet()) {
-                writer.write(((Product) entry.getKey()).getName() + "        " + ((Product) entry.getKey()).getPrice() + " руб." + "       " + entry.getValue());
+                writer.write("\r\n" + ((Product) entry.getKey()).getName() + "        " + ((Product) entry.getKey()).getPrice() + " руб." + "       " + entry.getValue());
             }
-            writer.write("Доставка: " + order.getDelivery().getName());
-            writer.write("Итого " + order.getTotalPrice() + "руб.");
+            writer.write("\r\n" + "\r\n" + "Доставка: " + order.getDelivery().getName() + "\r\n");
+            writer.write("\r\nИтого: " + order.getTotalPrice() + "руб.");
             writer.flush();
         } catch (IOException e) {
             e.printStackTrace();
