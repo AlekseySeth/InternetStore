@@ -66,7 +66,7 @@ public class UserDao {
     public List<User> getAll() {
         List<User> users = new ArrayList<>();
         try (Connection connection = ConnectionManager.getConnection()) {
-            String sql = "SELECT * FROM users WHERE id >= 1000";
+            String sql = "SELECT * FROM users WHERE id >= 1000 ORDER BY id";
             PreparedStatement statement = connection.prepareStatement(sql);
 
             ResultSet resultSet = statement.executeQuery();

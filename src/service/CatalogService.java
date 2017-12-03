@@ -106,4 +106,9 @@ public class CatalogService {
         }
         return ProductDao.newInstance().update(product);
     }
+
+    public boolean updateProduct(Product product) {
+        return ProductDao.newInstance().update(product);
+    }
+
 }

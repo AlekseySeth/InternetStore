@@ -38,6 +38,8 @@ public class CartService {
         Product product = CatalogService.newInstance().getProductById(productId);
         if (product.getQtyInStock() >= qtyToAdd) {
             order.addProduct(product, qtyToAdd);
+            product.setQtyInStock(product.getQtyInStock() - qtyToAdd);
+            CatalogService.newInstance().updateProduct(product);
         } else {
 //            сообщение, что не хватает на складе
         }

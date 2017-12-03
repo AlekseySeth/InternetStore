@@ -83,7 +83,7 @@ public class DeliveryDao {
     public List<Delivery> getAll() {
         List<Delivery> deliveries = new ArrayList<>();
         try (Connection connection = ConnectionManager.getConnection()) {
-            String sql = "SELECT * FROM deliveries";
+            String sql = "SELECT * FROM deliveries ORDER BY id";
             PreparedStatement statement = connection.prepareStatement(sql);
 
             ResultSet resultSet = statement.executeQuery();

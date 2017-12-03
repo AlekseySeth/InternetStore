@@ -181,7 +181,7 @@ public class OrderDao {
             String sql = "SELECT * FROM orders o " +
                     "JOIN users_orders uo ON o.id=uo.order_id " +
                     "JOIN users u ON uo.user_id=u.id " +
-                    "WHERE u.id=?";
+                    "WHERE u.id=? ORDER BY o.id";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, user.getId());
 
@@ -221,7 +221,7 @@ public class OrderDao {
             String sql = "SELECT * FROM orders o " +
                     "JOIN users_orders uo ON o.id=uo.order_id " +
                     "JOIN users u ON uo.user_id=u.id " +
-                    "JOIN deliveries d ON o.delivery_id=d.id";
+                    "JOIN deliveries d ON o.delivery_id=d.id ORDER BY o.id";
             PreparedStatement statement = connection.prepareStatement(sql);
 
             ResultSet resultSet = statement.executeQuery();

@@ -22,7 +22,7 @@
                 <%@include file="admin-left-navigation-bar.jsp"%>
                 <div class="update-product-container">
                     <h2 id="prod-update">Изменение продукта</h2>
-                    <form action="${pageContext.request.contextPath}/update-product">
+                    <form action="${pageContext.request.contextPath}/update-product" method="post">
                     <table id="update-product">
                         <tr>
                             <td>ID</td><td>${requestScope.product.id}</td>
@@ -40,12 +40,16 @@
                             <td>На складе</td><td><input type="number" name="qtyInStock" value="${requestScope.product.qtyInStock}"></td>
                         </tr>
                         <tr>
+                            <td>Изображение</td><td><input type="text" name="imageURL" value="${requestScope.product.imageURL}"></td>
+                        </tr>
+                        <tr>
                             <td>Категория</td><td>${requestScope.product.category.getCategory().name}</td>
                         </tr>
                         <tr>
                             <td>Подкатегория</td><td>${requestScope.product.category.name}</td>
                         </tr>
                     </table>
+                        <input type="hidden" name="productId" value="${requestScope.product.id}">
                         <button id="pu-button" type="submit">Принять изменения</button>
                     </form>
                     <form action="${pageContext.request.contextPath}/delete-product">

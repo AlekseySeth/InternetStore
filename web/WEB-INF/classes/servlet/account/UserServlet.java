@@ -26,23 +26,29 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String userId = req.getParameter("userId");
         String email = req.getParameter("userEmail");
-        if (userId == null && email.isEmpty() || userId.isEmpty() && email == null) {
-            resp.sendRedirect("/my-account");
-        } else {
-            Long id = null;
-            if (userId != null) {
-                id = Long.valueOf(userId);
-            }
-            User user;
-            if (id == null && email != null) {
-                user = UserService.newInstance().getUserByEmail(email);
+        User user;
+
+        if (userId == null) {
+            if (email.isEmpty()) {
+                resp.sendRedirect("/my-account");
             } else {
-                user = UserService.newInstance().getUserById(id);
+                user = UserService.newInstance().getUserByEmail(email);
+                req.setAttribute("foundUser", user);
+                List<OrderDto> orders = OrderService.newInstance().getOrdersByUser(user);
+                req.setAttribute("orders", orders);
+                req.getServletContext().getRequestDispatcher(getPath("user")).forward(req, resp);
             }
-            req.setAttribute("foundUser", user);
-            List<OrderDto> orders = OrderService.newInstance().getOrdersByUser(user);
-            req.setAttribute("orders", orders);
-            req.getServletContext().getRequestDispatcher(getPath("user")).forward(req, resp);
+        } else if (email == null) {
+            if (userId.isEmpty()) {
+                resp.sendRedirect("/my-account");
+            } else {
+                Long id = Long.valueOf(userId);
+                user = UserService.newInstance().getUserById(id);
+                req.setAttribute("foundUser", user);
+                List<OrderDto> orders = OrderService.newInstance().getOrdersByUser(user);
+                req.setAttribute("orders", orders);
+                req.getServletContext().getRequestDispatcher(getPath("user")).forward(req, resp);
+            }
         }
     }
 }
