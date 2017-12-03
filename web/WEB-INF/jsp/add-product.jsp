@@ -39,13 +39,14 @@
                         <td>На складе</td><td><input type="number" name="qtyInStock"></td>
                     </tr>
                     <tr>
-                        <td>Изображение</td><td><input type="text" name="imageURL""></td>
+                        <td>Изображение</td><td><input type="file" name="imageURL" multiple accept="image/*"></td>
                     </tr>
                     <tr>
-                        <td>Категория</td><td>${requestScope.product.category.getCategory().name}</td>
-                    </tr>
-                    <tr>
-                        <td>Подкатегория</td><td>${requestScope.product.category.name}</td>
+                        <td>Категория</td><td>
+                        <select name="category">
+
+                        </select>
+                    </td>
                     </tr>
                 </table>
                 <input type="hidden" name="productId" value="${requestScope.product.id}">
