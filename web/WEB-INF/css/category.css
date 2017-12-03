@@ -17,7 +17,7 @@ aside {
 .tree-element {
     font-size: 18px;
     height: 30px;
-    border: 1px solid #2e6da4;
+    border: 1px solid #446d91;
     position: relative;
 }
 
@@ -28,7 +28,7 @@ aside {
     bottom: 0;
     display: block;
     height: inherit;
-    width: 179px;
+    width: 178px;
     float: none;
 }
 

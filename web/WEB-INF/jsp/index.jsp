@@ -20,15 +20,7 @@
             <div class="main">
                 <article class="article-main">
                     <h1>Приветствие</h1>
-                    <img src="${pageContext.request.contextPath}/images/default.gif" width="100" height="100">
-                    <p>
-                    Текст приветствия
-                    </p>
-                </article>
-                <div class="categories-main">
-                    <h2>Категории товаров</h2>
-                    <p>Табличка с категориями товаров</p>
-                </div>
+
             </div>
             <%@include file="footer.jsp"%>
         </div>

@@ -26,6 +26,14 @@ public class Product {
 
     @Override
     public String toString() {
-        return id + ". " + name + " - " + description + " | " + price + "$ | " + qtyInStock + " | " + category.getName();
+        StringBuilder builder = new StringBuilder(name);
+        while (builder.length() <= 60) {
+            builder.append(" ");
+        }
+        builder.append(price).append(" руб.");
+        while (builder.length() <= 85) {
+            builder.append(" ");
+        }
+        return builder.toString();
     }
 }

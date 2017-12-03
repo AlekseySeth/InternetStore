@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
     <head>
-        <title>User Information</title>
+        <title>Update Product</title>
         <style>
             <%@include file="../css/main.css"%>
             <%@include file="../css/header.css"%>
