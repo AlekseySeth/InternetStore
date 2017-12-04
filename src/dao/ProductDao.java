@@ -44,11 +44,7 @@ public class ProductDao {
             statement.setBigDecimal(3, product.getPrice());
             statement.setInt(4, product.getQtyInStock());
             statement.setLong(5, product.getCategory().getId());
-            if (product.getImageURL() != null) {
-                statement.setString(6, product.getImageURL());
-            } else {
-                statement.setString(6, DEFAULT_IMAGE_PATH);
-            }
+            statement.setString(6, product.getImageURL());
 
             statement.executeUpdate();
             ResultSet generatedKeys = statement.getGeneratedKeys();
@@ -178,15 +174,16 @@ public class ProductDao {
 
     public boolean update(Product product) {
         try (Connection connection = ConnectionManager.getConnection()) {
-            String sql = "UPDATE products SET name=?, description=?, price=?, qty=?, image_url=? " +
+            String sql = "UPDATE products SET name=?, description=?, price=?, qty=?, category_id=?, image_url=? " +
                     "WHERE id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, product.getName());
             statement.setString(2, product.getDescription());
             statement.setBigDecimal(3, product.getPrice());
             statement.setInt(4, product.getQtyInStock());
-            statement.setString(5, product.getImageURL());
-            statement.setLong(6, product.getId());
+            statement.setLong(5, product.getCategory().getId());
+            statement.setString(6, product.getImageURL());
+            statement.setLong(7, product.getId());
 
             statement.executeUpdate();
             statement.close();

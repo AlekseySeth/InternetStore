@@ -39,12 +39,16 @@
                         <td>На складе</td><td><input type="number" name="qtyInStock"></td>
                     </tr>
                     <tr>
-                        <td>Изображение</td><td><input type="file" name="imageURL" multiple accept="image/*"></td>
+                        <td>Изображение</td><td><input type="text" name="imageURL" placeholder="введите путь: /images/<имя файла>"></td>
                     </tr>
                     <tr>
                         <td>Категория</td><td>
                         <select name="category">
-
+                            <c:forEach var="currentParent" items="${requestScope.categoryTree}">
+                                <c:forEach var="currentChild" items="${currentParent.value}">
+                                    <option value="${currentChild.id}">${currentParent.key.name} - ${currentChild.name}</option>
+                                </c:forEach>
+                            </c:forEach>
                         </select>
                     </td>
                     </tr>

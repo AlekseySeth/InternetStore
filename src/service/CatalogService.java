@@ -5,6 +5,7 @@ import dao.ProductDao;
 import entity.product.Category;
 import entity.product.Product;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
  */
 public class CatalogService {
 
+    private static final String DEFAULT_IMAGE_PATH = File.separator + "images" + File.separator + "default.png";
     private static CatalogService INSTANCE;
 
     private CatalogService() {
@@ -80,14 +82,32 @@ public class CatalogService {
         return ProductDao.newInstance().get(id);
     }
 
-    public Product addNewProduct(Product product) {
-        return ProductDao.newInstance().save(product);
+    public Product addNewProduct(String name, String description, String priceString, int qtyInStock, Long categoryId, String imageURL) {
+        BigDecimal price = BigDecimal.valueOf(Double.valueOf(priceString));
+        Category category = CatalogService.newInstance().getCategoryById(categoryId);
+        if (imageURL == null || imageURL.isEmpty()) {
+            imageURL = DEFAULT_IMAGE_PATH;
+        }
+//        StringBuilder descriptionBuilder = new StringBuilder(description);
+//        while (descriptionBuilder.length() <= 400) {
+//            descriptionBuilder.append(" ");
+//            descriptionBuilder.append(".");
+//        }
+        if (name != null && category != null) {
+            Product product = new Product(name, description, price, qtyInStock, category, imageURL);
+            return ProductDao.newInstance().save(product);
+        } else {
+            return null;
+        }
     }
 
     public boolean updateProduct(Product product, String name, String description, String priceString,
-                                 int qtyInStock, String imageURL) {
+                                 int qtyInStock, Long categoryId, String imageURL) {
 
         BigDecimal price = BigDecimal.valueOf(Double.valueOf(priceString));
+        Category category = CatalogService.newInstance().getCategoryById(categoryId);
+
+        product.setCategory(category);
 
         if (name.length() > 0) {
             product.setName(name);
@@ -104,11 +124,16 @@ public class CatalogService {
         if (imageURL.length() > 0) {
             product.setImageURL(imageURL);
         }
+
         return ProductDao.newInstance().update(product);
     }
 
     public boolean updateProduct(Product product) {
         return ProductDao.newInstance().update(product);
+    }
+
+    public boolean deleteProduct(Long id) {
+        return ProductDao.newInstance().delete(id);
     }
 
 }

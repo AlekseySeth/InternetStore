@@ -24,6 +24,15 @@ public class Product {
     private Category category;
     private String imageURL;
 
+    public Product(String name, String description, BigDecimal price, int qtyInStock, Category category, String imageURL) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.qtyInStock = qtyInStock;
+        this.category = category;
+        this.imageURL = imageURL;
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder(name);

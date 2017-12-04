@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static util.ServletUtil.getPath;
 
@@ -24,6 +26,15 @@ public class UpdateProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String productIdString = req.getParameter("productId");
+
+        Map<Category, List<Category>> categoryTree = new HashMap<>();
+        List<Category> parentCategories = CatalogService.newInstance().getParentCategories();
+        for (Category parent : parentCategories) {
+            List<Category> child = CatalogService.newInstance().getCategoriesByParentId(parent.getId());
+            categoryTree.put(parent, child);
+        }
+
+        req.setAttribute("categoryTree", categoryTree);
         if (productIdString == null || productIdString.isEmpty()) {
             resp.sendRedirect("/my-account");
         } else {
@@ -42,11 +53,12 @@ public class UpdateProductServlet extends HttpServlet {
         String price = req.getParameter("price");
         int qtyInStock = Integer.valueOf(req.getParameter("qtyInStock"));
         String imageURL = req.getParameter("imageURL");
+        Long categoryId = Long.valueOf(req.getParameter("category"));
 
         CatalogService catalogService = CatalogService.newInstance();
         Product product = catalogService.getProductById(productId);
 
-        if (catalogService.updateProduct(product, name, description, price, qtyInStock, imageURL)) {
+        if (catalogService.updateProduct(product, name, description, price, qtyInStock, categoryId, imageURL)) {
             resp.sendRedirect("/update-product");
         } else {
             resp.sendRedirect("/update-product");

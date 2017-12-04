@@ -2,6 +2,7 @@
   Created by a.shestovsky
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>
@@ -31,9 +32,19 @@
                                 <img class="product-image" src="${product.imageURL}" height="100" width="100">
                                 <p class="product-name">${product.name}</p>
                                 <div class="short-description">
-                                    <p>
+                                    <c:if test="${fn:length(product.description) > 150}">
+                                        <p>
                                         ${product.description}
-                                    </p>
+                                        </p>
+                                    </c:if>
+                                    <c:if test="${fn:length(product.description) < 150}">
+                                        <p>
+                                        ${product.description}
+                                            <c:forEach begin="1" end="130">
+                                                &nbsp;
+                                            </c:forEach>
+                                        </p>
+                                    </c:if>
                                 </div>
                                 <p class="product-price">
                                     ${product.price} руб.

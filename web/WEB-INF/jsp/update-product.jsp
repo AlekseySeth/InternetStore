@@ -48,18 +48,19 @@
                             <td>Изображение</td><td><input type="text" name="imageURL" value="${requestScope.product.imageURL}"></td>
                         </tr>
                         <tr>
-                            <td>Категория</td><td>${requestScope.product.category.getCategory().name}</td>
-                        </tr>
-                        <tr>
-                            <td>Подкатегория</td><td>${requestScope.product.category.name}</td>
+                            <td>Категория</td><td>
+                            <select name="category">
+                                <c:forEach var="currentParent" items="${requestScope.categoryTree}">
+                                    <c:forEach var="currentChild" items="${currentParent.value}">
+                                        <option value="${currentChild.id}" ${currentChild.id eq requestScope.product.category.id ? 'selected' : ''}>${currentParent.key.name} - ${currentChild.name}</option>
+                                    </c:forEach>
+                                </c:forEach>
+                            </select>
+                        </td>
                         </tr>
                     </table>
                         <input type="hidden" name="productId" value="${requestScope.product.id}">
                         <button id="pu-button" type="submit">Принять изменения</button>
-                    </form>
-                    <form action="${pageContext.request.contextPath}/delete-product">
-                        <input type="hidden" value="${requestScope.product.id}">
-                        <button id="pu-button-delete" type="submit">Удалить продукт</button>
                     </form>
                 </div>
             </div>
