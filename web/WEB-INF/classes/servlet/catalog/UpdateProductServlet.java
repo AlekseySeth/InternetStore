@@ -59,7 +59,7 @@ public class UpdateProductServlet extends HttpServlet {
         Product product = catalogService.getProductById(productId);
 
         if (catalogService.updateProduct(product, name, description, price, qtyInStock, categoryId, imageURL)) {
-            resp.sendRedirect("/update-product");
+            resp.sendRedirect("/products-list");
         } else {
             resp.sendRedirect("/update-product");
         }

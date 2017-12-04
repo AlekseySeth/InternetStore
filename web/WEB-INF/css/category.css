@@ -32,9 +32,13 @@ aside {
     float: none;
 }
 
-.child-element a{
+.child-element a {
     font-size: 14px;
     padding: 5px;
+}
+
+.child-element a:hover{
+    color: #00aeff;
 }
 
 div h2 {

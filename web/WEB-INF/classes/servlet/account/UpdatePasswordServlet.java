@@ -34,7 +34,7 @@ public class UpdatePasswordServlet extends HttpServlet {
 
         if (newPassword.equals(confirmNewPassword)
                 && UserService.newInstance().updatePassword(user, newPassword)) {
-            resp.sendRedirect("/update-password");
+            resp.sendRedirect("/my-account");
         } else {
             resp.sendRedirect("/update-password");
         }

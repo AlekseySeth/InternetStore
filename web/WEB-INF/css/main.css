@@ -65,7 +65,7 @@ div#login input {
 
 .login-form {
     margin-top: 80px;
-    margin-left: 440px;
+    margin-left: 420px;
     width: 300px;
     height: 245px;
     padding: 20px;
@@ -80,9 +80,13 @@ div#login input {
     text-align: center;
 }
 
+.registration-link a:hover {
+    color: #00aeff;
+}
+
 .registration-form {
     margin-top: 20px;
-    margin-left: 410px;
+    margin-left: 390px;
     width: 350px;
     height: 580px;
     padding: 10px 20px;
@@ -127,6 +131,10 @@ div#registration div {
     margin-top: 15px;
     padding: 5px;
     text-align: center;
+}
+
+.login-link a:hover {
+    color: #00aeff;
 }
 
 /*my account*/

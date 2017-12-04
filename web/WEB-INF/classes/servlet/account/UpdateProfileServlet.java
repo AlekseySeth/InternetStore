@@ -34,7 +34,7 @@ public class UpdateProfileServlet extends HttpServlet {
         User user = (User) req.getSession().getAttribute("user");
 
         if (UserService.newInstance().updateProfile(user, firstName, lastName, phone, address)) {
-            resp.sendRedirect("/update-profile");
+            resp.sendRedirect("/my-account");
         } else {
             resp.sendRedirect("/update-profile");
         }
