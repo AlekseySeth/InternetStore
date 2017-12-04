@@ -28,7 +28,12 @@
                             <th>Количество</th>
                         </tr>
                         <c:forEach var="product" items="${sessionScope.order.products}">
-                            <tr><td id="name">${product.key.name}</td><td>${product.key.price} руб.</td><td>${product.value}</td></tr>
+                            <tr><td id="name">${product.key.name}</td><td>${product.key.price} руб.</td><td>${product.value}</td><td>
+                                <form action="${pageContext.request.contextPath}/remove-from-cart" method="post">
+                                    <input type="hidden" name="productToRemoveID" value="${product.key.id}">
+                                    <button type="submit">X</button>
+                                </form>
+                            </td></tr>
                         </c:forEach>
                     </table>
                     <div class="subtotal">
