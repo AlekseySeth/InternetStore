@@ -45,6 +45,13 @@ public class CartService {
         }
     }
 
+    public void removeProductFromCart(Order order, Long productToRemoveId, int productToRemoveQty) {
+        Product productToRemove = CatalogService.newInstance().getProductById(productToRemoveId);
+        productToRemove.setQtyInStock(productToRemove.getQtyInStock() + productToRemoveQty);
+        order.removeProduct(productToRemove, productToRemoveQty);
+        CatalogService.newInstance().updateProduct(productToRemove);
+    }
+
     public List<Delivery> getAllDeliveries() {
         return DeliveryDao.newInstance().getAll();
     }

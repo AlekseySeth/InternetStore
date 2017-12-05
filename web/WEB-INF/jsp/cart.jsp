@@ -30,7 +30,8 @@
                         <c:forEach var="product" items="${sessionScope.order.products}">
                             <tr><td id="name">${product.key.name}</td><td>${product.key.price} руб.</td><td>${product.value}</td><td>
                                 <form action="${pageContext.request.contextPath}/remove-from-cart" method="post">
-                                    <input type="hidden" name="productToRemoveID" value="${product.key.id}">
+                                    <input type="hidden" name="productToRemoveId" value="${product.key.id}">
+                                    <input type="hidden" name="productToRemoveQty" value="${product.value}">
                                     <button type="submit">X</button>
                                 </form>
                             </td></tr>
