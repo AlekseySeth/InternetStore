@@ -51,4 +51,8 @@ public class Order {
     public void addProduct(Product product, int qty) {
         products.put(product, qty);
     }
+
+    public void removeProduct(Product product, int qty) {
+        products.remove(product, qty);
+    }
 }

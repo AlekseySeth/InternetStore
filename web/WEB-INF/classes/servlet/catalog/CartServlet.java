@@ -34,7 +34,7 @@ public class CartServlet extends HttpServlet {
         Order order = (Order) req.getSession().getAttribute("order");
         Long deliveryId = Long.valueOf(req.getParameter("delivery"));
         CartService.newInstance().setOrderDelivery(order, deliveryId);
+        req.getSession().setAttribute("isPlaced", true);
         resp.sendRedirect("/cart");
     }
-
 }
