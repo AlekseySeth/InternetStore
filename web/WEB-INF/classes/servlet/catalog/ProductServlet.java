@@ -2,6 +2,7 @@ package servlet.catalog;
 
 import entity.order.Order;
 import entity.product.Category;
+import entity.user.Role;
 import entity.user.User;
 import service.CartService;
 import service.CatalogService;
@@ -46,7 +47,7 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = (User) req.getSession().getAttribute("user");
-        if (user == null) {
+        if (user == null || user.getRole().equals(Role.ADMIN) || user.getRole().equals(Role.MARKETER)) {
             resp.sendRedirect("/login");
         } else {
             int qty = Integer.valueOf(req.getParameter("qty"));
