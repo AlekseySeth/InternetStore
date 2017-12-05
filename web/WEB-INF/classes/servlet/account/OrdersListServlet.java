@@ -1,7 +1,7 @@
 package servlet.account;
 
-import entity.user.User;
-import service.UserService;
+import dto.OrderFullDto;
+import service.OrderService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,16 +13,13 @@ import java.util.List;
 
 import static util.ServletUtil.getPath;
 
-/**
- * @author a.shestovsky
- */
-@WebServlet(urlPatterns = "/users-list", name = "UsersList")
-public class UsersListServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/orders-list", name = "OrdersList")
+public class OrdersListServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<User> users = UserService.newInstance().getUsersList();
-        req.setAttribute("users", users);
-        req.getServletContext().getRequestDispatcher(getPath("users-list")).forward(req, resp);
+        List<OrderFullDto> orders = OrderService.newInstance().getAllOrders();
+        req.setAttribute("orders", orders);
+        req.getServletContext().getRequestDispatcher(getPath("orders-list")).forward(req, resp);
     }
 }

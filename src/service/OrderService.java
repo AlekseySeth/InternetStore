@@ -22,7 +22,6 @@ import java.util.Map;
  */
 public class OrderService {
 
-    private static final String PATH = "web" + File.separator + "invoices";
     private static OrderService INSTANCE;
 
     private OrderService() {
@@ -65,25 +64,27 @@ public class OrderService {
         if (Status.valueOf(status).equals(Status.CLOSED) || Status.valueOf(status).equals(Status.COMPLETED)) {
             order.setStatus(Status.valueOf(status));
             order.setCloseDate(new Date(System.currentTimeMillis()));
+            OrderDao.newInstance().update(order);
         } else {
             order.setStatus(Status.valueOf(status));
+            OrderDao.newInstance().update(order);
         }
         return true;
     }
 
     public File generateInvoice(Long orderId, String fileName) {
         Order order = OrderService.newInstance().getOrderById(orderId);
-        File invoice = new File(PATH, fileName);
+        File invoice = new File(fileName);
         Map<Product, Integer> products = order.getProducts();
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(invoice))) {
-            writer.write("Заказ №" + order.getId()
-            + "           Наименование продукта                            Цена                 Количество");
+            writer.write("Заказ №" + order.getId() + "\r\n");
+            writer.write("\r\nНаименование продукта                                         Цена                Количество");
             for (Map.Entry entry : products.entrySet()) {
-                writer.write(((Product) entry.getKey()).getName() + "        " + ((Product) entry.getKey()).getPrice() + " руб." + "       " + entry.getValue());
+                writer.write("\r\n" + (entry.getKey()).toString() + entry.getValue());
             }
-            writer.write("Доставка: " + order.getDelivery().getName());
-            writer.write("Итого " + order.getTotalPrice() + "руб.");
+            writer.write("\r\n" + "\r\n" + "Доставка: " + order.getDelivery().getName() + "\r\n");
+            writer.write("\r\nИтого: " + order.getTotalPrice() + "руб.");
             writer.flush();
         } catch (IOException e) {
             e.printStackTrace();

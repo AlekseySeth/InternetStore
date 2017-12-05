@@ -19,18 +19,7 @@
     <div class="wrapper">
         <%@include file="header.jsp"%>
         <div class="main">
-            <form action="/products-list" method="get">
-                <input type="hidden" name="orderId" value="${order.id}">
-                <button type="submit">Список продуктов</button>
-            </form>
-            <form action="/orders-list" method="get">
-                <input type="hidden" name="orderId" value="${order.id}">
-                <button type="submit">Список заказов</button>
-            </form>
-            <form action="/log-out" class="log-out" method="post">
-                <input type="hidden" name="logOut" value="true">
-                <button type="submit">Выйти из аккаунта</button>
-            </form>
+            <%@include file="marketer-left-navigation-bar.jsp"%>
         </div>
         <%@include file="footer.jsp"%>
     </body>

@@ -19,6 +19,7 @@
         <div class="wrapper">
             <%@include file="header.jsp"%>
             <div class="main">
+                <%@include file="admin-left-navigation-bar.jsp"%>
                 <div class="user-change-container">
                     <h2 id="profile-update">Изменение данных пользователя</h2>
                     <form action="${pageContext.request.contextPath}/update-user" method="post">

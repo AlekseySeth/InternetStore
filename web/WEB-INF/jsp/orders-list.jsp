@@ -19,6 +19,34 @@
         <div class="wrapper">
             <%@include file="header.jsp"%>
             <div class="main">
+                <c:if test="${sessionScope.user.role eq 'ADMIN'}">
+                    <%@include file="admin-left-navigation-bar.jsp"%>
+                </c:if>
+                <c:if test="${sessionScope.user.role eq 'MARKETER'}">
+                    <%@include file="marketer-left-navigation-bar.jsp"%>
+                </c:if>
+                <div class="orders-list-container">
+                    <table id="orders-list">
+                        <th>ID</th>
+                        <th>Статус</th>
+                        <th>Доставка</th>
+                        <th>Сумма</th>
+                        <th>Дата размещения</th>
+                        <th>Дата закрытия</th>
+                        <th>Пользователь</th>
+                        <c:forEach var="orderItem" items="${requestScope.orders}">
+                            <tr>
+                                <td>${orderItem.id}</td>
+                                <td>${orderItem.status}</td>
+                                <td id="delivery">${orderItem.delivery}</td>
+                                <td>${orderItem.totalPrice}</td>
+                                <td>${orderItem.openDate}</td>
+                                <td>${orderItem.closeDate}</td>
+                                <td>${orderItem.userEmail}</td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </div>
 
             </div>
             <%@include file="footer.jsp"%>

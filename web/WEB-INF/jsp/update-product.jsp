@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
     <head>
-        <title>User Information</title>
+        <title>Update Product</title>
         <style>
             <%@include file="../css/main.css"%>
             <%@include file="../css/header.css"%>
@@ -19,7 +19,50 @@
         <div class="wrapper">
             <%@include file="header.jsp"%>
             <div class="main">
-
+                <c:if test="${sessionScope.user.role eq 'ADMIN'}">
+                    <%@include file="admin-left-navigation-bar.jsp"%>
+                </c:if>
+                <c:if test="${sessionScope.user.role eq 'MARKETER'}">
+                    <%@include file="marketer-left-navigation-bar.jsp"%>
+                </c:if>
+                <div class="update-product-container">
+                    <h2 id="prod-update">Изменение продукта</h2>
+                    <form action="${pageContext.request.contextPath}/update-product" method="post">
+                    <table id="update-product">
+                        <tr>
+                            <td>ID</td><td>${requestScope.product.id}</td>
+                        </tr>
+                        <tr>
+                            <td>Наименование</td><td><input type="text" name="name" value="${requestScope.product.name}"></td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: middle">Описание</td><td><textarea name="description" cols="60" rows="5">${requestScope.product.description}</textarea></td>
+                        </tr>
+                        <tr>
+                            <td>Стоимость</td><td><input type="text" name="price" value="${requestScope.product.price}"></td>
+                        </tr>
+                        <tr>
+                            <td>На складе</td><td><input type="number" name="qtyInStock" value="${requestScope.product.qtyInStock}"></td>
+                        </tr>
+                        <tr>
+                            <td>Изображение</td><td><input type="text" name="imageURL" value="${requestScope.product.imageURL}"></td>
+                        </tr>
+                        <tr>
+                            <td>Категория</td><td>
+                            <select name="category">
+                                <c:forEach var="currentParent" items="${requestScope.categoryTree}">
+                                    <c:forEach var="currentChild" items="${currentParent.value}">
+                                        <option value="${currentChild.id}" ${currentChild.id eq requestScope.product.category.id ? 'selected' : ''}>${currentParent.key.name} - ${currentChild.name}</option>
+                                    </c:forEach>
+                                </c:forEach>
+                            </select>
+                        </td>
+                        </tr>
+                    </table>
+                        <input type="hidden" name="productId" value="${requestScope.product.id}">
+                        <button id="pu-button" type="submit">Принять изменения</button>
+                    </form>
+                </div>
             </div>
             <%@include file="footer.jsp"%>
         </div>

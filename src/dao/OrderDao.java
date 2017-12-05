@@ -11,7 +11,6 @@ import entity.product.Product;
 import entity.user.Role;
 import entity.user.User;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -182,7 +181,7 @@ public class OrderDao {
             String sql = "SELECT * FROM orders o " +
                     "JOIN users_orders uo ON o.id=uo.order_id " +
                     "JOIN users u ON uo.user_id=u.id " +
-                    "WHERE u.id=?";
+                    "WHERE u.id=? ORDER BY o.id";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, user.getId());
 
@@ -222,7 +221,7 @@ public class OrderDao {
             String sql = "SELECT * FROM orders o " +
                     "JOIN users_orders uo ON o.id=uo.order_id " +
                     "JOIN users u ON uo.user_id=u.id " +
-                    "JOIN deliveries d ON o.delivery_id=d.id";
+                    "JOIN deliveries d ON o.delivery_id=d.id ORDER BY o.id";
             PreparedStatement statement = connection.prepareStatement(sql);
 
             ResultSet resultSet = statement.executeQuery();
@@ -252,12 +251,20 @@ public class OrderDao {
 
     public boolean update(Order order) {
         try (Connection connection = ConnectionManager.getConnection()) {
-            String sql = "UPDATE orders SET status_id=?, close_date=? WHERE id=?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setLong(1, order.getStatus().ordinal() + CORRECTION_FACTOR);
-            statement.setDate(2, order.getCloseDate());
-            statement.setLong(3, order.getId());
-
+            String sql;
+            PreparedStatement statement;
+            if (order.getCloseDate() != null) {
+                sql = "UPDATE orders SET status_id=?, close_date=? WHERE id=?";
+                statement = connection.prepareStatement(sql);
+                statement.setLong(1, order.getStatus().ordinal() + CORRECTION_FACTOR);
+                statement.setDate(2, order.getCloseDate());
+                statement.setLong(3, order.getId());
+            } else {
+                sql = "UPDATE orders SET status_id=? WHERE id=?";
+                statement = connection.prepareStatement(sql);
+                statement.setLong(1, order.getStatus().ordinal() + CORRECTION_FACTOR);
+                statement.setLong(2, order.getId());
+            }
             statement.executeUpdate();
             statement.close();
         } catch (SQLException e) {

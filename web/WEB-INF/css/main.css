@@ -1,17 +1,5 @@
 html, body {
     background-color: #f2f5f6;
-    /*height: 100%;*/
-}
-
-article {
-    background: #dbe1ff;
-    margin-right: 280px;
-    margin-top: 20px;
-    padding: 10px;
-}
-
-article.article-main {
-    padding: 10px;
 }
 
 p{
@@ -41,6 +29,17 @@ p{
     padding: 0 10px;
 }
 
+.main-header {
+    font-size: 22px;
+    padding: 20px;
+    font-weight: bold;
+}
+
+p.delivery {
+    font-size: 16px;
+    padding: 0 100px 10px 20px;
+}
+
 div#login h2 {
     padding: 5px;
     font-size: 34px;
@@ -65,13 +64,13 @@ div#login input {
 }
 
 .login-form {
-    margin-top: 100px;
-    margin-left: 440px;
+    margin-top: 80px;
+    margin-left: 420px;
     width: 300px;
     height: 245px;
     padding: 20px;
     border-style: ridge;
-    background-color: aliceblue;
+    background-color: #d5d9e0;
 }
 
 .registration-link {
@@ -81,14 +80,17 @@ div#login input {
     text-align: center;
 }
 
+.registration-link a:hover {
+    color: #00aeff;
+}
+
 .registration-form {
     margin-top: 20px;
-    margin-left: 410px;
+    margin-left: 390px;
     width: 350px;
     height: 580px;
     padding: 10px 20px;
-    border: 8px skyblue;
-    background-color: aliceblue;
+    background-color: #d5d9e0;
 }
 
 div#registration h2 {
@@ -131,15 +133,505 @@ div#registration div {
     text-align: center;
 }
 
-/*input:invalid:not(:placeholder-shown):not(:focus) {border-color: red;}*/
-/*input:valid:not(:placeholder-shown):not(:focus) {border-color: green;}*/
+.login-link a:hover {
+    color: #00aeff;
+}
 
-/*.form-error {*/
-    /*color: red;*/
-    /*text-align: left;*/
-    /*font-size: 12px;*/
-    /*display: block;*/
-    /*margin-top: 3px;*/
-    /*display: none;*/
-/*}*/
+/*my account*/
 
+h2#welcome {
+    font-size: 26px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    font-weight: bold;
+}
+
+h2#profile-header {
+    font-size: 20px;
+    padding-bottom: 5px;
+    font-weight: bold;
+    padding-left: 100px;
+}
+
+.profile-container {
+    float: left;
+    width: 35%;
+    margin-left: 20px;
+    padding: 10px;
+    background-color: #d5d9e0;
+}
+
+.profile {
+    font-size: 20px;
+    line-height: 30px;
+}
+
+.row-title {
+    padding-left: 35px;
+}
+
+.row-value {
+    padding-left: 125px;
+}
+
+.profile-button {
+    height: 40px;
+    font-size: 18px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.my-orders-container {
+    float: right;
+    padding: 10px;
+    margin-right: 20px;
+    margin-left: 20px;
+    width: 55%;
+    background-color: #d5d9e0;
+}
+
+.my-orders {
+    width: 100%;
+}
+
+h2#orders-header {
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 250px;
+}
+
+.my-orders th {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 5px 10px 0 20px;
+    line-height: 30px;
+}
+
+.my-orders td {
+    font-size: 18px;
+    padding-left: 22px;
+    line-height: 25px;
+}
+
+td#order-status {
+    font-size: 16px;
+    padding-left: 10px;
+}
+
+td#date {
+    padding-left: 50px;
+}
+
+td#sum {
+    padding-left: 30px;
+}
+
+td.button {
+    padding: 0;
+}
+
+.my-orders button {
+    width: 100px;
+}
+
+.order-info-container {
+    float: left;
+    margin-left: 10px;
+    margin-top: 10px;
+    background-color: #d5d9e0;
+    padding: 10px;
+    font-size: 18px;
+    line-height: 30px;
+    width: 33%;
+}
+
+td.oi_title {
+    padding-left: 20px;
+}
+
+td.oi_value {
+    padding-left: 60px;
+}
+
+.order-info-products-container {
+    margin-right: 10px;
+    margin-top: 10px;
+    float: right;
+    padding: 10px;
+    background-color: #d5d9e0;
+    width: 58%;
+    font-size: 18px;
+    line-height: 30px;
+
+}
+
+.order-info-products {
+    width: 100%;
+}
+
+.order-info-products td {
+    text-align: center;
+}
+
+.order-info-products th {
+    font-weight: bold;
+}
+
+th.price {
+    text-align: left;
+}
+
+td.price {
+    text-align: left;
+}
+
+th#head-name {
+    text-align: left;
+    padding-left: 30px;
+}
+
+td#name {
+    text-align: left;
+    padding-left: 10px;
+}
+
+/*Update profile*/
+
+.profile-change-container {
+    margin-left: 350px;
+    margin-top: 50px;
+    width: 30%;
+    background-color: #d5d9e0;
+    padding: 20px;
+}
+
+h2#profile-update {
+    font-size: 22px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    margin-bottom: 5px;
+    padding-top: 5px;
+}
+
+.profile-change-container input {
+    float: right;
+    font-size: 16px;
+    padding-left: 5px;
+    width: 70%;
+    height: 25px;
+}
+
+.profile-update-element {
+    font-size: 19px;
+    padding-top: 10px;
+}
+
+/*Update password*/
+.password-change-container {
+    margin-left: 420px;
+    margin-top: 50px;
+    width: 20%;
+    background-color: #d5d9e0;
+    font-size: 19px;
+    padding: 20px;
+}
+
+h2#password-update {
+    font-size: 22px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.password-change-container input {
+    width: 100%;
+    padding-left: 5px;
+    height: 30px;
+    font-size: 16px;
+}
+
+/*Admin account*/
+
+.left-navigation-bar {
+    float: left;
+    width: 25%;
+    padding: 10px;
+    background-color: #d5d9e0;
+}
+
+.lnb-button {
+    width: 100%;
+    height: 30px;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+button.find {
+    float: right;
+    height: 30px;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.left-navigation-bar input {
+    width: 75%;
+    padding-left: 5px;
+    height: 30px;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.users-list {
+    float: right;
+    width: 70%;
+    background-color: #d5d9e0;
+    padding: 10px;
+}
+
+table#users {
+    width: 100%;
+}
+
+table#users th {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+table#users td {
+    text-align: center;
+    font-size: 16px;
+    padding-bottom: 10px;
+}
+
+
+
+.user-container {
+    float: right;
+    width: 70%;
+    background-color: #d5d9e0;
+    padding: 10px;
+}
+
+.user {
+    font-size: 18px;
+    line-height: 20px;
+    width: 50%;
+}
+
+.user-row-title {
+    padding-left: 20px;
+}
+
+.user-row-value {
+    padding-left: 10px;
+}
+
+h2#user-orders-list {
+    font-size: 20px;
+    font-weight: bold;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.user-my-orders {
+    width: 100%;
+}
+
+.user-my-orders th {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 5px 10px 0 20px;
+    line-height: 30px;
+}
+
+.user-my-orders td {
+    font-size: 18px;
+    padding-left: 50px;
+    line-height: 25px;
+}
+
+td.id {
+    padding-left: 40px;
+}
+
+td.sum {
+    padding-left: 50px;
+}
+
+td#open-date {
+    padding-left: 70px;
+}
+
+td#close-date {
+    padding-left: 70px;
+}
+
+.products-list-container {
+    float: right;
+    width: 70%;
+    background-color: #d5d9e0;
+    padding: 10px;
+}
+
+table#products-list {
+    width: 100%;
+}
+
+table#products-list th{
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+table#products-list td{
+    font-size: 16px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+table#products-list td#pl-product-name {
+    text-align: left;
+    padding-left: 20px;
+}
+
+.orders-list-container {
+    float: right;
+    width: 70%;
+    background-color: #d5d9e0;
+    padding: 10px;
+}
+
+table#orders-list {
+    width: 100%;
+}
+
+table#orders-list th{
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+table#orders-list td{
+    font-size: 16px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+table#orders-list td#delivery {
+    text-align: left;
+    padding-left: 15px;
+}
+
+.update-order-container {
+    width: 40%;
+    float: right;
+    margin-right: 300px;
+    padding: 10px 10px 10px 30px;
+    background-color: #d5d9e0;
+}
+
+h2#order-update {
+    font-size: 22px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    margin-bottom: 5px;
+    margin-left: 80px;
+    padding-top: 5px;
+}
+
+h2#uo-products {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+table#update-order {
+    width: 100%;
+    font-size: 18px;
+    line-height: 25px;
+}
+
+table#update-order select {
+    width: 120px;
+    height: 25px;
+    font-size: 14px;
+}
+
+table#update-order-products {
+    width: 100%;
+}
+
+button#change-status {
+    height: 30px;
+    width: 100%;
+    float: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+table#update-order-products th {
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+table#update-order-products td {
+    font-size: 16px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+.update-product-container {
+    float: right;
+    margin-right: 180px;
+    width: 52%;
+    background-color: #d5d9e0;
+    padding: 10px 0 10px 20px;
+}
+
+table#update-product {
+    font-size: 18px;
+    line-height: 25px;
+}
+
+table#update-product input {
+    padding-left: 5px;
+    width: 100%;
+}
+
+table#update-product td {
+    padding-left: 10px;
+}
+
+h2#prod-update {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+}
+
+button#pu-button {
+    height: 30px;
+    font-size: 18px;
+    margin-right: 20px;
+    margin-left: 10px;
+    width: 94%;
+}
+
+button#pu-button-delete {
+    height: 30px;
+    font-size: 18px;
+    margin-right: 20px;
+    margin-left: 10px;
+    width: 94%;
+}
+
+h2#prod-add {
+    font-size: 22px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    text-align: center;
+}

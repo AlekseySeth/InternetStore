@@ -19,7 +19,29 @@
         <div class="wrapper">
             <%@include file="header.jsp"%>
             <div class="main">
-
+                <%@include file="admin-left-navigation-bar.jsp"%>
+                <div class="users-list">
+                    <table id="users">
+                        <th>ID</th>
+                        <th>Имя</th>
+                        <th>Фамилия</th>
+                        <th>E-mail</th>
+                        <th>Зарегистрирован</th>
+                        <th>Телефон</th>
+                        <th>Адрес</th>
+                    <c:forEach var="userItem" items="${requestScope.users}">
+                        <tr>
+                            <td>${userItem.id}</td>
+                            <td>${userItem.firstName}</td>
+                            <td>${userItem.lastName}</td>
+                            <td>${userItem.email}</td>
+                            <td>${userItem.registrationDate}</td>
+                            <td>${userItem.phone}</td>
+                            <td>${userItem.address}</td>
+                        </tr>
+                    </c:forEach>
+                    </table>
+                </div>
             </div>
             <%@include file="footer.jsp"%>
         </div>

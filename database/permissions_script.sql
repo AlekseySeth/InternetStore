@@ -19,6 +19,7 @@ INSERT INTO pages (url) VALUES ('/update-profile');
 INSERT INTO pages (url) VALUES ('/update-user');
 INSERT INTO pages (url) VALUES ('/user');
 INSERT INTO pages (url) VALUES ('/users-list');
+INSERT INTO pages (url) VALUES ('/add-product');
 
 INSERT INTO roles_pages (role_id, page_id) VALUES (0, 1);
 INSERT INTO roles_pages (role_id, page_id) VALUES (0, 2);
@@ -37,6 +38,7 @@ INSERT INTO roles_pages (role_id, page_id) VALUES (0, 16);
 INSERT INTO roles_pages (role_id, page_id) VALUES (0, 17);
 INSERT INTO roles_pages (role_id, page_id) VALUES (0, 18);
 INSERT INTO roles_pages (role_id, page_id) VALUES (0, 19);
+INSERT INTO roles_pages (role_id, page_id) VALUES (0, 20);
 
 
 INSERT INTO roles_pages (role_id, page_id) VALUES (1, 2);
@@ -46,6 +48,7 @@ INSERT INTO roles_pages (role_id, page_id) VALUES (1, 6);
 INSERT INTO roles_pages (role_id, page_id) VALUES (1, 9);
 INSERT INTO roles_pages (role_id, page_id) VALUES (1, 12);
 INSERT INTO roles_pages (role_id, page_id) VALUES (1, 16);
+INSERT INTO roles_pages (role_id, page_id) VALUES (1, 20);
 
 INSERT INTO roles_pages (role_id, page_id) VALUES (2, 1);
 INSERT INTO roles_pages (role_id, page_id) VALUES (2, 2);
@@ -69,3 +72,4 @@ INSERT INTO roles_pages (role_id, page_id) VALUES (3, 15);
 INSERT INTO roles_pages (role_id, page_id) VALUES (3, 17);
 INSERT INTO roles_pages (role_id, page_id) VALUES (3, 18);
 INSERT INTO roles_pages (role_id, page_id) VALUES (3, 19);
+INSERT INTO roles_pages (role_id, page_id) VALUES (3, 20);

@@ -22,26 +22,23 @@
                 <div class="profile-change-container">
                     <h2 id="profile-update">Изменение персональных данных</h2>
                     <form action="${pageContext.request.contextPath}/update-profile" method="post">
-                        <div>
+                        <div class="profile-update-element">
                             <label for="firstName"><fmt:message key="registration.first.name"/></label>
                             <input type="text" id="firstName" name="firstName" placeholder=" " value="${sessionScope.user.firstName}">
                         </div>
-                        <div>
+                        <div class="profile-update-element">
                             <label for="lastName"><fmt:message key="registration.last.name"/></label>
                             <input type="text" id="lastName" name="lastName" placeholder=" " value="${sessionScope.user.lastName}">
                         </div>
-                        <div>
+                        <div class="profile-update-element">
                             <label for="phone"><fmt:message key="registration.phone"/></label>
                             <input type="tel" id="phone" name="phone" placeholder=" " value="${sessionScope.user.phone}">
                         </div>
-                        <div>
+                        <div class="profile-update-element">
                             <label for="address"><fmt:message key="registration.address"/></label>
                             <input type="text" id="address" name="address" placeholder=" " value="${sessionScope.user.address}">
                         </div>
-                        <button type="submit">Изменить данные</button>
-                        <%--<c:if test="${requestScope.result eq true}">--%>
-                            <%--<p id="message">Данные успешно изменены</p>--%>
-                        <%--</c:if>--%>
+                        <button class="profile-button" type="submit">Изменить данные</button>
                     </form>
                 </div>
             </div>

@@ -28,7 +28,6 @@ public class CategoryListServlet extends HttpServlet {
         List<Category> parentCategories = CatalogService.newInstance().getParentCategories();
         List<Category> childCategories = new ArrayList<>();
         req.setAttribute("categories", parentCategories);
-        Map<Category, List<Category>> categoryTree = new HashMap<>();
 
         for (Category parent : parentCategories) {
             List<Category> subCategories = CatalogService.newInstance().getCategoriesByParentId(parent.getId());

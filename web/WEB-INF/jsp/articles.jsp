@@ -19,9 +19,9 @@
     <div class="wrapper">
         <%@include file="header.jsp"%>
         <div class="main">
-            <h1>Статьи</h1>
-            <p>Данный раздел находится в разработке</p>
-                        <%--вставить картинку--%>
+            <h1 class="main-header">Статьи</h1>
+            <p style="padding: 0 0 10px 20px; font-size: 18px">Данный раздел находится в разработке</p>
+            <img src="${pageContext.request.contextPath}/images/wip.png" alt="Страница в разработке" style="padding: 30px">
         </div>
         <%@include file="footer.jsp"%>
     </body>

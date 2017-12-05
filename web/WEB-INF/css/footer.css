@@ -1,11 +1,12 @@
 footer {
-    background: #dbdbdb;
+    background: #c4c9d1;
     height: 40px;
     flex: 0 0 auto;
 }
 
 p#footer{
     text-align: center;
+    padding-left: 20px;
     font-size: 15px;
     font-weight: bold;
     padding-top: 13px;

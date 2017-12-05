@@ -28,7 +28,7 @@ p{
 }
 
 .cart-container {
-    background-color: aliceblue;
+    background-color: #d5d9e0;
     padding: 20px;
 }
 
@@ -93,6 +93,6 @@ p#order-placed {
     font-weight: bold;
     padding: 50px 0;
     margin-top: 20px;
-    background-color: aliceblue;
+    background-color: #d5d9e0;
 }
 

@@ -10,25 +10,15 @@
         <%@include file="../css/footer.css"%>
         <%@include file="../css/reset.css"%>
         </style>
-        <%--<script type="text/javascript">--%>
-        <%--<%@include file="../js/bootstrap.js"%>--%>
-        <%--</script>--%>
     </head>
     <body>
         <div class="wrapper">
             <%@include file="header.jsp"%>
             <div class="main">
-                <article class="article-main">
-                    <h1>Приветствие</h1>
-                    <img src="${pageContext.request.contextPath}/images/default.gif" width="100" height="100">
-                    <p>
-                    Текст приветствия
-                    </p>
-                </article>
-                <div class="categories-main">
-                    <h2>Категории товаров</h2>
-                    <p>Табличка с категориями товаров</p>
-                </div>
+                <h1 class="main-header">Добро пожаловать в интернет-магазин спортивного питания Sport Pit!</h1>
+                <p style="text-align: center">
+                    <img src="${pageContext.request.contextPath}/images/welcome.png" alt="Привет" style="padding: 30px" height="500">
+                </p>
             </div>
             <%@include file="footer.jsp"%>
         </div>
