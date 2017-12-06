@@ -42,7 +42,7 @@ public class AuthenticationService {
 
     public User signIn(String email, String password) {
         User user = UserService.newInstance().getUserByEmail(email);
-        if (user.getPassword().equals(password)) {
+        if (user != null && user.getPassword().equals(password)) {
             return user;
         } else {
             return null;

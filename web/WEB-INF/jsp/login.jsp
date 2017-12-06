@@ -12,11 +12,16 @@
         <%@include file="../css/header.css"%>
         <%@include file="../css/footer.css"%>
     </style>
-    <%--<script type="text/javascript">--%>
-        <%--<%@include file="../js/bootstrap.js"%>--%>
-    <%--</script>--%>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 </head>
     <body>
+    <%--<div class="b-popup" id="popup">--%>
+        <%--<div class="b-popup-content">--%>
+            <%--Ошибка! Введены некорректные данные--%>
+            <%--<a href="javascript:PopUpHide()">Понятно</a>--%>
+        <%--</div>--%>
+    </div>
         <div class="wrapper">
             <%@include file="header.jsp"%>
             <div class="main">
@@ -24,7 +29,6 @@
                     <h2><fmt:message key="login"/></h2>
                     <form action="${pageContext.request.contextPath}/login" method="post">
                         <p><input type="text" id="email" name="email" placeholder="email" required></p>
-                        <%--<span class="form-error">Это поле должно содержать E-mail в формате example@site.com</span>--%>
                         <p><input type="password" id="password" name="password" placeholder="<fmt:message key="login.password"/>" required></p>
                         <button class="login-button" type="submit"><fmt:message key="login.button"/></button>
                         <p class="registration-link"><a href="${pageContext.request.contextPath}/registration"><fmt:message key="login.registration.link"/></a></p>

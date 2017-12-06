@@ -171,7 +171,7 @@ h2#profile-header {
 }
 
 .row-value {
-    padding-left: 125px;
+    padding-left: 80px;
 }
 
 .profile-button {
@@ -242,7 +242,7 @@ td.button {
     padding: 10px;
     font-size: 18px;
     line-height: 30px;
-    width: 33%;
+    width: 34%;
 }
 
 td.oi_title {
@@ -634,4 +634,37 @@ h2#prod-add {
     font-weight: bold;
     padding-bottom: 10px;
     text-align: center;
+}
+
+.b-container{
+    width:500px;
+    height:200px;
+    background-color: #ccc;
+    margin:0 auto;
+    padding:10px;
+    font-size:30px;
+    color: #fff;
+}
+.b-popup{
+    width:100%;
+    min-height:100%;
+    background-color: rgba(0,0,0,0.5);
+    overflow:hidden;
+    position:fixed;
+    top:0;
+}
+.b-popup .b-popup-content{
+    margin:200px auto 0 auto;
+    width:280px;
+    height: 40px;
+    padding:10px;
+    background-color: #c5c5c5;
+    border-radius:5px;
+    box-shadow: 0 0 10px #000;
+    text-align: center;
+}
+
+.b-popup .b-popup-content a{
+    vertical-align: bottom;
+    text-decoration: underline;
 }

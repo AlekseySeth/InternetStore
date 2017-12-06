@@ -8,6 +8,7 @@ import entity.product.Product;
 import lombok.Getter;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -81,7 +82,7 @@ public class CartService {
 
     public Order placeOrder(Order order) {
         order.setOpenDate(LocalDate.now());
-        order.setCloseDate(null);
+        order.setCloseDate(new Date(0));
         return OrderDao.newInstance().save(order);
     }
 }

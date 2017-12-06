@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +24,7 @@ public class Order {
     private Status status;
     private BigDecimal totalPrice;
     private LocalDate openDate;
-    private LocalDate closeDate;
+    private Date closeDate;
     private Map<Product, Integer> products = new HashMap<>();
     private User user;
     private Delivery delivery;
@@ -36,7 +37,7 @@ public class Order {
         this.delivery = delivery;
     }
 
-    public Order(Long id, BigDecimal totalPrice, LocalDate openDate, LocalDate closeDate) {
+    public Order(Long id, BigDecimal totalPrice, LocalDate openDate, Date closeDate) {
         this.id = id;
         this.totalPrice = totalPrice;
         this.openDate = openDate;

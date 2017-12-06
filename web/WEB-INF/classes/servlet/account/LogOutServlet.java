@@ -2,6 +2,8 @@ package servlet.account;
 
 import entity.order.Order;
 import entity.product.Product;
+import entity.user.Role;
+import entity.user.User;
 import service.CartService;
 
 import javax.servlet.ServletException;
@@ -28,10 +30,11 @@ public class LogOutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String logOut = req.getParameter("logOut");
         HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("user");
         if (logOut == null) {
             resp.sendRedirect(req.getHeader("Referer"));
-        } else if (logOut.equals("true")) {
-            if (session.getAttribute("isPlaced").equals(true)) {
+        } else if (logOut.equals("true") && user.getRole().equals(Role.CUSTOMER)) {
+            if (session.getAttribute("isPlaced") != null && session.getAttribute("isPlaced").equals(true)) {
                 session.setAttribute("isPlaced", false);
             } else {
                 Order order = (Order) session.getAttribute("order");
@@ -40,8 +43,8 @@ public class LogOutServlet extends HttpServlet {
                     CartService.newInstance().removeProductFromCart(order, (Long) entry.getKey(), (int) entry.getValue());
                 }
             }
-            session.invalidate();
-            resp.sendRedirect("/");
         }
+        session.invalidate();
+        resp.sendRedirect("/");
     }
 }

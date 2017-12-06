@@ -12,6 +12,7 @@ import entity.user.Role;
 import entity.user.User;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -111,7 +112,7 @@ public class OrderDao {
                         id,
                         resultSet.getBigDecimal("o.total_price"),
                         resultSet.getDate("o.open_date").toLocalDate(),
-                        resultSet.getDate("o.close_date").toLocalDate());
+                        resultSet.getDate("o.close_date"));
 
                 order.setStatus(Status.values()[resultSet.getInt("o.status_id") - CORRECTION_FACTOR]);
 
@@ -195,7 +196,7 @@ public class OrderDao {
                         resultSet.getBigDecimal("total_price"),
                         resultSet.getDate("open_date").toLocalDate());
 
-                LocalDate closeDate = resultSet.getDate("close_date").toLocalDate();
+                Date closeDate = resultSet.getDate("close_date");
 
                 if (closeDate != null) {
                     orderDto.setCloseDate(closeDate);
@@ -235,7 +236,7 @@ public class OrderDao {
                         resultSet.getString("d.name"),
                         resultSet.getBigDecimal("o.total_price"),
                         resultSet.getDate("o.open_date").toLocalDate(),
-                        resultSet.getDate("o.close_date").toLocalDate(),
+                        resultSet.getDate("o.close_date"),
                         resultSet.getString("u.email"));
                 orders.add(orderFullDto);
             }

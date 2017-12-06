@@ -1,8 +1,12 @@
-function comparePasswords() {
-    let newPassword = $('#newPassword').val();
-    let confirmNewPassword = $('#confirmNewPassword').val();
-
-    if (!newPassword || !confirmNewPassword || newPassword !== confirmNewPassword) {
-        $('#message').text("Введены некорректные данные");
-    } 
+$(document).ready(function(){
+        //Скрыть PopUp при загрузке страницы
+        PopUpHide();
+    });
+//Функция отображения PopUp
+function PopUpShow(){
+    $('#popup').show();
+}
+//Функция скрытия PopUp
+function PopUpHide(){
+    $('#popup').hide();
 }

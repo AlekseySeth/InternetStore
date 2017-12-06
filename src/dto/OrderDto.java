@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.time.LocalDate;
 
 /**
@@ -17,7 +18,7 @@ public class OrderDto {
     private String status;
     private BigDecimal totalPrice;
     private LocalDate openDate;
-    private LocalDate closeDate;
+    private Date closeDate;
     private User user;
 
     public OrderDto(Long id, BigDecimal totalPrice, LocalDate openDate) {

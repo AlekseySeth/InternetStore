@@ -12,6 +12,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +53,7 @@ public class OrderService {
     public boolean updateOrder(Order order, String status) {
         if (Status.valueOf(status).equals(Status.CLOSED) || Status.valueOf(status).equals(Status.COMPLETED)) {
             order.setStatus(Status.valueOf(status));
-            order.setCloseDate(LocalDate.now());
+            order.setCloseDate(new Date(System.currentTimeMillis()));
             OrderDao.newInstance().update(order);
         } else {
             order.setStatus(Status.valueOf(status));
@@ -68,7 +69,7 @@ public class OrderService {
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(invoice))) {
             writer.write("Заказ №" + order.getId() + "\r\n");
-            writer.write("Дата размещения" + order.getOpenDate() + "\r\n");
+            writer.write("Дата размещения: " + order.getOpenDate() + "\r\n");
             writer.write("\r\nНаименование продукта                                         Цена                Количество");
             for (Map.Entry entry : products.entrySet()) {
                 writer.write("\r\n" + (entry.getKey()).toString() + entry.getValue());
