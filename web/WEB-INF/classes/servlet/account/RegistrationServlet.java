@@ -11,10 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Date;
+import java.time.LocalDate;
 
 import static util.ServletUtil.getPath;
 
@@ -38,7 +36,7 @@ public class RegistrationServlet extends HttpServlet {
         String repeatedPassword = req.getParameter("repPassword");
         String phone = req.getParameter("phone");
         String address = req.getParameter("address");
-        Date registrationDate = new Date(System.currentTimeMillis());
+        LocalDate registrationDate = LocalDate.now();
         Role role = Role.CUSTOMER;
         User newUser = null;
         HttpSession session = req.getSession();

@@ -1,6 +1,5 @@
 package filter;
 
-import com.sun.deploy.net.HttpResponse;
 import entity.user.Role;
 import entity.user.User;
 import service.AuthenticationService;
@@ -12,14 +11,11 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-
-import static util.ServletUtil.getPath;
 
 /**
  * @author a.shestovsky

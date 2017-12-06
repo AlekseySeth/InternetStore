@@ -1,7 +1,6 @@
 package servlet.account;
 
 import dto.OrderDto;
-import entity.order.Order;
 import entity.user.User;
 import service.OrderService;
 import service.UserService;

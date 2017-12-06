@@ -14,11 +14,6 @@ import java.io.IOException;
 @WebServlet(urlPatterns = "/language", name = "Language")
 public class LanguageSelectorServlet extends HttpServlet {
 
-//    @Override
-//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        resp.sendRedirect(req.getHeader("Referer"));
-//    }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String language = req.getParameter("language");

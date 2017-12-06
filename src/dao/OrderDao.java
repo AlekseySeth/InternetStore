@@ -12,11 +12,11 @@ import entity.user.Role;
 import entity.user.User;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +50,7 @@ public class OrderDao {
             PreparedStatement orderStatement = connection.prepareStatement(orderSql, Statement.RETURN_GENERATED_KEYS);
             orderStatement.setBigDecimal(1, order.getTotalPrice());
             orderStatement.setLong(2, order.getDelivery().getId());
-            orderStatement.setDate(3, order.getOpenDate());
+            orderStatement.setObject(3, order.getOpenDate());
 
             orderStatement.executeUpdate();
 
@@ -110,8 +110,8 @@ public class OrderDao {
                 order = new Order(
                         id,
                         resultSet.getBigDecimal("o.total_price"),
-                        resultSet.getDate("o.open_date"),
-                        resultSet.getDate("o.close_date"));
+                        resultSet.getDate("o.open_date").toLocalDate(),
+                        resultSet.getDate("o.close_date").toLocalDate());
 
                 order.setStatus(Status.values()[resultSet.getInt("o.status_id") - CORRECTION_FACTOR]);
 
@@ -123,7 +123,7 @@ public class OrderDao {
                         resultSet.getString("u.password"),
                         resultSet.getString("u.phone"),
                         resultSet.getString("u.address"),
-                        resultSet.getDate("u.registration_date"),
+                        resultSet.getDate("u.registration_date").toLocalDate(),
                         Role.values()[resultSet.getInt("u.role_id")]));
 
                 order.setDelivery(new Delivery(
@@ -193,9 +193,9 @@ public class OrderDao {
                 orderDto = new OrderDto(
                         resultSet.getLong("o.id"),
                         resultSet.getBigDecimal("total_price"),
-                        resultSet.getDate("open_date"));
+                        resultSet.getDate("open_date").toLocalDate());
 
-                Date closeDate = resultSet.getDate("close_date");
+                LocalDate closeDate = resultSet.getDate("close_date").toLocalDate();
 
                 if (closeDate != null) {
                     orderDto.setCloseDate(closeDate);
@@ -234,8 +234,8 @@ public class OrderDao {
                         status.getAsString(),
                         resultSet.getString("d.name"),
                         resultSet.getBigDecimal("o.total_price"),
-                        resultSet.getDate("o.open_date"),
-                        resultSet.getDate("o.close_date"),
+                        resultSet.getDate("o.open_date").toLocalDate(),
+                        resultSet.getDate("o.close_date").toLocalDate(),
                         resultSet.getString("u.email"));
                 orders.add(orderFullDto);
             }
@@ -257,7 +257,7 @@ public class OrderDao {
                 sql = "UPDATE orders SET status_id=?, close_date=? WHERE id=?";
                 statement = connection.prepareStatement(sql);
                 statement.setLong(1, order.getStatus().ordinal() + CORRECTION_FACTOR);
-                statement.setDate(2, order.getCloseDate());
+                statement.setObject(2, order.getCloseDate());
                 statement.setLong(3, order.getId());
             } else {
                 sql = "UPDATE orders SET status_id=? WHERE id=?";

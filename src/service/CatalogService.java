@@ -73,11 +73,6 @@ public class CatalogService {
         return ProductDao.newInstance().getAll();
     }
 
-    public Product getProductByName() {
-
-        return null;
-    }
-
     public Product getProductById(Long id) {
         return ProductDao.newInstance().get(id);
     }
@@ -88,11 +83,6 @@ public class CatalogService {
         if (imageURL == null || imageURL.isEmpty()) {
             imageURL = DEFAULT_IMAGE_PATH;
         }
-//        StringBuilder descriptionBuilder = new StringBuilder(description);
-//        while (descriptionBuilder.length() <= 400) {
-//            descriptionBuilder.append(" ");
-//            descriptionBuilder.append(".");
-//        }
         if (name != null && category != null) {
             Product product = new Product(name, description, price, qtyInStock, category, imageURL);
             return ProductDao.newInstance().save(product);
@@ -135,5 +125,4 @@ public class CatalogService {
     public boolean deleteProduct(Long id) {
         return ProductDao.newInstance().delete(id);
     }
-
 }

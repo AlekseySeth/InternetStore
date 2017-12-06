@@ -5,7 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 
 /**
@@ -24,11 +24,11 @@ public class User {
     private String password;
     private String phone;
     private String address;
-    private Date registrationDate;
+    private LocalDate registrationDate;
     private Role role;
 
     public User(String firstName, String lastName, String email, String password,
-                String phone, String address, Date registrationDate, Role role) {
+                String phone, String address, LocalDate registrationDate, Role role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
