@@ -47,6 +47,4 @@ public class UpdateUserServlet extends HttpServlet {
             resp.sendRedirect("/update-user");
         }
     }
-
-
 }

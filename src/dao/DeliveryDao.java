@@ -121,20 +121,4 @@ public class DeliveryDao {
         }
         return true;
     }
-
-    public boolean delete(Long id) {
-        try (Connection connection = ConnectionManager.getConnection()) {
-            String sql = "DELETE FROM deliveries WHERE id=?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setLong(1, id);
-
-            statement.executeUpdate();
-
-            statement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
 }

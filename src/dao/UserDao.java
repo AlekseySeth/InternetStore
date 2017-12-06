@@ -44,7 +44,7 @@ public class UserDao {
             statement.setString(4, user.getPassword());
             statement.setString(5, user.getPhone());
             statement.setString(6, user.getAddress());
-            statement.setDate(7, user.getRegistrationDate());
+            statement.setObject(7, user.getRegistrationDate());
             statement.setInt(8, user.getRole().ordinal());
 
             statement.executeUpdate();
@@ -80,7 +80,7 @@ public class UserDao {
                         resultSet.getString("password"),
                         resultSet.getString("phone"),
                         resultSet.getString("address"),
-                        resultSet.getDate("registration_date"),
+                        resultSet.getDate("registration_date").toLocalDate(),
                         Role.values()[resultSet.getInt("role_id")]));
             }
             resultSet.close();
@@ -109,7 +109,7 @@ public class UserDao {
                         resultSet.getString("password"),
                         resultSet.getString("phone"),
                         resultSet.getString("address"),
-                        resultSet.getDate("registration_date"),
+                        resultSet.getDate("registration_date").toLocalDate(),
                         Role.values()[resultSet.getInt("role_id")]);
             }
 
@@ -138,7 +138,7 @@ public class UserDao {
                         resultSet.getString("password"),
                         resultSet.getString("phone"),
                         resultSet.getString("address"),
-                        resultSet.getDate("registration_date"),
+                        resultSet.getDate("registration_date").toLocalDate(),
                         Role.values()[resultSet.getInt("role_id")]);
                 return user;
             }
@@ -201,22 +201,6 @@ public class UserDao {
             statement.setLong(5, user.getId());
 
             statement.executeUpdate();
-            statement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
-
-    public boolean delete(Long id) {
-        try (Connection connection = ConnectionManager.getConnection()) {
-            String sql = "DELETE FROM users WHERE id=?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setLong(1, id);
-
-            statement.executeUpdate();
-
             statement.close();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -2,7 +2,6 @@ package servlet.catalog;
 
 import entity.order.Order;
 import service.CartService;
-import service.OrderService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
