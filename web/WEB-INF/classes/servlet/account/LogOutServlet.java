@@ -40,7 +40,7 @@ public class LogOutServlet extends HttpServlet {
                 Order order = (Order) session.getAttribute("order");
                 Map<Product, Integer> products = order.getProducts();
                 for (Map.Entry entry : products.entrySet()) {
-                    CartService.newInstance().removeProductFromCart(order, (Long) entry.getKey(), (int) entry.getValue());
+                    CartService.newInstance().removeProductFromCart(order, (Product) entry.getKey(), (int) entry.getValue());
                 }
             }
         }

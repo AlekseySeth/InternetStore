@@ -74,7 +74,7 @@ public class AuthorizationFilter implements Filter {
         List<String> restrictedPages = permissions.get(Role.CUSTOMER);
         String referer = ((HttpServletRequest) servletRequest).getHeader("Referer");
         if (restrictedPages.contains(requestURI)
-                || (referer.equals("/order-placed") && requestURI.equals("/cart"))) {
+                || (referer.contains("/order-placed") && requestURI.equals("/cart"))) {
             ((HttpServletResponse) servletResponse).sendRedirect("/my-account");
         } else {
             filterChain.doFilter(servletRequest, servletResponse);

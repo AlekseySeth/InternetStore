@@ -4,6 +4,7 @@ import entity.order.Order;
 import entity.product.Category;
 import entity.user.Role;
 import entity.user.User;
+import service.AuthenticationService;
 import service.CartService;
 import service.CatalogService;
 
@@ -52,6 +53,9 @@ public class ProductServlet extends HttpServlet {
         if (user == null || user.getRole().equals(Role.ADMIN) || user.getRole().equals(Role.MARKETER)) {
             resp.sendRedirect("/login");
         } else {
+            if (session.getAttribute("isPlaced").equals(true)) {
+                session.setAttribute("order", AuthenticationService.newInstance().createInitialOrder(user));
+            }
             int qty = Integer.valueOf(req.getParameter("qty"));
             Long id = Long.valueOf(req.getParameter("id"));
             Order order = (Order) session.getAttribute("order");

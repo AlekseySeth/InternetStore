@@ -2,6 +2,7 @@ package service;
 
 import dao.DeliveryDao;
 import dao.OrderDao;
+import dao.ProductDao;
 import entity.order.Delivery;
 import entity.order.Order;
 import entity.product.Product;
@@ -46,8 +47,14 @@ public class CartService {
         }
     }
 
+    public void removeProductFromCart(Order order, Product productToRemove, int productToRemoveQty) {
+        productToRemove.setQtyInStock(productToRemove.getQtyInStock() + productToRemoveQty);
+        order.removeProduct(productToRemove, productToRemoveQty);
+        CatalogService.newInstance().updateProduct(productToRemove);
+    }
+
     public void removeProductFromCart(Order order, Long productToRemoveId, int productToRemoveQty) {
-        Product productToRemove = CatalogService.newInstance().getProductById(productToRemoveId);
+        Product productToRemove = ProductDao.newInstance().get(productToRemoveId);
         productToRemove.setQtyInStock(productToRemove.getQtyInStock() + productToRemoveQty);
         order.removeProduct(productToRemove, productToRemoveQty);
         CatalogService.newInstance().updateProduct(productToRemove);

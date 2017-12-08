@@ -41,6 +41,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("user", user);
             if (user.getRole().equals(Role.CUSTOMER)) {
                 session.setAttribute("order", authenticationService.createInitialOrder(user));
+                session.setAttribute("isPlaced", false);
             }
             resp.sendRedirect("/my-account");
         } else {
